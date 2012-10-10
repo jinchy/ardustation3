@@ -59,8 +59,7 @@ void cmdSetComeHere(int alt)
   //uint16_t seq, uint8_t frame, uint16_t command, uint8_t current, uint8_t autocontinue, float param1, float param2, float param3, float param4, float x, float y, float z)
   gps.f_get_position(&flat, &flon, &age);
   //mavlink_msg_rc_channels_override_pack(127, 0, &msg,received_sysid,received_compid, seq, frame,MAV_CMD_NAV_WAYPOINT, 1, 0, p1, p2, p3, p4, ); 
-  //send_message(&msg); 
-  
+  //send_message(&msg);  
 }
 
 void cmdCheckLimit()

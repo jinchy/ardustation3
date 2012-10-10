@@ -250,12 +250,12 @@ void SetMenu(int State, int Refresh)
 #endif
                            if(Refresh == 0)
                                            {
-                                            StabTune();
+                                            StabRTune();
                                             CurrentMenu = 14;
                                            }
                            if(Refresh == 1)
                                            {
-                                            StabTuneR();
+                                            StabRTuneR();
                                             CurrentMenu = 14;
                                            }
                            return;
@@ -274,7 +274,19 @@ void SetMenu(int State, int Refresh)
                                            }
                            return;
                 }
-
+		 case 16: {
+                           if(Refresh == 0)
+                                           {
+                                            StabTune();
+                                            CurrentMenu = 16;
+                                           }
+                           if(Refresh == 1)
+                                           {
+                                            StabTuneR();
+                                            CurrentMenu = 16;
+                                           }
+                           return;
+                }
       default: return;
   }
   

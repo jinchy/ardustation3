@@ -120,10 +120,6 @@ void gcs_update()
     }
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 void gcs_handleMessage(mavlink_message_t* msg)
 {
   switch (msg->msgid) {
@@ -346,48 +342,12 @@ void gcs_handleMessage(mavlink_message_t* msg)
  }
 }
 
-/*
-int find_param(const char* key)
-{
-  char buffer[16];
-  for (int i=0; i<TOTAL_PARAMS; i++)
-  {
-    //get_Param_Key(buffer, i);
-
-
-    //if (strcmp(buffer,(const char*)key) == 0)
-      return i;    
-  }
-  return -1;  
-}
-*/
-
 void start_feeds()
 {
   mavlink_message_t msg;
   mavlink_msg_request_data_stream_pack(127, 0, &msg, received_sysid, received_compid, MAV_DATA_STREAM_ALL, 5, MAV_DATA_STREAM_RAW_SENSORS_ACTIVE);
   send_message(&msg);
   delay(10);
-/* 
-  mavlink_message_t msg3;
-  mavlink_msg_request_data_stream_pack(127, 0, &msg, received_sysid, received_compid, MAV_DATA_STREAM_EXTENDED_STATUS, MAV_DATA_STREAM_EXTENDED_STATUS_RATE, MAV_DATA_STREAM_EXTENDED_STATUS_ACTIVE);
-  send_message(&msg);
-  delay(10);
-  
-  mavlink_message_t msg4;
-  mavlink_msg_request_data_stream_pack(127, 0, &msg, received_sysid, received_compid, MAV_DATA_STREAM_RAW_CONTROLLER, MAV_DATA_STREAM_RAW_CONTROLLER_RATE, MAV_DATA_STREAM_RAW_CONTROLLER_ACTIVE);
-  send_message(&msg);
-  delay(10);
-  
-  mavlink_message_t msg1;
-  mavlink_msg_request_data_stream_pack(127, 0, &msg, received_sysid, received_compid, MAV_DATA_STREAM_POSITION, MAV_DATA_STREAM_POSITION_RATE, MAV_DATA_STREAM_POSITION_ACTIVE);
-  send_message(&msg);
-  delay(10);
-  
-  mavlink_message_t msg5;
-  mavlink_msg_request_data_stream_pack(127, 0, &msg, received_sysid, received_compid, MAV_DATA_STREAM_EXTRA1, MAV_DATA_STREAM_EXTRA1_RATE, MAV_DATA_STREAM_EXTRA1_ACTIVE);
-  send_message(&msg);
-*/
   delay(460);
 }
 

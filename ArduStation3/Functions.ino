@@ -20,7 +20,6 @@ float rBearing()
   return dYaw-calc_bearing(latitude, longitude, flat, flon);
 }
 
-
 int freeRam()
 {
   extern int __heap_start, *__brkval; 

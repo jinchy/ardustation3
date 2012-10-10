@@ -1,0 +1,53 @@
+<VisualMicro>
+  <Program Name="ArduStation3" Ext=".ino" Location="C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3">
+    <Compile CompilerErrors="0" ConfigurationName="Debug" StopOnError="False" OptimiseLibs="True" OptimiseCore="True" BuildPath="C:\Users\jesse\AppData\Local\VMicro\Arduino\Builds\ArduStation3\mega2560" IncludeDebug="0" IncludesDebug="0" SketchName="ArduStation3" IsCompiled="1" />
+    <Platform Name="Arduino">
+      <Board Name="mega2560" Description="Arduino Mega 2560 or Mega ADK" CoreFolder="C:\Users\jesse\Documents\arduino-1.0.1\hardware\arduino\cores\arduino" VariantFullPath="C:\Users\jesse\Documents\arduino-1.0.1\hardware\arduino\variants\mega" />
+    </Platform>
+    <VCCodeModel>
+      <VCCodeMacros>
+        <VCCodeMacro Name="MAVLINK10" Value="" />
+        <VCCodeMacro Name="ARDUINO" Value="101" />
+        <VCCodeMacro Name="DEBUG_PARAM" Value="" />
+        <VCCodeMacro Name="__AVR_ATmega2560__" Value="" />
+        <VCCodeMacro Name="F_CPU" Value="16000000L" />
+        <VCCodeMacro Name="__AVR__" Value="" />
+        <VCCodeMacro Name="__cplusplus" Value="" />
+        <VCCodeMacro Name="__attribute__" Value="" />
+        <VCCodeMacro Name="__inline__" Value="" />
+        <VCCodeMacro Name="__asm__" Value="" />
+        <VCCodeMacro Name="__extension__" Value="" />
+        <VCCodeMacro Name="__ATTR_PURE__" Value="" />
+        <VCCodeMacro Name="__ATTR_CONST__" Value="" />
+        <VCCodeMacro Name="__inline__" Value="" />
+        <VCCodeMacro Name="__asm__" Value="" />
+        <VCCodeMacro Name="__volatile__" Value="" />
+        <VCCodeMacro Name="__builtin_va_list" Value="" />
+        <VCCodeMacro Name="__builtin_va_start" Value="" />
+        <VCCodeMacro Name="__builtin_va_end" Value="" />
+        <VCCodeMacro Name="__DOXYGEN__" Value="" />
+        <VCCodeMacro Name="prog_void" Value="" />
+        <VCCodeMacro Name="PGM_VOID_P" Value="int" />
+        <VCCodeMacro Name="NOINLINE" Value="__attribute__((noinline))" />
+        <VCCodeMacro Name="toRad" Value="(x*PI)/180.0" />
+        <VCCodeMacro Name="toDeg" Value="(x*180.0)/PI" />
+        <VCCodeMacro Name="GET_PARAMS_TIMEOUT" Value="250" />
+        <VCCodeMacro Name="PSTR" Value="(__extension__({static const char __c[] PROGMEM = (s); &amp;__c[0];}))" />
+        <VCCodeMacro Name="MAV_DATA_STREAM_POSITION_ACTIVE" Value="1" />
+        <VCCodeMacro Name="MAV_DATA_STREAM_RAW_SENSORS_ACTIVE" Value="1" />
+        <VCCodeMacro Name="MAV_DATA_STREAM_EXTENDED_STATUS_ACTIVE" Value="1" />
+        <VCCodeMacro Name="MAV_DATA_STREAM_RAW_CONTROLLER_ACTIVE" Value="1" />
+        <VCCodeMacro Name="MAV_DATA_STREAM_EXTRA1_ACTIVE" Value="1" />
+        <VCCodeMacro Name="MAV_DATA_STREAM_POSITION_RATE" Value="1" />
+        <VCCodeMacro Name="MAV_DATA_STREAM_RAW_SENSORS_RATE" Value="1" />
+        <VCCodeMacro Name="MAV_DATA_STREAM_EXTENDED_STATUS_RATE" Value="1" />
+        <VCCodeMacro Name="MAV_DATA_STREAM_RAW_CONTROLLER_RATE" Value="1" />
+        <VCCodeMacro Name="MAV_DATA_STREAM_EXTRA1_RATE" Value="1" />
+        <VCCodeMacro Name="DEBUG" Value="" />
+      </VCCodeMacros>
+      <VCCodeVariables>
+        <VCCodeVariable Name="received_sysid" />
+      </VCCodeVariables>
+    </VCCodeModel>
+  </Program>
+</VisualMicro>

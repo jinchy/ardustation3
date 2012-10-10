@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B9D4B7D0-B4AF-4974-BF96-86F02039D7D9}</ProjectGuid>
+    <RootNamespace>ArduStation3</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>C:\Users\jesse\Documents\arduino-1.0.1\hardware\arduino\cores\arduino;C:\Users\jesse\Documents\arduino-1.0.1\hardware\arduino\variants\mega;C:\Users\jesse\Documents\Source\Ardustation3\libraries\FastSerial;C:\Users\jesse\Documents\Source\Ardustation3\libraries\FastSerial\utility;C:\Users\jesse\Documents\Source\Ardustation3\libraries\UTFT;C:\Users\jesse\Documents\Source\Ardustation3\libraries\UTFT\utility;C:\Users\jesse\Documents\Source\Ardustation3\libraries\ITBD02Touch;C:\Users\jesse\Documents\Source\Ardustation3\libraries\ITBD02Touch\utility;C:\Users\jesse\Documents\Source\Ardustation3\libraries\TinyGPS;C:\Users\jesse\Documents\Source\Ardustation3\libraries\TinyGPS\utility;C:\Users\jesse\Documents\Source\Ardustation3\libraries\GCS_MAVLink;C:\Users\jesse\Documents\Source\Ardustation3\libraries\GCS_MAVLink\utility;C:\Users\jesse\Documents\Source\Ardustation3\libraries\AP_EEPROMB;C:\Users\jesse\Documents\Source\Ardustation3\libraries\AP_EEPROMB\utility;C:\Users\jesse\Documents\arduino-1.0.1\libraries\EEPROM;C:\Users\jesse\Documents\arduino-1.0.1\libraries\EEPROM\utility;c:\users\jesse\documents\arduino-1.0.1\hardware\tools\avr\avr\include\;c:\users\jesse\documents\arduino-1.0.1\hardware\tools\avr\avr\include\avr\;c:\users\jesse\documents\arduino-1.0.1\hardware\tools\avr\avr\;c:\users\jesse\documents\arduino-1.0.1\hardware\tools\avr\lib\gcc\avr\4.3.2\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3\Visual Micro\.ArduStation3.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
+      <PreprocessorDefinitions>ARDUINO=101;__AVR_ATmega2560__;F_CPU=16000000L;__AVR__;__cplusplus;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="ArduStation3.ino">
+      <FileType>CppCode</FileType>
+    </None>
+    <None Include="Buttons.ino">
+      <FileType>CppCode</FileType>
+    </None>
+    <None Include="eeprom.ino">
+      <FileType>CppCode</FileType>
+    </None>
+    <None Include="Functions.ino">
+      <FileType>CppCode</FileType>
+    </None>
+    <None Include="GPS.ino">
+      <FileType>CppCode</FileType>
+    </None>
+    <None Include="GPS_Math.ino">
+      <FileType>CppCode</FileType>
+    </None>
+    <None Include="LCD.ino">
+      <FileType>CppCode</FileType>
+    </None>
+    <None Include="LCD_Supp.ino" />
+    <None Include="Mavlink.ino">
+      <FileType>CppCode</FileType>
+    </None>
+    <None Include="MAV_Commands.ino">
+      <FileType>CppCode</FileType>
+    </None>
+    <None Include="Parameters.ino">
+      <FileType>CppCode</FileType>
+    </None>
+    <None Include="SetMenu.ino">
+      <FileType>CppCode</FileType>
+    </None>
+    <None Include="TouchCalibration.ino">
+      <FileType>CppCode</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Visual Micro\.ArduStation3.vsarduino.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
