@@ -7,8 +7,8 @@ void vButton()
   TouchCo += " Y: ";
   TouchCo += ty;
   TouchCo += "      ";
-  myGLCD.setFont(SmallFont);
-  Serial.println(TouchCo);
+  //myGLCD.setFont(SmallFont);
+  eLog.println(TouchCo);
 
 #ifdef DEBUG
 //  if(CurrentMenu != 3)  myGLCD.print(TouchCo, LEFT, 214);
@@ -86,6 +86,13 @@ switch(CurrentMenu)
           return;
         }
 
+	if(tx > 1740 && tx < 2688 && ty > 1232 && ty < 1996 && CurrentMenu == 1 && Touched == 0) 
+        {
+          //Loiter Tune
+          SetMenu(17, 0);
+          Touched = 5;
+          return;
+        }
     if(tx > 1704 && tx < 2711 && ty > 2880 && ty < 3643 && CurrentMenu == 1 && Touched == 0) 
         {
           SetMenu(0, 0);  //MainMenu
@@ -651,7 +658,75 @@ switch(CurrentMenu)
           return;
        }
     }
-   
+
+	case 17:
+	{
+	 // 0 - Main Menu Buttons
+		 
+	 if(tx > 1704 && tx < 2711 && ty > 2880 && ty < 3643 && CurrentMenu == 17 && Touched == 0) 
+        {
+          SetMenu(1, 0);  //Setup Button - Main Menu
+          Touched = 5;
+          return;
+        }
+      
+    if(tx > 527 && tx < 1554 && ty > 453 && ty < 1162 && CurrentMenu == 17 && Touched == 0) 
+        {
+          //SetMenu(3, 0);  //HUD Button - Main Menu
+          Touched = 5;
+          return;
+        }
+      
+     if(tx > 527 && tx < 1554 && ty > 1225 && ty < 1961 && CurrentMenu == 17 && Touched == 0) 
+        {
+          SetMenu(19, 0);  //Flight Map Button - Main Menu
+          Touched = 5;
+          return;
+        }
+     
+    if(tx > 512 && tx < 1518 && ty > 2099 && ty < 2848 && CurrentMenu == 17 && Touched == 0) 
+       { 
+          //SetMenu(6, 0);  //Follow Me Button - Main Menu
+          Touched = 5;
+          return;
+       }
+
+    if(tx > 580 && tx < 1539 && ty > 2918 && ty < 3690 && CurrentMenu == 17 && Touched == 0) 
+       { 
+          //SetMenu(8, 0);  //Return to Main Menu from SetMode
+          Touched = 5;
+          return;
+       }
+
+    if(tx > 1666 && tx < 2688 && ty > 458 && ty < 1111 && CurrentMenu == 17 && Touched == 0) 
+       {
+          SetMenu(18, 0);  //Format SD
+          Touched = 5;
+          return;
+       }
+	  }
+
+case 18:
+  {
+    //6 - Follow Me       
+     if(tx > 527 && tx < 3844 && ty > 453 && ty < 3843 && CurrentMenu == 18 && Touched == 0) 
+       { 
+          SetMenu(17, 0);  //Return to Main Menu from HUD
+          Touched = 5;
+          return;
+       }
+  }
+
+case 19:
+  {
+    //6 - Follow Me       
+     if(tx > 527 && tx < 3844 && ty > 453 && ty < 3843 && CurrentMenu == 19 && Touched == 0) 
+       { 
+          SetMenu(17, 0);  //Return to Main Menu from HUD
+          Touched = 5;
+          return;
+       }
+  }
   }
 }
 

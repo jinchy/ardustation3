@@ -3,13 +3,15 @@ void SetMenu(int State, int Refresh)
 {
   GoToMenu = State;
   if((CurrentMenu == GoToMenu) && Refresh == 0) return;   //We're on the menu that we want
-
+  if(beLog) eLog.print("SetMenu(");
+  if(beLog) eLog.print(CurrentMenu);
+  if(beLog) eLog.print(", ");
+  if(beLog) eLog.print(Refresh);
+  if(beLog) eLog.println(")");
+                    
     switch(State)
                 {
                 case 0: {
-#ifdef DEBUG
-//                           Serial.println("Main Menu");
-#endif
                            if(Refresh == 0)
                                            {
                                             MainMenu();
@@ -20,13 +22,10 @@ void SetMenu(int State, int Refresh)
                                             MainMenuR();
                                             CurrentMenu = 0;
                                            }
-                           return;
+                           break;
                 }
              
       case 1: {
-#ifdef DEBUG
-//               Serial.println("Setup Menu");
-#endif                           
               if(Refresh == 0)
                                            {
                                             Setup1();
@@ -37,13 +36,11 @@ void SetMenu(int State, int Refresh)
                                             Setup1R();
                                             CurrentMenu = 1;
                                            }
-                           return;
+                           break;
                }
                
        case 2: {
-#ifdef DEBUG
-//               Serial.println("Setup Menu");
-#endif                           
+                         
               if(Refresh == 0)
                                            {
                                             Debug1();
@@ -54,13 +51,10 @@ void SetMenu(int State, int Refresh)
                                             Debug1R();
                                             CurrentMenu = 2;
                                            }
-                           return;
+                           break;
                }
       
        case 3: {
-#ifdef DEBUG
-//                           Serial.println("HUD");
-#endif
                            if(Refresh == 0)
                                            {
                                             HUD();
@@ -71,13 +65,10 @@ void SetMenu(int State, int Refresh)
                                             HUDR();
                                             CurrentMenu = 3;
                                            }
-                           return;
+                           break;
                 }
         
         case 4: {
-#ifdef DEBUG
-//                           Serial.println("FlightMap");
-#endif
                            if(Refresh == 0)
                                            {
                                             FlightMapM();
@@ -88,13 +79,10 @@ void SetMenu(int State, int Refresh)
                                             FlightMapMR();
                                             CurrentMenu = 4;
                                            }
-                           return;
+                           break;
                 }
 
         case 5: {
-#ifdef DEBUG
-//                           Serial.println("FlightMap");
-#endif
                            if(Refresh == 0)
                                            {
                                             FlightMap();
@@ -105,13 +93,10 @@ void SetMenu(int State, int Refresh)
                                             FlightMapR();
                                             CurrentMenu = 5;
                                            }
-                           return;
+                           break;
                 }
         
         case 6: {
-#ifdef DEBUG
-//                           Serial.println("Follow Me");
-#endif
                            if(Refresh == 0)
                                            {
                                             FollowMe();
@@ -122,13 +107,10 @@ void SetMenu(int State, int Refresh)
                                             FollowMeR();
                                             CurrentMenu = 6;
                                            }
-                           return;
+                           break;
                 }
         
         case 7: {
-#ifdef DEBUG
-//                           Serial.println("FlightMap");
-#endif
                            if(Refresh == 0)
                                            {
                                             SetMode();
@@ -139,13 +121,10 @@ void SetMenu(int State, int Refresh)
                                             SetModeR();
                                             CurrentMenu = 7;
                                            }
-                           return;
+                           break;
                 }
         
         case 8: {
-#ifdef DEBUG
-//                           Serial.println("FlightMap");
-#endif
                            if(Refresh == 0)
                                            {
                                             SetLimitM();
@@ -156,13 +135,10 @@ void SetMenu(int State, int Refresh)
                                             SetLimitR();
                                             CurrentMenu = 8;
                                            }
-                           return;
+                           break;
                 }
 
         case 9: {
-#ifdef DEBUG
-//                           Serial.println("FlightMap");
-#endif
                            if(Refresh == 0)
                                            {
                                             ParamMainP1();
@@ -173,13 +149,10 @@ void SetMenu(int State, int Refresh)
                                             ParamMainR();
                                             CurrentMenu = 9;
                                            }
-                           return;
+                           break;
                 }
 
         case 10: {
-#ifdef DEBUG
-//                           Serial.println("FlightMap");
-#endif
                            if(Refresh == 0)
                                            {
                                             ParamMainP2();
@@ -190,13 +163,10 @@ void SetMenu(int State, int Refresh)
                                             ParamMainR();
                                             CurrentMenu = 10;
                                            }
-                           return;
+                           break;
                 }
  
        case 11: {
-#ifdef DEBUG
-//                           Serial.println("FlightMap");
-#endif
                            if(Refresh == 0)
                                            {
                                             ParmM();
@@ -207,13 +177,10 @@ void SetMenu(int State, int Refresh)
                                             ParmR();
                                             CurrentMenu = 11;
                                            }
-                           return;
+                           break;
                 }
                 
        case 12: {
-#ifdef DEBUG
-//                           Serial.println("FlightMap");
-#endif
                            if(Refresh == 0)
                                            {
                                             LoiterTune();
@@ -224,13 +191,10 @@ void SetMenu(int State, int Refresh)
                                             LoiterTuneR();
                                             CurrentMenu = 12;
                                            }
-                           return;
+                           break;
                 }
                 
        case 13: {
-#ifdef DEBUG
-//                           Serial.println("FlightMap");
-#endif
                            if(Refresh == 0)
                                            {
                                             NavTune();
@@ -241,13 +205,10 @@ void SetMenu(int State, int Refresh)
                                             NavTuneR();
                                             CurrentMenu = 13;
                                            }
-                           return;
+                           break;
                 }
 
        case 14: {
-#ifdef DEBUG
-//                           Serial.println("FlightMap");
-#endif
                            if(Refresh == 0)
                                            {
                                             StabRTune();
@@ -258,7 +219,7 @@ void SetMenu(int State, int Refresh)
                                             StabRTuneR();
                                             CurrentMenu = 14;
                                            }
-                           return;
+                           break;
                 }
                 
          case 15: {
@@ -272,7 +233,7 @@ void SetMenu(int State, int Refresh)
                                             SerialPassThruR();
                                             CurrentMenu = 15;
                                            }
-                           return;
+                           break;
                 }
 		 case 16: {
                            if(Refresh == 0)
@@ -285,8 +246,50 @@ void SetMenu(int State, int Refresh)
                                             StabTuneR();
                                             CurrentMenu = 16;
                                            }
-                           return;
+                           break;
                 }
+		
+		 case 17: {
+                           if(Refresh == 0)
+                                           {
+                                            SDMaint();
+                                            CurrentMenu = 17;
+                                           }
+                           if(Refresh == 1)
+                                           {
+                                            SDMaintR();
+                                            CurrentMenu = 17;
+                                           }
+                           break;
+                   }
+
+	      case 18: {
+					       if(Refresh == 0)
+                                           {
+                                            FormatSD();
+                                            CurrentMenu = 18;
+                                           }
+                           if(Refresh == 1)
+                                           {
+                                            FormatSDR();
+                                            CurrentMenu = 18;
+                                           }
+                           break;
+                   }
+
+		  case 19: {
+					       if(Refresh == 0)
+                                           {
+                                            StopLoggingSD();
+                                            CurrentMenu = 19;
+                                           }
+                           if(Refresh == 1)
+                                           {
+                                            StopLoggingSDR();
+                                            CurrentMenu = 19;
+                                           }
+                           break;
+                   }
       default: return;
   }
   

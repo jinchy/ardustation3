@@ -192,8 +192,8 @@ void Setup1()
                myGLCD.fillRoundRect(80, 95, 150, 165);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Start", 97, 44);
-               myGLCD.print("Feeds", 97, 56);
+               myGLCD.print("SD Card", 92, 125);
+               //myGLCD.print("Feeds", 97, 56);
                               
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(155, 95, 225, 165);
@@ -1359,13 +1359,13 @@ void NavTuneR()
 
 void StabTune()
 {   
-	ThreeTune("Stab Rate", 156);
+	TwoTune("Stab Rate", 156);
 	return;
 }
 
 void StabTuneR()
 {              
-	ThreeTuneR(156);
+	TwoTuneR(156);
  return;
 }
 
@@ -1869,7 +1869,7 @@ void SerialPassThru()
                myGLCD.print("Serial Passthrough", CENTER, 1);
                myGLCD.setFont(BigFont);
                myGLCD.setBackColor(0, 0, 128);
-               SPT = true;
+               //SPT = true;
 }
 
 void SerialPassThruR()
@@ -1877,3 +1877,212 @@ void SerialPassThruR()
    
 }
   
+void SDMaint()
+{
+               myGLCD.clrScr();
+               myGLCD.setFont(SmallFont);
+               myGLCD.setColor(0, 0, 128);
+               myGLCD.fillRect(0, 0, 319, 239);
+               myGLCD.setColor(255, 0, 0);
+               myGLCD.fillRect(0, 0, 319, 13);
+               myGLCD.setColor(255, 255, 255);
+               myGLCD.setBackColor(255, 0, 0);
+               myGLCD.print("SD Card Menu", CENTER, 1);
+               myGLCD.setBackColor(0, 0, 128);
+               myGLCD.setColor(255, 0, 0);
+               myGLCD.fillRect(0, 226, 319, 239); 
+               
+  
+               /////////////////////////////////////////
+               //              Row 1
+               /////////////////////////////////////////
+               myGLCD.setColor(0, 255, 0);
+               myGLCD.fillRoundRect(5, 20, 75, 90);
+               myGLCD.setColor(0, 0, 0);
+               myGLCD.setBackColor(0, 255, 0);
+               myGLCD.print("Show", 25, 44);
+               myGLCD.print("Contents", 10, 56);
+               
+               myGLCD.setColor(0, 255, 0);
+               myGLCD.fillRoundRect(80, 20, 150, 90);
+               myGLCD.setColor(0, 0, 0);
+               myGLCD.setBackColor(0, 255, 0);
+               myGLCD.print("Stop", 105, 44);
+               myGLCD.print("Logging", 93, 56);
+                              
+               myGLCD.setColor(0, 255, 0);
+               myGLCD.fillRoundRect(155, 20, 225, 90);
+               myGLCD.setColor(0, 0, 0);
+               myGLCD.setBackColor(0, 255, 0);
+               //myGLCD.print("Follow", 170, 44);
+               //myGLCD.print("Me", 180, 56);
+               
+               myGLCD.setColor(0, 255, 0);
+               myGLCD.fillRoundRect(230, 20, 305, 90);
+               myGLCD.setColor(0, 0, 0);
+               myGLCD.setBackColor(0, 255, 0);
+               //myGLCD.print("Set", 255, 44);
+               //myGLCD.print("Limits", 245, 56);
+               
+               
+               /////////////////////////////////////////
+               //              Row 2
+               /////////////////////////////////////////
+               myGLCD.setColor(0, 255, 0);
+               myGLCD.fillRoundRect(5, 95, 75, 165);
+               myGLCD.setColor(0, 0, 0);
+               myGLCD.setBackColor(0, 255, 0);
+               myGLCD.print("Format", 20, 125);
+               //myGLCD.print("Mode", 20, 127);               
+               
+               myGLCD.setColor(0, 255, 0);
+               myGLCD.fillRoundRect(80, 95, 150, 165);
+               myGLCD.setColor(0, 0, 0);
+               myGLCD.setBackColor(0, 255, 0);
+               //myGLCD.print("Start", 97, 44);
+               //myGLCD.print("Feeds", 97, 56);
+                              
+               myGLCD.setColor(0, 255, 0);
+               myGLCD.fillRoundRect(155, 95, 225, 165);
+               myGLCD.setColor(0, 0, 0);
+               myGLCD.setBackColor(0, 255, 0);
+               
+               myGLCD.setColor(0, 255, 0);
+               myGLCD.fillRoundRect(230, 95, 305, 165);
+               myGLCD.setColor(0, 0, 0);
+               myGLCD.setBackColor(0, 255, 0);
+               myGLCD.print("Setup", 247, 119);
+               myGLCD.print("Menu", 250, 132);
+			   Serial.println("SDMaint End");
+               return;
+}
+
+void SDMaintR()
+{
+			   if(beLog) eLog.println("SD Maint R");
+               myGLCD.setColor(255, 255, 255);
+               myGLCD.setBackColor(255, 0, 0);
+               myGLCD.setFont(SmallFont);
+               return;
+}
+
+void FormatSD()
+{
+			   myGLCD.clrScr();
+               myGLCD.setFont(SmallFont);
+               myGLCD.setColor(0, 0, 0);
+               myGLCD.fillRect(0, 0, 319, 239);
+               myGLCD.setColor(255, 0, 0);
+               myGLCD.fillRect(0, 0, 319, 13);
+               myGLCD.setColor(255, 255, 255);
+               myGLCD.setBackColor(255, 0, 0);
+               myGLCD.print("Formatting SD Card", CENTER, 1);
+               myGLCD.setBackColor(0, 0, 0);
+               myGLCD.setColor(255,255,255);  
+			   SDReady = false;
+               return;
+}
+
+void FormatSDR()
+{
+	if(!SDReady)
+	{
+		if (!card.init(spiSpeed, chipSelect)) 
+		{
+			myGLCD.print("\nSD initialization failure!", CENTER, 24);
+			myGLCD.print("Is the SD card inserted correctly?", CENTER, 36);
+			myGLCD.print("Is chip select correct at the top of this sketch?", CENTER, 48);
+			return;
+			//sdError("card.init failed");
+		}
+
+		cardSizeBlocks = card.cardSize();
+  
+		if (cardSizeBlocks == 0) 
+		{
+			myGLCD.print("CardSize Error", CENTER, 24);
+			return;
+		}
+  
+		cardCapacityMB = (cardSizeBlocks + 2047)/2048;
+
+		bline = "Card Size: ";
+		bline += cardCapacityMB;
+		bline += " MB"; //, (MB = 1,048,576 bytes)";
+		myGLCD.print(bline, LEFT, 24);		
+		myGLCD.print("Erasing Card", LEFT, 36);
+		eraseCard();
+		myGLCD.print("Formatting Card", LEFT, 48);
+		formatCard();
+		myGLCD.print("Done...", LEFT, 60);
+		myGLCD.print("Touch screen to continue...", LEFT, 72);
+		bline = "";
+		delay(3000);
+		SDReady = true;
+	}
+}
+
+void ShowContents()
+{
+
+}
+
+void ShowContentsR()
+{
+
+}
+
+void StopLoggingSD()
+{
+		myGLCD.clrScr();
+		myGLCD.setFont(SmallFont);
+		myGLCD.setColor(0, 0, 0);
+		myGLCD.fillRect(0, 0, 319, 239);
+		myGLCD.setColor(255, 0, 0);
+		myGLCD.fillRect(0, 0, 319, 13);
+		myGLCD.setColor(255, 255, 255);
+		myGLCD.setBackColor(255, 0, 0);
+		myGLCD.print("Stopping Logging", CENTER, 1);
+		myGLCD.setBackColor(0, 0, 0);
+		myGLCD.setColor(255,255,255); 
+		int i = 20;
+
+		if(beLog)
+		{
+			myGLCD.print("Stopping Error Log", LEFT, i);
+			eLog.println("Logging stopped at request of user");
+			eLog.close();
+		}
+
+		if(btLog)
+		{
+			i += 12;
+			myGLCD.print("Stopping Telemetry Log", LEFT, i);
+			tLog.close();
+		}
+
+		if(bfile)
+		{
+			i += 12;
+			myGLCD.print("Closing Open File", LEFT, i);
+			file.close();
+		}
+
+		beLog = false;
+		btLog = false;
+		bfile = false;
+
+		i += 12;
+	    myGLCD.print("All Files Closed", LEFT, i);
+
+		i += 12;
+		myGLCD.print("Card may be ejected when ready", LEFT, i);
+
+		i += 24;
+		myGLCD.print("Touch screen to continue", LEFT, i);
+}
+
+void StopLoggingSDR()
+{
+
+}

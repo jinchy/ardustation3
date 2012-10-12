@@ -107,7 +107,7 @@
  * on Mega Arduinos.  Software SPI works well with GPS Shield V1.1
  * but many SD cards will fail with GPS Shield V1.0.
  */
-#define MEGA_SOFT_SPI 1
+#define MEGA_SOFT_SPI 0
 //------------------------------------------------------------------------------
 /**
  * Define LEONARDO_SOFT_SPI nonzero to use software SPI on Leonardo Arduinos.
@@ -128,9 +128,9 @@
 /** Default Software SPI chip select pin */
 uint8_t const SOFT_SPI_CS_PIN = 53;
 /** Software SPI Master Out Slave In pin */
-uint8_t const SOFT_SPI_MOSI_PIN = 52;
+uint8_t const SOFT_SPI_MOSI_PIN = 51;
 /** Software SPI Master In Slave Out pin */
 uint8_t const SOFT_SPI_MISO_PIN = 50;
 /** Software SPI Clock pin */
-uint8_t const SOFT_SPI_SCK_PIN = 51;
+uint8_t const SOFT_SPI_SCK_PIN = 52;
 #endif  // SdFatConfig_h

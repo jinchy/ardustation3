@@ -28,6 +28,7 @@
     <None Include="TouchCalibration.ino" />
     <None Include="eeprom.ino" />
     <None Include="LCD_Supp.ino" />
+    <None Include="SD.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Visual Micro\.ArduStation3.vsarduino.h">

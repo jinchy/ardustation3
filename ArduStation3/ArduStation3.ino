@@ -1,5 +1,5 @@
 #define MAVLINK10
-#define DEBUG_PARAM
+//#define DEBUG_PARAM
 //#define DEBUG_MAV
 
 #include <FastSerial.h>
@@ -12,13 +12,46 @@
 
 #include <TinyGPS.h>
 #include <GCS_MAVLink.h>
-//#include "parameter.h"
 #include <Stream.h>
 #include <stdint.h>
 #include <AP_EEPROMB.h>
 #include <EEPROM.h>
+#include <SdFat.h>
+#include <SdFatUtil.h>
+const uint8_t chipSelect = 53;
+const uint8_t spiSpeed = SPI_FULL_SPEED;
 
+int i;
+Sd2Card card;
+SdFat sd;
 
+SdFile eLog;
+boolean beLog;
+
+SdFile tLog;
+boolean btLog;
+
+SdFile file;
+boolean bfile;
+
+uint32_t cardSizeBlocks;
+uint16_t cardCapacityMB;
+cache_t cache;
+uint8_t partType;
+uint32_t relSector;
+uint32_t partSize;
+uint8_t numberOfHeads;
+uint8_t sectorsPerTrack;
+uint16_t reservedSectors;
+uint8_t sectorsPerCluster;
+uint32_t fatStart;
+uint32_t fatSize;
+uint32_t dataStart;
+uint16_t const BU16 = 128;
+uint16_t const BU32 = 8192;
+char noName[] = "JBGS3   ";
+char fat16str[] = "FAT16   ";
+char fat32str[] = "FAT32   ";
 #define toRad(x) (x*PI)/180.0
 #define toDeg(x) (x*180.0)/PI
 
@@ -49,7 +82,7 @@ UTFT myGLCD(ITDB32S,38,39,40,41);   // Remember to change the model parameter to
 ITDB02_Touch  myTouch(6,5,4,3,2);
 
 static bool feeds = false;
-boolean SPT = false;
+//boolean SPT = false;
 TinyGPS gps;
 float flat;
 float flon;
@@ -58,19 +91,18 @@ static void gpsdump(TinyGPS &gps);
 static bool feedgps();
 unsigned long tx=0;
 unsigned long ty=0;
-int cx, cy;
-float px, py;
-int ox, oy;
-int pIndexa = 0;
+//int cx, cy;
+//float px, py;
+//int ox, oy;
+//int pIndexa = 0;
 int pot;
 float value;
-
+boolean SDReady = false;
 boolean pSend = false;
 float tuneP;
 float tuneI;
 float tuneD;
 float tuneIMax;
-
 int CurrentMenu = 999;
 int GoToMenu = 0;
 int Touched;
@@ -92,8 +124,6 @@ boolean mChange = true;
 int limitMeters = 0;
 int softLimitMeters = 0;
 int pIndex;
-//unsigned long test;
-
 int lsx;  //last pitch from HUD
 int lsy;   //last roll from HUD
 int lex;
@@ -102,9 +132,6 @@ int mapLastX;
 int mapLastY;
 float mapZoom = 1.0;
 char cFloat[15];
-String bline;
-
-
 float offset = 0;
 // flight data
 int altitude=0;
@@ -140,6 +167,7 @@ byte packetStartByte = 0;  // first byte detected used to store which wrong Mavl
 
 extern uint8_t SmallFont[];
 extern uint8_t BigFont[];
+String bline;
 
 FastSerialPort0(Serial);
 FastSerialPort1(Serial1);
@@ -148,8 +176,6 @@ FastSerialPort2(Serial2);
 #define DEBUG
 void setup()
 {
-    randomSeed(analogRead(0));
-  
 // Setup the LCD
     myGLCD.InitLCD();
     myGLCD.clrScr();
@@ -162,40 +188,99 @@ void setup()
     myGLCD.setBackColor(255, 0, 0);
     myGLCD.print("Jesse's Ardustation III", CENTER, 1);
     myGLCD.setBackColor(0, 0, 128);
-    myGLCD.setColor(255,255,0);
-   //myGLCD.print(, CENTER, 0);
-   
-     myTouch.InitTouch(1);
-     myTouch.setPrecision(PREC_LOW);
-    
-    Serial.begin(115200); //Debug USB Port
-#ifdef DEBUG // = true
-    Serial.println("");
-    Serial.println("Debug Port 0 Started @115200bps");
-    myGLCD.print("Debug Port 0 Started @115200bps", LEFT, 30);
-    
-#endif 
+    myGLCD.setColor(255,255,0);   
+    myTouch.InitTouch(1);
+    myTouch.setPrecision(PREC_LOW);
+    i = 30;
+	int logID;
+	logID = GetLogID();
+	char logName[12];
 
+	beLog = false;
+	btLog = false;
+	bfile = false;
+		
+	if (!sd.begin(chipSelect, SPI_FULL_SPEED))
+		{
+			myGLCD.print("No SD Card Detected, logging disabled", LEFT, i);
+			beLog = false;
+			btLog = false;
+			bfile = false;
+		}
+	else
+		{
+			i += 12;
+			myGLCD.print("SD Card Detected", LEFT, i);
+
+			bline = "ELog";
+			bline += logID;
+			bline += ".txt";
+			bline.toCharArray(logName, 12);
+
+			if (!eLog.open(logName, O_RDWR | O_CREAT | O_AT_END)) 
+			{
+				i += 12;
+		 		myGLCD.print("Error Log Not created", LEFT, i);
+				beLog = false;
+			}
+			else
+			{
+				i += 12;
+				myGLCD.print("Error Logging Started: " + bline, LEFT, i);
+				eLog.println();
+				eLog.println("==============================================================");
+				beLog = true;
+			}
+
+			bline = "tlog";
+			bline += logID;
+			bline += ".log";
+			bline.toCharArray(logName, 12);
+
+		/*if (!tLog.open(logName, O_RDWR | O_CREAT | O_AT_END)) 
+			{
+				i += 12;
+				myGLCD.print("Telemetry Log Not created", LEFT, i);
+				btLog = false;
+			}
+			else
+			{
+				i += 12;
+
+				myGLCD.print("Telemetry Logging Started: " + bline, LEFT, i);
+				btLog = true;
+			}*/
+		}
+
+    Serial.begin(115200); //Debug USB Port
+
+	Serial.println("");
+    Serial.println("Debug Port 0 Started @115200bps");
+	if(beLog) eLog.println("Debug Port 0 Started @115200bps");
+	i += 12;
+    myGLCD.print("Debug Port 0 Started @115200bps", LEFT, i);
+    
     Serial1.begin(57600); //Xbee port
-#ifdef DEBUG //= true
     Serial.println("Xbee Port 1 Started @ 57600bps");
-    myGLCD.print("Xbee Port 1 Started @ 57600bps", LEFT, 42);
+	if(beLog) eLog.println("Xbee Port 1 Started @ 57600bps");
+    i += 12;
+	myGLCD.print("Xbee Port 1 Started @ 57600bps", LEFT, i);
     Serial.println("Starting Xbee");
-    myGLCD.print("Starting Xbee...", LEFT, 54);
+	if(beLog) eLog.println("Xbee Port 1 Started @ 57600bps");
+    i += 12;
+	myGLCD.print("Starting Xbee...", LEFT, i);
     delay(4000);
     Serial1.println("...");
-#endif
-
     Serial2.begin(38400); //GPS
-#ifdef DEBUG //= true
+	i += 12;
     Serial.println("GPS Port 2 Started @ 38400bps");
-    myGLCD.print("GPS Port 2 Started @ 38400bps", LEFT, 66);
+    if(beLog) eLog.println("GPS Port 2 Started @ 38400bps");
+	myGLCD.print("GPS Port 2 Started @ 38400bps", LEFT, i);
     
-#endif
-
     delay(3000);
     SetMenu(0, 0);
     pinMode(13, OUTPUT);
+//	FactReset();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -204,7 +289,15 @@ void setup()
 
 void loop()
 {
-  if(SPT)
+  //beLogFlush();
+  if(beLog) eLog.sync();
+  if(btLog) tLog.sync();
+  //Serial.println("Loop Start");
+  if(beLog) eLog.print("Loop Start: SetMenu(");
+  if(beLog) eLog.print(CurrentMenu);
+  if(beLog) eLog.println(")");
+
+  if(false)
   {
       if (Serial1.available()) 
       {
@@ -246,10 +339,6 @@ void loop()
 #ifdef DEBUG
         Serial.print("Starting Feeds...");
 #endif
-      //cmdRequestParm();
-      //delay(1000);
-      //cmdRequestParm();
-      //delay(1000);
         start_feeds();
         feeds = true;
 #ifdef DEBUG
@@ -270,7 +359,25 @@ void loop()
      }
    
     gcs_update();
+	if(btLog) tLog.sync();
+
     gps.f_get_position(&flat, &flon, &age); 
+    
+	if(beLog)
+	{
+		bline = "GPS Position update:\n lat: ";
+		dtostrf(flat, 4, 2, cFloat);
+		bline += cFloat;
+		bline += " Lon: ";
+		dtostrf(flon, 4, 2, cFloat);
+		bline += cFloat;
+		bline += " Age: ";
+		bline += age;
+		eLog.println(bline);
+	}
+
+	if(beLog) eLog.sync();
+	
   
     if (limitMeters > 0)
        {
@@ -302,6 +409,7 @@ void loop()
       }
     SetMenu(CurrentMenu, 1);
   }
+  
 }
 
 

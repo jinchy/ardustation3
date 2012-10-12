@@ -68,8 +68,18 @@ void AltTune();
 void AltTuneR();
 void SerialPassThru();
 void SerialPassThruR();
+void SDMaint();
+void SDMaintR();
+void FormatSD();
+void FormatSDR();
+void ShowContents();
+void ShowContentsR();
+void StopLoggingSD();
+void StopLoggingSDR();
 void ThreeTune(char hdg[12], int addr);
 void ThreeTuneR(int addr);
+void TwoTune(char hdg[12], int addr);
+void TwoTuneR(int addr);
 void cmdSetStab();
 void cmdSetLoiter();
 void cmdSetRTL();
@@ -86,9 +96,26 @@ void gcs_handleMessage(mavlink_message_t* msg);
 void start_feeds();
 void send_message(mavlink_message_t* msg);
 String PName(int Index);
+uint8_t writeCache(uint32_t lbn);
+int initSizes();
+void clearCache(uint8_t addSig);
+int clearFatDir(uint32_t bgn, uint32_t count);
+uint16_t lbnToCylinder(uint32_t lbn);
+uint8_t lbnToHead(uint32_t lbn);
+uint8_t lbnToSector(uint32_t lbn);
+int writeMbr();
+uint32_t volSerialNumber();
+int makeFat16();
+int makeFat32();
+int eraseCard();
+int formatCard();
+void beLogFlush();
 void SetMenu(int State, int Refresh);
 void EEPROM_writeDouble(int ee, double value);
 double EEPROM_readDouble(int ee);
+int GetLogID();
+bool SPT();
+void FactReset();
 
 #include "C:\Users\jesse\Documents\arduino-1.0.1\hardware\arduino\variants\mega\pins_arduino.h" 
 #include "C:\Users\jesse\Documents\arduino-1.0.1\hardware\arduino\cores\arduino\arduino.h"
@@ -102,6 +129,7 @@ double EEPROM_readDouble(int ee);
 #include "C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3\MAV_Commands.ino"
 #include "C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3\Mavlink.ino"
 #include "C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3\Parameters.ino"
+#include "C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3\SD.ino"
 #include "C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3\SetMenu.ino"
 #include "C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3\TouchCalibration.ino"
 #include "C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3\eeprom.ino"

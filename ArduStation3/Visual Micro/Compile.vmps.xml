@@ -8,7 +8,6 @@
       <VCCodeMacros>
         <VCCodeMacro Name="MAVLINK10" Value="" />
         <VCCodeMacro Name="ARDUINO" Value="101" />
-        <VCCodeMacro Name="DEBUG_PARAM" Value="" />
         <VCCodeMacro Name="__AVR_ATmega2560__" Value="" />
         <VCCodeMacro Name="F_CPU" Value="16000000L" />
         <VCCodeMacro Name="__AVR__" Value="" />
@@ -46,7 +45,7 @@
         <VCCodeMacro Name="DEBUG" Value="" />
       </VCCodeMacros>
       <VCCodeVariables>
-        <VCCodeVariable Name="received_sysid" />
+        <VCCodeVariable Name="chipSelect" />
       </VCCodeVariables>
     </VCCodeModel>
   </Program>
