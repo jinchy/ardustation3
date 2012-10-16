@@ -217,7 +217,7 @@ private:
 	static void _freeBuffer(Buffer *buffer);
 
 	/// default receive buffer size
-	static const unsigned int	_default_rx_buffer_size = 128;
+	static const unsigned int	_default_rx_buffer_size = 64;
 
 	/// default transmit buffer size
 	static const unsigned int	_default_tx_buffer_size = 16;
@@ -226,7 +226,7 @@ private:
 	/// @note if we could bring the max size down to 256, the mask and head/tail
 	///       pointers in the buffer could become uint8_t.
 	///
-	static const unsigned int	_max_buffer_size = 512;
+	static const unsigned int	_max_buffer_size = 256;
 };
 
 // Used by the per-port interrupt vectors

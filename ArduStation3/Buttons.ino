@@ -8,7 +8,7 @@ void vButton()
   TouchCo += ty;
   TouchCo += "      ";
   //myGLCD.setFont(SmallFont);
-  eLog.println(TouchCo);
+  if(beLog) eLog.println(TouchCo);
 
 #ifdef DEBUG
 //  if(CurrentMenu != 3)  myGLCD.print(TouchCo, LEFT, 214);
@@ -723,6 +723,17 @@ case 19:
      if(tx > 527 && tx < 3844 && ty > 453 && ty < 3843 && CurrentMenu == 19 && Touched == 0) 
        { 
           SetMenu(17, 0);  //Return to Main Menu from HUD
+          Touched = 5;
+          return;
+       }
+  }
+
+case 20:
+  {
+    //6 - GroundStation Config      
+     if(tx > 527 && tx < 3844 && ty > 453 && ty < 3843 && CurrentMenu == 20 && Touched == 0) 
+       { 
+          SetMenu(1, 0);  //Return to Main Menu from HUD
           Touched = 5;
           return;
        }

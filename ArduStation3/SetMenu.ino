@@ -290,6 +290,20 @@ void SetMenu(int State, int Refresh)
                                            }
                            break;
                    }
+		 
+		  case 20: {
+					       if(Refresh == 0)
+                                           {
+                                            GSConfig();
+                                            CurrentMenu = 20;
+                                           }
+                           if(Refresh == 1)
+                                           {
+                                            GSConfigR();
+                                            CurrentMenu = 20;
+                                           }
+                           break;
+                   }
       default: return;
   }
   

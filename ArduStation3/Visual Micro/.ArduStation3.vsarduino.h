@@ -76,6 +76,8 @@ void ShowContents();
 void ShowContentsR();
 void StopLoggingSD();
 void StopLoggingSDR();
+void GSConfig();
+void GSConfigR();
 void ThreeTune(char hdg[12], int addr);
 void ThreeTuneR(int addr);
 void TwoTune(char hdg[12], int addr);
@@ -109,13 +111,17 @@ int makeFat16();
 int makeFat32();
 int eraseCard();
 int formatCard();
-void beLogFlush();
 void SetMenu(int State, int Refresh);
 void EEPROM_writeDouble(int ee, double value);
 double EEPROM_readDouble(int ee);
 int GetLogID();
 bool SPT();
+void SetSPT();
 void FactReset();
+bool tLogging();
+void tLogging(bool on);
+bool eLogging();
+void eLogging(bool on);
 
 #include "C:\Users\jesse\Documents\arduino-1.0.1\hardware\arduino\variants\mega\pins_arduino.h" 
 #include "C:\Users\jesse\Documents\arduino-1.0.1\hardware\arduino\cores\arduino\arduino.h"

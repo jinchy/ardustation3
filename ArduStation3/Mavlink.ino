@@ -11,7 +11,7 @@ void gcs_update()
     while(Serial1.available())
     {
         uint8_t c = Serial1.read();
-		tLog.write(c);
+		if(btLog) tLog.write(c);
 #ifdef DEBUG_MAV
 //        Serial.print(".");    
 #endif	
@@ -104,10 +104,9 @@ void gcs_update()
         // Try to get a new message
         if(mavlink_parse_char(0, c, &msg, status)) 
         {
-#ifdef DEBUG_MAV
-                  Serial.println("Handle Message");    
-#endif
+		 if(btLog) tLog.sync();
          gcs_handleMessage(&msg);
+		 Serial1.flush();
         }
         // If time value is 0 we were in idle, check if not in idle and receiving message bytes
         if (timeLastByte == 0)
@@ -319,7 +318,7 @@ void gcs_handleMessage(mavlink_message_t* msg)
        bline += PName(pIndex-1);
        bline += ",";
        bline += cFloat;
-       eLog.println(bline);
+       if(beLog) eLog.println(bline);
      }
      /*
      // Function used to build the parameter resolution list

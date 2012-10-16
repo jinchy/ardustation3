@@ -21,7 +21,7 @@
 const uint8_t chipSelect = 53;
 const uint8_t spiSpeed = SPI_FULL_SPEED;
 
-int i;
+//int i;
 Sd2Card card;
 SdFat sd;
 
@@ -49,6 +49,7 @@ uint32_t fatSize;
 uint32_t dataStart;
 uint16_t const BU16 = 128;
 uint16_t const BU32 = 8192;
+
 char noName[] = "JBGS3   ";
 char fat16str[] = "FAT16   ";
 char fat32str[] = "FAT32   ";
@@ -82,7 +83,7 @@ UTFT myGLCD(ITDB32S,38,39,40,41);   // Remember to change the model parameter to
 ITDB02_Touch  myTouch(6,5,4,3,2);
 
 static bool feeds = false;
-//boolean SPT = false;
+boolean bSPT = false;
 TinyGPS gps;
 float flat;
 float flon;
@@ -91,10 +92,6 @@ static void gpsdump(TinyGPS &gps);
 static bool feedgps();
 unsigned long tx=0;
 unsigned long ty=0;
-//int cx, cy;
-//float px, py;
-//int ox, oy;
-//int pIndexa = 0;
 int pot;
 float value;
 boolean SDReady = false;
@@ -105,21 +102,21 @@ float tuneD;
 float tuneIMax;
 int CurrentMenu = 999;
 int GoToMenu = 0;
-int Touched;
-int time_usec;
+uint8_t Touched;
+uint8_t time_usec;
 float flow_comp_m_x;
 float flow_comp_m_y;
 float ground_distance;
 float flow_x;
 float flow_y;
-int sensor_id;
-int quality;
+uint8_t sensor_id;
+uint8_t quality;
 int relative_alt;
 unsigned int hdg;
-int command;
-int result;
-int baseMode;
-int customMode;
+uint8_t command;
+uint8_t result;
+uint8_t baseMode;
+uint8_t customMode;
 boolean mChange = true;
 int limitMeters = 0;
 int softLimitMeters = 0;
@@ -191,7 +188,7 @@ void setup()
     myGLCD.setColor(255,255,0);   
     myTouch.InitTouch(1);
     myTouch.setPrecision(PREC_LOW);
-    i = 30;
+    int i = 20;
 	int logID;
 	logID = GetLogID();
 	char logName[12];
@@ -216,13 +213,19 @@ void setup()
 			bline += logID;
 			bline += ".txt";
 			bline.toCharArray(logName, 12);
-
+		
+		if(eLogging())
+		{
+			i += 12;
+			myGLCD.print("Error Logging On!", LEFT, i);
+			
 			if (!eLog.open(logName, O_RDWR | O_CREAT | O_AT_END)) 
 			{
 				i += 12;
 		 		myGLCD.print("Error Log Not created", LEFT, i);
 				beLog = false;
 			}
+		
 			else
 			{
 				i += 12;
@@ -236,36 +239,55 @@ void setup()
 			bline += logID;
 			bline += ".log";
 			bline.toCharArray(logName, 12);
-
-		/*if (!tLog.open(logName, O_RDWR | O_CREAT | O_AT_END)) 
-			{
-				i += 12;
-				myGLCD.print("Telemetry Log Not created", LEFT, i);
-				btLog = false;
-			}
-			else
-			{
-				i += 12;
-
-				myGLCD.print("Telemetry Logging Started: " + bline, LEFT, i);
-				btLog = true;
-			}*/
+		}
+		
+		else
+		{
+			i += 12;
+			myGLCD.print("Error Logging Off!", LEFT, i);
+			beLog = false;
 		}
 
-    Serial.begin(115200); //Debug USB Port
+		if(tLogging())
+		{
+			i += 12;
+			myGLCD.print("Telemetry Logging On!", LEFT, i);
+			if (!tLog.open(logName, O_RDWR | O_CREAT | O_AT_END)) 
+				{
+					i += 12;
+					myGLCD.print("Telemetry Log Not created", LEFT, i);
+					btLog = false;
+				}
+				else
+				{
+					i += 12;
 
-	Serial.println("");
-    Serial.println("Debug Port 0 Started @115200bps");
+					myGLCD.print("Telemetry Logging Started: " + bline, LEFT, i);
+					btLog = true;
+				}
+			}
+
+		else
+		{
+			i += 12;
+			myGLCD.print("Telemetry Logging Off!", LEFT, i);
+			btLog = false;
+		}
+	}
+
+
+	//Serial.println("");
+    //Serial.println("Debug Port 0 Started @115200bps");
 	if(beLog) eLog.println("Debug Port 0 Started @115200bps");
 	i += 12;
     myGLCD.print("Debug Port 0 Started @115200bps", LEFT, i);
     
     Serial1.begin(57600); //Xbee port
-    Serial.println("Xbee Port 1 Started @ 57600bps");
+    //Serial.println("Xbee Port 1 Started @ 57600bps");
 	if(beLog) eLog.println("Xbee Port 1 Started @ 57600bps");
     i += 12;
 	myGLCD.print("Xbee Port 1 Started @ 57600bps", LEFT, i);
-    Serial.println("Starting Xbee");
+    //Serial.println("Starting Xbee");
 	if(beLog) eLog.println("Xbee Port 1 Started @ 57600bps");
     i += 12;
 	myGLCD.print("Starting Xbee...", LEFT, i);
@@ -273,14 +295,28 @@ void setup()
     Serial1.println("...");
     Serial2.begin(38400); //GPS
 	i += 12;
-    Serial.println("GPS Port 2 Started @ 38400bps");
+    //Serial.println("GPS Port 2 Started @ 38400bps");
     if(beLog) eLog.println("GPS Port 2 Started @ 38400bps");
 	myGLCD.print("GPS Port 2 Started @ 38400bps", LEFT, i);
+	int fr;
+	fr = EEPROM.read(0);
+	i += 12;
+	bline = "Settings byte: ";
+	bline += fr;
+	myGLCD.print(bline, LEFT, i);
     
+	bSPT = SPT();
+
+	i += 12;
+	if(bSPT) myGLCD.print("SPT is True", LEFT, i);
+	if(!bSPT) myGLCD.print("SPT is False", LEFT, i);
+
     delay(3000);
-    SetMenu(0, 0);
+    if(!bSPT) SetMenu(0, 0);
+	if(bSPT) Serial.begin(115200); //Debug USB Port
+
     pinMode(13, OUTPUT);
-//	FactReset();
+
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -289,15 +325,13 @@ void setup()
 
 void loop()
 {
-  //beLogFlush();
   if(beLog) eLog.sync();
   if(btLog) tLog.sync();
-  //Serial.println("Loop Start");
   if(beLog) eLog.print("Loop Start: SetMenu(");
   if(beLog) eLog.print(CurrentMenu);
   if(beLog) eLog.println(")");
 
-  if(false)
+  if(bSPT)
   {
       if (Serial1.available()) 
       {
@@ -311,20 +345,9 @@ void loop()
         int inByte = Serial.read();
         Serial1.write(inByte); 
       }
-      
-      if((myTouch.dataAvailable() == true) && Touched == 0)
-      {
-        myTouch.read();
-        tx = myTouch.TP_X;
-        ty = myTouch.TP_Y;
-        vButton();
-      }
   }
   else
   {
-  //
-  //if((pot - analogRead(A0))>1) pot = analogRead(A0);
-  //if((analogRead(A0) - pot)>1) pot = analogRead(A0);
     pot += analogRead(A0);
     pot += analogRead(A0);
     pot += analogRead(A0);
@@ -333,23 +356,13 @@ void loop()
   
     pot = pot/6;
   
-  //digitalWrite(13, HIGH);
-    if(!feeds)
-    {
-#ifdef DEBUG
-        Serial.print("Starting Feeds...");
-#endif
-        start_feeds();
-        feeds = true;
-#ifdef DEBUG
-        Serial.println("Started");
-#endif
+	if(beLog)
+		{
+			bline = "FreeRam: ";
+			bline += freeRam();
+			eLog.println(bline);
+		}
 
-    }
-  
-#ifdef DEBUG
-//      Serial.println(freeRam());
-#endif
 
     bool newdata = false;
     if (feedgps())
@@ -359,7 +372,7 @@ void loop()
      }
    
     gcs_update();
-	if(btLog) tLog.sync();
+	//if(btLog) tLog.sync();
 
     gps.f_get_position(&flat, &flon, &age); 
     
@@ -374,6 +387,15 @@ void loop()
 		bline += " Age: ";
 		bline += age;
 		eLog.println(bline);
+
+		//bline = "Serial 1 Buffer: ";
+		//bline += Serial1.available();
+		//eLog.println(bline);
+
+		//bline = "Serial 2 Buffer: ";
+		//bline += Serial2.available();
+		//eLog.println(bline);
+
 	}
 
 	if(beLog) eLog.sync();

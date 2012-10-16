@@ -82,26 +82,11 @@ void MainMenu()
 void MainMenuR()
 {
                mChange = true;
-               //float flat;
-               //float flon;
-               //unsigned long age;
-               char dLat[15];
-               char dLon[15]; 
              
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-               
-               //gps.f_get_position(&flat, &flon, &age);
-               
-               //dtostrf(flat, 10, 6, dLat);
-               //dtostrf(flon, 10, 6, dLon);
-               //bline = "Lat: "; 
-               //bline += dLat;
-               //bline += "    Lon: ";  
-               //bline += dLon;
-               //bline += "    ";
-               //myGLCD.print(bline, LEFT, 226);
-               if(mChange)
+             
+			   if(mChange)
                {
                  myGLCD.setFont(BigFont);
                  myGLCD.setColor(0,255,0);
@@ -199,8 +184,8 @@ void Setup1()
                myGLCD.fillRoundRect(155, 95, 225, 165);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Stop", 175, 44);
-               myGLCD.print("Feeds", 175, 56);
+               myGLCD.print("GS Config", 155, 125);
+               //myGLCD.print("Feeds", 175, 56);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(230, 95, 305, 165);
@@ -238,8 +223,9 @@ void Debug1R()
                //float flat;
                //float flon;
                //unsigned long age;
-               char dLon[15]; 
-               
+               //char dLon[15]; 
+               char cFloat[15];
+
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(0, 0, 0);
                
@@ -1526,6 +1512,7 @@ void AltTune()
 void AltTuneR()
 {              
   int addr = 116;
+  char cFloat[15];
   if(pSend)
   {
     int x = ley;
@@ -1661,7 +1648,7 @@ void AltTuneR()
            {
             case 0:
              {
-               tuneP = value;
+			   tuneP = value;
                dtostrf(value, 4, 2, cFloat);
                bline = "tune P ";
                bline += cFloat;
@@ -1672,7 +1659,7 @@ void AltTuneR()
              
             case 1:
              {
-               tuneI = value;
+			   tuneI = value;
                dtostrf(value, 4, 2, cFloat);
                bline = "Tune I ";
                bline += cFloat;
@@ -1703,7 +1690,7 @@ void AltTuneR()
                break;
              }
            }
-                   
+               
            if(value > 65499.0) value = 65500.0;
            if(x != 3) dtostrf((value), 4, 2, cFloat);
            else dtostrf((value/100), 4, 2, cFloat);
@@ -1867,9 +1854,10 @@ void SerialPassThru()
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
                myGLCD.print("Serial Passthrough", CENTER, 1);
+			   myGLCD.print("Plug Ground Station into serial now", CENTER, 24);
                myGLCD.setFont(BigFont);
                myGLCD.setBackColor(0, 0, 128);
-               //SPT = true;
+               SetSPT();
 }
 
 void SerialPassThruR()
@@ -2083,6 +2071,27 @@ void StopLoggingSD()
 }
 
 void StopLoggingSDR()
+{
+
+}
+
+void GSConfig()
+{
+		myGLCD.clrScr();
+		myGLCD.setFont(SmallFont);
+		myGLCD.setColor(0, 0, 0);
+		myGLCD.fillRect(0, 0, 319, 239);
+		myGLCD.setColor(255, 0, 0);
+		myGLCD.fillRect(0, 0, 319, 13);
+		myGLCD.setColor(255, 255, 255);
+		myGLCD.setBackColor(255, 0, 0);
+		myGLCD.print("GroundStation Config", CENTER, 1);
+		myGLCD.setBackColor(0, 0, 0);
+		myGLCD.setColor(255,255,255); 
+		int i = 20;
+}
+
+void GSConfigR()
 {
 
 }

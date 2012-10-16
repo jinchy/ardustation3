@@ -458,27 +458,3 @@ int formatCard()
   //cout << pstr("Format done\n");
 }
 
-void beLogFlush()
-{
-	if(beLog) eLog.close();
-	beLog = false;
-
-	if (!sd.begin(chipSelect, SPI_FULL_SPEED))
-			{
-				beLog = false;
-				btLog = false;
-				bfile = false;
-			}
-		else
-			{
-				if (!eLog.open("ErrorLog.txt", O_RDWR | O_CREAT | O_AT_END)) 
-				{
-				}
-				else
-				{
-					eLog.println();
-					eLog.println("==============================================================");
-					beLog = true;
-				}
-			}
-}
