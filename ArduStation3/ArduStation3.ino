@@ -14,7 +14,7 @@
 #include <GCS_MAVLink.h>
 #include <Stream.h>
 #include <stdint.h>
-#include <AP_EEPROMB.h>
+//#include <AP_EEPROMB.h>
 #include <EEPROM.h>
 #include <SdFat.h>
 #include <SdFatUtil.h>
@@ -31,8 +31,8 @@ boolean beLog;
 SdFile tLog;
 boolean btLog;
 
-SdFile file;
-boolean bfile;
+//SdFile file;
+//boolean bfile;
 
 uint32_t cardSizeBlocks;
 uint16_t cardCapacityMB;
@@ -61,6 +61,9 @@ uint8_t received_compid=0;  // component id of heartbeat sender
 
 #define GET_PARAMS_TIMEOUT 250 //(20 seconds)
 
+#undef PROGMEM 
+#define PROGMEM __attribute__(( section(".progmem.data") )) 
+
 #undef PSTR 
 #define PSTR(s) (__extension__({static const char __c[] PROGMEM = (s); &__c[0];})) 
 
@@ -81,6 +84,8 @@ uint8_t received_compid=0;  // component id of heartbeat sender
 // Uncomment the next line for Arduino Mega
 UTFT myGLCD(ITDB32S,38,39,40,41);   // Remember to change the model parameter to suit your display module!
 ITDB02_Touch  myTouch(6,5,4,3,2);
+char p_buffer[80];
+#define P(str) (strcpy_P(p_buffer, PSTR(str)), p_buffer)
 
 static bool feeds = false;
 boolean bSPT = false;
@@ -155,6 +160,8 @@ int droneType = 1;  // 0 = Not established, 1 = APM, 2 = ACM  - Normally read fr
 int autoPilot = 3;  // This should be 3 for ArdupilotMeg
 long timeLastByte = 0;
 long maxByteTime = 0;
+char bline[96];
+
 
 // Wrong Mavlink Version detector
 byte wrongMavlinkState = 0; // Check incoming serial seperately from Mavlink library - in case we have wrong Mavlink source 
@@ -164,7 +171,7 @@ byte packetStartByte = 0;  // first byte detected used to store which wrong Mavl
 
 extern uint8_t SmallFont[];
 extern uint8_t BigFont[];
-String bline;
+//String bline;
 
 FastSerialPort0(Serial);
 FastSerialPort1(Serial1);
@@ -183,7 +190,10 @@ void setup()
     myGLCD.fillRect(0, 0, 319, 13);
     myGLCD.setColor(255, 255, 255);
     myGLCD.setBackColor(255, 0, 0);
-    myGLCD.print("Jesse's Ardustation III", CENTER, 1);
+
+    //print_P(PSTR());
+	//strcpy(bline, P("Jesse's Aardustation"));
+	myGLCD.print(P("Jesse's Aardustation"), CENTER, 1);
     myGLCD.setBackColor(0, 0, 128);
     myGLCD.setColor(255,255,0);   
     myTouch.InitTouch(1);
@@ -195,74 +205,78 @@ void setup()
 
 	beLog = false;
 	btLog = false;
-	bfile = false;
+	//bfile = false;
 		
 	if (!sd.begin(chipSelect, SPI_FULL_SPEED))
 		{
-			myGLCD.print("No SD Card Detected, logging disabled", LEFT, i);
+			myGLCD.print(P("No SD Card Detected, logging disabled"), LEFT, i);
 			beLog = false;
 			btLog = false;
-			bfile = false;
+			//bfile = false;
 		}
 	else
 		{
 			i += 12;
-			myGLCD.print("SD Card Detected", LEFT, i);
+			myGLCD.print(P("SD Card Detected"), LEFT, i);
 
-			bline = "ELog";
-			bline += logID;
-			bline += ".txt";
-			bline.toCharArray(logName, 12);
-		
+			strcpy(bline, P("ELog"));
+			itoa(logID, cFloat, 10);
+			strcat(bline, cFloat);
+			strcat(bline, P(".txt"));
+
 		if(eLogging())
 		{
 			i += 12;
-			myGLCD.print("Error Logging On!", LEFT, i);
+			myGLCD.print(P("Error Logging On!"), LEFT, i);
 			
-			if (!eLog.open(logName, O_RDWR | O_CREAT | O_AT_END)) 
+			if (!eLog.open(bline, O_RDWR | O_CREAT | O_AT_END)) 
 			{
 				i += 12;
-		 		myGLCD.print("Error Log Not created", LEFT, i);
+		 		myGLCD.print(P("Error Log Not created"), LEFT, i);
 				beLog = false;
 			}
 		
 			else
 			{
 				i += 12;
-				myGLCD.print("Error Logging Started: " + bline, LEFT, i);
+				myGLCD.print(P("Error Logging Started: "), LEFT, i);
+				myGLCD.print(bline, 180, i);
 				eLog.println();
-				eLog.println("==============================================================");
+				eLog.println(P("=============================================================="));
 				beLog = true;
 			}
 
-			bline = "tlog";
-			bline += logID;
-			bline += ".log";
-			bline.toCharArray(logName, 12);
 		}
 		
 		else
 		{
 			i += 12;
-			myGLCD.print("Error Logging Off!", LEFT, i);
+			myGLCD.print(P("Error Logging Off!"), LEFT, i);
 			beLog = false;
 		}
 
 		if(tLogging())
+		//if(false)
 		{
 			i += 12;
-			myGLCD.print("Telemetry Logging On!", LEFT, i);
-			if (!tLog.open(logName, O_RDWR | O_CREAT | O_AT_END)) 
+			myGLCD.print(P("Telemetry Logging On!"), LEFT, i);
+			strcpy(bline, P("tlog"));
+			itoa(logID, cFloat, 10);
+			strcat(bline, cFloat);
+			strcat(bline,P(".log"));
+
+			if (!tLog.open(bline, O_RDWR | O_CREAT | O_AT_END)) 
 				{
 					i += 12;
-					myGLCD.print("Telemetry Log Not created", LEFT, i);
+					myGLCD.print(P("Telemetry Log Not created"), LEFT, i);
 					btLog = false;
 				}
 				else
 				{
 					i += 12;
 
-					myGLCD.print("Telemetry Logging Started: " + bline, LEFT, i);
+					myGLCD.print(P("Telemetry Logging Started: "), LEFT, i);
+					myGLCD.print(bline, 210, i);
 					btLog = true;
 				}
 			}
@@ -270,7 +284,7 @@ void setup()
 		else
 		{
 			i += 12;
-			myGLCD.print("Telemetry Logging Off!", LEFT, i);
+			myGLCD.print(P("Telemetry Logging Off!"), LEFT, i);
 			btLog = false;
 		}
 	}
@@ -278,38 +292,41 @@ void setup()
 
 	//Serial.println("");
     //Serial.println("Debug Port 0 Started @115200bps");
-	if(beLog) eLog.println("Debug Port 0 Started @115200bps");
+	if(beLog) eLog.println(P("Debug Port 0 Started @115200bps"));
 	i += 12;
-    myGLCD.print("Debug Port 0 Started @115200bps", LEFT, i);
+    myGLCD.print(P("Debug Port 0 Started @115200bps"), LEFT, i);
     
     Serial1.begin(57600); //Xbee port
     //Serial.println("Xbee Port 1 Started @ 57600bps");
-	if(beLog) eLog.println("Xbee Port 1 Started @ 57600bps");
+	if(beLog) eLog.println(P("Xbee Port 1 Started @ 57600bps"));
     i += 12;
-	myGLCD.print("Xbee Port 1 Started @ 57600bps", LEFT, i);
+	myGLCD.print(P("Xbee Port 1 Started @ 57600bps"), LEFT, i);
     //Serial.println("Starting Xbee");
-	if(beLog) eLog.println("Xbee Port 1 Started @ 57600bps");
+	if(beLog) eLog.println(P("Starting Xbee..."));
     i += 12;
-	myGLCD.print("Starting Xbee...", LEFT, i);
+	myGLCD.print(P("Starting Xbee..."), LEFT, i);
     delay(4000);
     Serial1.println("...");
     Serial2.begin(38400); //GPS
 	i += 12;
     //Serial.println("GPS Port 2 Started @ 38400bps");
-    if(beLog) eLog.println("GPS Port 2 Started @ 38400bps");
-	myGLCD.print("GPS Port 2 Started @ 38400bps", LEFT, i);
+    if(beLog) eLog.println(P("GPS Port 2 Started @ 38400bps"));
+	myGLCD.print(P("GPS Port 2 Started @ 38400bps"), LEFT, i);
 	int fr;
 	fr = EEPROM.read(0);
 	i += 12;
-	bline = "Settings byte: ";
-	bline += fr;
+	
+
+	strcpy(bline, P("Settings byte: "));
+	itoa(fr, cFloat, 10);
+	strcat(bline, cFloat);
 	myGLCD.print(bline, LEFT, i);
-    
+
 	bSPT = SPT();
 
 	i += 12;
-	if(bSPT) myGLCD.print("SPT is True", LEFT, i);
-	if(!bSPT) myGLCD.print("SPT is False", LEFT, i);
+	if(bSPT) myGLCD.print(P("SPT is True"), LEFT, i);
+	if(!bSPT) myGLCD.print(P("SPT is False"), LEFT, i);
 
     delay(3000);
     if(!bSPT) SetMenu(0, 0);
@@ -327,9 +344,9 @@ void loop()
 {
   if(beLog) eLog.sync();
   if(btLog) tLog.sync();
-  if(beLog) eLog.print("Loop Start: SetMenu(");
+  if(beLog) eLog.print(P("Loop Start: SetMenu("));
   if(beLog) eLog.print(CurrentMenu);
-  if(beLog) eLog.println(")");
+  if(beLog) eLog.println(P(")"));
 
   if(bSPT)
   {
@@ -358,8 +375,9 @@ void loop()
   
 	if(beLog)
 		{
-			bline = "FreeRam: ";
-			bline += freeRam();
+			strcpy(bline, P("FreeRam: "));
+			itoa(freeRam(), cFloat, 10);
+			strcat(bline, cFloat);
 			eLog.println(bline);
 		}
 
@@ -368,39 +386,27 @@ void loop()
     if (feedgps())
      {
        newdata = true;
-       Serial2.flush();
      }
    
     gcs_update();
-	//if(btLog) tLog.sync();
-
     gps.f_get_position(&flat, &flon, &age); 
     
 	if(beLog)
 	{
-		bline = "GPS Position update:\n lat: ";
-		dtostrf(flat, 4, 2, cFloat);
-		bline += cFloat;
-		bline += " Lon: ";
-		dtostrf(flon, 4, 2, cFloat);
-		bline += cFloat;
-		bline += " Age: ";
-		bline += age;
+		strcpy(bline, P("GPS Position update:\n lat: "));
+		dtostrf(flat, 4, 6, cFloat);
+		strcat(bline, cFloat);
+		strcat(bline, P(" Lon: "));
+		dtostrf(flon, 4, 6, cFloat);
+		strcat(bline, cFloat);
+		strcat(bline, P(" Age: "));
+		itoa(age, cFloat, 10);
+		strcat(bline, cFloat);
 		eLog.println(bline);
-
-		//bline = "Serial 1 Buffer: ";
-		//bline += Serial1.available();
-		//eLog.println(bline);
-
-		//bline = "Serial 2 Buffer: ";
-		//bline += Serial2.available();
-		//eLog.println(bline);
-
 	}
 
 	if(beLog) eLog.sync();
 	
-  
     if (limitMeters > 0)
        {
          cmdCheckLimit();  //check if distence limit is imposed

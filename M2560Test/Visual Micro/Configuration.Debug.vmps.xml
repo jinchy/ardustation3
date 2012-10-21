@@ -1,0 +1,8 @@
+<VisualMicro>
+  <Program Name="M2560Test" Ext=".ino" Location="C:\Users\jesse\Documents\Source\Ardustation3\M2560Test">
+    <Compile IsCompiled="0" CompilerErrors="0" ConfigurationName="Debug" StopOnError="False" OptimiseLibs="True" OptimiseCore="True" BuildPath="C:\Users\jesse\AppData\Local\VMicro\Arduino\Builds\M2560Test\mega2560" />
+    <Platform Name="Arduino">
+      <Board Name="mega2560" Description="Arduino Mega 2560 or Mega ADK" CoreFolder="C:\Users\jesse\Documents\arduino-1.0.1\hardware\arduino\cores\arduino" VariantFullPath="C:\Users\jesse\Documents\arduino-1.0.1\hardware\arduino\variants\mega" />
+    </Platform>
+  </Program>
+</VisualMicro>

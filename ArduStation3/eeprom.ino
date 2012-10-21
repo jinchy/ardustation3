@@ -67,6 +67,7 @@ void FactReset()
 
 bool tLogging()
 {
+	/*
 	int fr;
 	fr = EEPROM.read(0);
 	if((fr & 4) == 4)
@@ -74,6 +75,8 @@ bool tLogging()
 		return true;
 	}
 	return false;
+	*/
+	return true;
 }
 
 void tLogging(bool on)
@@ -88,6 +91,7 @@ void tLogging(bool on)
 	{
 		EEPROM.write(0, (fr | 4));
 	}
+
 }
 
 bool eLogging()

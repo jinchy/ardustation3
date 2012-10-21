@@ -8,8 +8,8 @@ void ThreeTune(char hdg[12], int addr)
                myGLCD.fillRect(0, 0, 319, 13);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-			   bline = hdg;
-			   bline += " Stabilisation";
+			   strcpy(bline, hdg);
+			   strcat(bline, P(" Stabilisation"));
                myGLCD.print(bline, CENTER, 1);
                myGLCD.setFont(BigFont);
                myGLCD.setBackColor(0, 0, 128);
@@ -18,100 +18,100 @@ void ThreeTune(char hdg[12], int addr)
                myGLCD.fillRect(0, 24, 319, 44);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print("Roll", LEFT, 24);
-               myGLCD.print ("Start", 110, 24);
-               myGLCD.print ("New", 210, 24);
+               myGLCD.print(P("Roll"), LEFT, 24);
+               myGLCD.print (P("Start"), 110, 24);
+               myGLCD.print (P("New"), 210, 24);
                
                myGLCD.setBackColor(0, 0, 128);
-               myGLCD.print("   P:", LEFT, 44);
-               myGLCD.print("   I:", LEFT, 64);
-               myGLCD.print("   D:", LEFT, 84);
-               myGLCD.print("IMax:", LEFT, 104);
+               myGLCD.print(P("   P:"), LEFT, 44);
+               myGLCD.print(P("   I:"), LEFT, 64);
+               myGLCD.print(P("   D:"), LEFT, 84);
+               myGLCD.print(P("IMax:"), LEFT, 104);
  
                myGLCD.setColor(255, 0, 0);
                myGLCD.fillRect(0, 124, 319, 144);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print("Pitch", LEFT, 124);
+               myGLCD.print(P("Pitch"), LEFT, 124);
                
                myGLCD.setBackColor(0, 0, 128);
-               myGLCD.print("   P:", LEFT, 144);
-               myGLCD.print("   I:", LEFT, 164);
-               myGLCD.print("   D:", LEFT, 184);
-               myGLCD.print("IMax:", LEFT, 204);
+               myGLCD.print(P("   P:"), LEFT, 144);
+               myGLCD.print(P("   I:"), LEFT, 164);
+               myGLCD.print(P("   D:"), LEFT, 184);
+               myGLCD.print(P("IMax:"), LEFT, 204);
 
                int x;
                
                x = addr;
                value = EEPROM_readDouble(x*4);
                if(value > 65499.0) value = 65500.0;
+               strcpy(bline, P(" "));
                dtostrf(value, 4, 2, cFloat);
-               bline = " ";
-               bline += cFloat;
-               bline += "  ";
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
                myGLCD.print(bline, 85, 44);
                
                x++;
                value = EEPROM_readDouble(x*4);
                if(value > 65499.0) value = 65500.0;
+               strcpy(bline, P(" "));
                dtostrf(value, 4, 2, cFloat);
-               bline = " ";
-               bline += cFloat;
-               bline += "  ";
+               strcat(bline, cFloat);
+               strcpy(bline, P("  "));
                myGLCD.print(bline, 85, 64);
                
                x++;
                value = EEPROM_readDouble(x*4);
                if(value > 65499.0) value = 65500.0;
+               strcpy(bline, P(" "));
                dtostrf(value, 4, 2, cFloat);
-               bline = " ";
-               bline += cFloat;
-               bline += "  ";
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
                myGLCD.print(bline, 85, 84);
                
                x++;
                value = EEPROM_readDouble(x*4);
                if(value > 65499.0) value = 65500.0;
+               strcpy(bline, P(" "));
                dtostrf((value/100), 4, 2, cFloat);
-               bline = " ";
-               bline += cFloat;
-               bline += "  ";
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
                myGLCD.print(bline, 85, 104);
  
                x++;
                value = EEPROM_readDouble(x*4);
                if(value > 65499.0) value = 65500.0;
+               strcpy(bline, P(" "));
                dtostrf(value, 4, 2, cFloat);
-               bline = " ";
-               bline += cFloat;
-               bline += "  ";
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
                myGLCD.print(bline, 85, 144);
                
                x++;
                value = EEPROM_readDouble(x*4);
                if(value > 65499.0) value = 65500.0;
                dtostrf(value, 4, 2, cFloat);
-               bline = " ";
-               bline += cFloat;
-               bline += "  ";
+               strcpy(bline, P(" "));
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
                myGLCD.print(bline, 85, 164);
                
                x++;
                value = EEPROM_readDouble(x*4);
                if(value > 65499.0) value = 65500.0;
                dtostrf(value, 4, 2, cFloat);
-               bline = " ";
-               bline += cFloat;
-               bline += "  ";
+               strcpy(bline, P(" "));
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
                myGLCD.print(bline, 85, 184);
                
                x++;
                value = EEPROM_readDouble(x*4);
                if(value > 65499.0) value = 65500.0;
                dtostrf((value/100), 4, 2, cFloat);
-               bline = " ";
-               bline += cFloat;
-               bline += "  ";
+               strcpy(bline, P(" "));
+               strcat(bline, cFloat);
+               strcpy(bline, P("  "));
                myGLCD.print(bline, 85, 204);
                
                myGLCD.setColor(0, 0, 128);
@@ -122,19 +122,19 @@ void ThreeTune(char hdg[12], int addr)
                myGLCD.fillRoundRect(285, 20, 319, 100);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("UP", 295, 55);
+               myGLCD.print(P("UP"), 295, 55);
                
                myGLCD.setColor(255, 0, 0);
                myGLCD.fillRoundRect(285, 105, 319, 154);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print("SND", 292, 123); 
+               myGLCD.print(P("SND"), 292, 123); 
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(285, 159, 319, 239);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("DN", 295, 195);  
+               myGLCD.print(P("DN"), 295, 195);  
                
                tuneP = 0.0;
                tuneI = 0.0;
@@ -284,10 +284,10 @@ void ThreeTuneR(int addr)
              {
                tuneP = value;
                dtostrf(value, 4, 2, cFloat);
-               bline = "tune P ";
-               bline += cFloat;
-               bline += "  ";
-               Serial.println(bline);
+               strcpy(bline, P("tune P "));
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
+               if(beLog) eLog.println(bline);
                break;
              }
              
@@ -295,10 +295,10 @@ void ThreeTuneR(int addr)
              {
                tuneI = value;
                dtostrf(value, 4, 2, cFloat);
-               bline = "Tune I ";
-               bline += cFloat;
-               bline += "  ";
-               Serial.println(bline);
+               strcpy(bline, P("tune I "));
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
+               if(beLog) eLog.println(bline);
                break;
              }
              
@@ -306,10 +306,10 @@ void ThreeTuneR(int addr)
              {
                tuneD = value;
                dtostrf(value, 4, 2, cFloat);
-               bline = "Tune D ";
-               bline += cFloat;
-               bline += "  ";
-               Serial.println(bline);
+               strcpy(bline, P("tune D "));
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
+			   if(beLog) eLog.println(bline);
                break;
              }
              
@@ -317,10 +317,10 @@ void ThreeTuneR(int addr)
              {
                tuneIMax = value;
                dtostrf(value, 4, 2, cFloat);
-               bline = "Tune I Max ";
-               bline += cFloat;
-               bline += "  ";
-               Serial.println(bline);
+               strcpy(bline, P("Tune I Max "));
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
+               if(beLog) eLog.println(bline);
                break;
              }
            }
@@ -328,8 +328,8 @@ void ThreeTuneR(int addr)
            if(value > 65499.0) value = 65500.0;
            if(x != 3) dtostrf((value), 4, 2, cFloat);
            else dtostrf((value/100), 4, 2, cFloat);
-           bline = " ";
-           bline += cFloat;
+           strcpy(bline, " ");
+           strcat(bline, cFloat);
            myGLCD.setFont(BigFont);
            myGLCD.setBackColor(0, 0, 128);
            myGLCD.setColor(255, 255, 255);
@@ -421,8 +421,8 @@ void ThreeTuneR(int addr)
            if(value > 65499.0) value = 65500.0;
            if(x != 3) dtostrf((value), 4, 2, cFloat);
            else dtostrf((value/100), 4, 2, cFloat);
-           bline = " ";
-           bline += cFloat;
+           strcat(bline, P(" "));
+           strcpy(bline, cFloat);
            myGLCD.setFont(BigFont);
            myGLCD.setBackColor(0, 0, 128);
            myGLCD.setColor(255, 255, 255);
@@ -465,8 +465,8 @@ void ThreeTuneR(int addr)
            if(value > 65499.0) value = 65500.0;
            if(x != 3) dtostrf((value), 4, 2, cFloat);
            else dtostrf((value/100), 4, 2, cFloat);
-           bline = " ";
-           bline += cFloat;
+           strcpy(bline, P(" "));
+           strcat(bline, cFloat);
            myGLCD.setFont(BigFont);
            myGLCD.setBackColor(0, 0, 128);
            myGLCD.setColor(255, 255, 255);
@@ -487,8 +487,8 @@ void TwoTune(char hdg[12], int addr)
                myGLCD.fillRect(0, 0, 319, 13);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-			   bline = hdg;
-			   bline += " Stabilisation";
+			   strcpy(bline, hdg);
+			   strcat(bline, P(" Stabilisation"));
                myGLCD.print(bline, CENTER, 1);
                myGLCD.setFont(BigFont);
                myGLCD.setBackColor(0, 0, 128);
@@ -497,25 +497,25 @@ void TwoTune(char hdg[12], int addr)
                myGLCD.fillRect(0, 24, 319, 44);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print("Roll", LEFT, 24);
-               myGLCD.print ("Start", 110, 24);
-               myGLCD.print ("New", 210, 24);
+               myGLCD.print(P("Roll"), LEFT, 24);
+               myGLCD.print (P("Start"), 110, 24);
+               myGLCD.print (P("New"), 210, 24);
                
                myGLCD.setBackColor(0, 0, 128);
-               myGLCD.print("   P:", LEFT, 44);
-               myGLCD.print("   I:", LEFT, 64);
-               myGLCD.print("IMax:", LEFT, 104);
+               myGLCD.print(P("   P:"), LEFT, 44);
+               myGLCD.print(P("   I:"), LEFT, 64);
+               myGLCD.print(P("IMax:"), LEFT, 104);
  
                myGLCD.setColor(255, 0, 0);
                myGLCD.fillRect(0, 124, 319, 144);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print("Pitch", LEFT, 124);
+               myGLCD.print(P("Pitch"), LEFT, 124);
                
                myGLCD.setBackColor(0, 0, 128);
-               myGLCD.print("   P:", LEFT, 144);
-               myGLCD.print("   I:", LEFT, 164);
-               myGLCD.print("IMax:", LEFT, 204);
+               myGLCD.print(P("   P:"), LEFT, 144);
+               myGLCD.print(P("   I:"), LEFT, 164);
+               myGLCD.print(P("IMax:"), LEFT, 204);
 
                int x;
                
@@ -523,54 +523,54 @@ void TwoTune(char hdg[12], int addr)
                value = EEPROM_readDouble(x*4);
                if(value > 65499.0) value = 65500.0;
                dtostrf(value, 4, 2, cFloat);
-               bline = " ";
-               bline += cFloat;
-               bline += "  ";
+               strcpy(bline, P(" "));
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
                myGLCD.print(bline, 85, 44);
                
                x++;
                value = EEPROM_readDouble(x*4);
                if(value > 65499.0) value = 65500.0;
                dtostrf(value, 4, 2, cFloat);
-               bline = " ";
-               bline += cFloat;
-               bline += "  ";
+               strcpy(bline, P(" "));
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
                myGLCD.print(bline, 85, 64);
                
                x++;
                value = EEPROM_readDouble(x*4);
                if(value > 65499.0) value = 65500.0;
                dtostrf((value/100), 4, 2, cFloat);
-               bline = " ";
-               bline += cFloat;
-               bline += "  ";
+               strcpy(bline, P(" "));
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
                myGLCD.print(bline, 85, 104);
  
                x++;
                value = EEPROM_readDouble(x*4);
                if(value > 65499.0) value = 65500.0;
                dtostrf(value, 4, 2, cFloat);
-               bline = " ";
-               bline += cFloat;
-               bline += "  ";
+               strcpy(bline, P(" "));
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
                myGLCD.print(bline, 85, 144);
                
                x++;
                value = EEPROM_readDouble(x*4);
                if(value > 65499.0) value = 65500.0;
                dtostrf(value, 4, 2, cFloat);
-               bline = " ";
-               bline += cFloat;
-               bline += "  ";
+               strcpy(bline, P(" "));
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
                myGLCD.print(bline, 85, 164);
                
                x++;
                value = EEPROM_readDouble(x*4);
                if(value > 65499.0) value = 65500.0;
                dtostrf((value/100), 4, 2, cFloat);
-               bline = " ";
-               bline += cFloat;
-               bline += "  ";
+               strcpy(bline, P(" "));
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
                myGLCD.print(bline, 85, 204);
                
                myGLCD.setColor(0, 0, 128);
@@ -581,19 +581,19 @@ void TwoTune(char hdg[12], int addr)
                myGLCD.fillRoundRect(285, 20, 319, 100);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("UP", 295, 55);
+               myGLCD.print(P("UP"), 295, 55);
                
                myGLCD.setColor(255, 0, 0);
                myGLCD.fillRoundRect(285, 105, 319, 154);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print("SND", 292, 123); 
+               myGLCD.print(P("SND"), 292, 123); 
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(285, 159, 319, 239);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("DN", 295, 195);  
+               myGLCD.print(P("DN"), 295, 195);  
                
                tuneP = 0.0;
                tuneI = 0.0;
@@ -730,10 +730,10 @@ void TwoTuneR(int addr)
              {
                tuneP = value;
                dtostrf(value, 4, 2, cFloat);
-               bline = "tune P ";
-               bline += cFloat;
-               bline += "  ";
-               Serial.println(bline);
+               strcpy(bline, P("tune P "));
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
+               if(beLog) eLog.println(bline);
                break;
              }
              
@@ -741,10 +741,10 @@ void TwoTuneR(int addr)
              {
                tuneI = value;
                dtostrf(value, 4, 2, cFloat);
-               bline = "Tune I ";
-               bline += cFloat;
-               bline += "  ";
-               Serial.println(bline);
+               strcpy(bline, P("Tune I "));
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
+               if(beLog) eLog.println(bline);
                break;
              }
               
@@ -752,10 +752,10 @@ void TwoTuneR(int addr)
              {
                tuneIMax = value;
                dtostrf(value, 4, 2, cFloat);
-               bline = "Tune I Max ";
-               bline += cFloat;
-               bline += "  ";
-               Serial.println(bline);
+               strcpy(bline, P("Tune I Max "));
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
+               if(beLog) eLog.println(bline);
                break;
              }
            }
@@ -763,8 +763,8 @@ void TwoTuneR(int addr)
            if(value > 65499.0) value = 65500.0;
            if(x != 3) dtostrf((value), 4, 2, cFloat);
            else dtostrf((value/100), 4, 2, cFloat);
-           bline = " ";
-           bline += cFloat;
+           strcpy(bline, " ");
+           strcat(bline, cFloat);
            myGLCD.setFont(BigFont);
            myGLCD.setBackColor(0, 0, 128);
            myGLCD.setColor(255, 255, 255);
@@ -839,8 +839,8 @@ void TwoTuneR(int addr)
            if(value > 65499.0) value = 65500.0;
            if(x != 3) dtostrf((value), 4, 2, cFloat);
            else dtostrf((value/100), 4, 2, cFloat);
-           bline = " ";
-           bline += cFloat;
+           strcpy(bline, " ");
+           strcat(bline, cFloat);
            myGLCD.setFont(BigFont);
            myGLCD.setBackColor(0, 0, 128);
            myGLCD.setColor(255, 255, 255);
@@ -876,8 +876,8 @@ void TwoTuneR(int addr)
            if(value > 65499.0) value = 65500.0;
            if(x != 3) dtostrf((value), 4, 2, cFloat);
            else dtostrf((value/100), 4, 2, cFloat);
-           bline = " ";
-           bline += cFloat;
+           strcpy(bline, " ");
+           strcat(bline, cFloat);
            myGLCD.setFont(BigFont);
            myGLCD.setBackColor(0, 0, 128);
            myGLCD.setColor(255, 255, 255);

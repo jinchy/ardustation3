@@ -138,7 +138,7 @@ class UTFT
 		void setColor(byte r, byte g, byte b);
 		void setBackColor(byte r, byte g, byte b);
 		void print(char *st, int x, int y, int deg=0);
-		void print(String st, int x, int y, int deg=0);
+		//void print(String st, int x, int y, int deg=0);
 		void printNumI(long num, int x, int y, int length=0, char filler=' ');
 		void printNumF(double num, byte dec, int x, int y, char divider='.', int length=0, char filler=' ');
 		void setFont(uint8_t* font);

@@ -80,10 +80,9 @@ void cmdRequestParm()
 
 void cmdSetParm(int Parm, float value)
 {  
-    char PaName[16];
-     PName(Parm).toCharArray(PaName, 16);
-    //mav_array_memcpy(PaName, PName(Parm), sizeof(char)*16);
+    //char PaName[16];
+    //strcpy(PaName, PName(Parm));
     mavlink_message_t msg;  
-    mavlink_msg_param_set_pack(127, 0, &msg, received_sysid, received_compid, PaName, value, MAV_VAR_FLOAT);
+    mavlink_msg_param_set_pack(127, 0, &msg, received_sysid, received_compid, PName(Parm), value, MAV_VAR_FLOAT);
     send_message(&msg);  
 }

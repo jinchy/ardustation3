@@ -9,7 +9,7 @@ void MainMenu()
                myGLCD.fillRect(0, 0, 319, 13);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print("Main Menu", CENTER, 1);
+               myGLCD.print(P("Main Menu"), CENTER, 1);
                myGLCD.setBackColor(0, 0, 128);
                myGLCD.setColor(255, 0, 0);
                myGLCD.fillRect(0, 226, 319, 239); 
@@ -22,28 +22,28 @@ void MainMenu()
                myGLCD.fillRoundRect(5, 20, 75, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("HUD", 30, 50);
+               myGLCD.print(P("HUD"), 30, 50);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(80, 20, 150, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Flight", 97, 44);
-               myGLCD.print("Map", 105, 56);
+               myGLCD.print(P("Flight"), 97, 44);
+               myGLCD.print(P("Map"), 105, 56);
                               
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(155, 20, 225, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Follow", 170, 44);
-               myGLCD.print("Me", 180, 56);
+               myGLCD.print(P("Follow"), 170, 44);
+               myGLCD.print(P("Me"), 180, 56);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(230, 20, 305, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Set", 255, 44);
-               myGLCD.print("Limits", 245, 56);
+               myGLCD.print(P("Set"), 255, 44);
+               myGLCD.print(P("Limits"), 245, 56);
                
                
                /////////////////////////////////////////
@@ -53,8 +53,8 @@ void MainMenu()
                myGLCD.fillRoundRect(5, 95, 75, 165);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Set", 25, 115);
-               myGLCD.print("Mode", 20, 127);               
+               myGLCD.print(P("Set"), 25, 115);
+               myGLCD.print(P("Mode"), 20, 127);               
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(80, 95, 150, 165);
@@ -74,7 +74,7 @@ void MainMenu()
                myGLCD.fillRoundRect(230, 95, 305, 165);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Setup", 250, 126);
+               myGLCD.print(P("Setup"), 250, 126);
                //myGLCD.print("Menu", 250, 132);
                return;
 }
@@ -92,19 +92,19 @@ void MainMenuR()
                  myGLCD.setColor(0,255,0);
                  myGLCD.setBackColor(0,0,128);
                
-                 if((baseMode & 81) == 81 && customMode == 0)  myGLCD.print("    Stabilize    ", CENTER, 200);
-                 if((baseMode & 89) == 89 && customMode == 5)  myGLCD.print("     Loiter     ", CENTER, 200);
-                 if((baseMode & 89) == 89 && customMode == 6)  myGLCD.print("Return To Launch", CENTER, 200);
-                 if((baseMode  & 81) == 81 && customMode == 2)  myGLCD.print("    Alt Hold    ", CENTER, 200);
-                 if((baseMode  & 89) == 89 && customMode == 3)  myGLCD.print("      Auto      ", CENTER, 200);
-                 if((baseMode  & 89) == 89 && customMode == 4)  myGLCD.print("     Guided      ", CENTER, 200);
+                 if((baseMode & 81) == 81 && customMode == 0)  myGLCD.print(P("    Stabilize    "), CENTER, 200);
+                 if((baseMode & 89) == 89 && customMode == 5)  myGLCD.print(P("     Loiter     "), CENTER, 200);
+                 if((baseMode & 89) == 89 && customMode == 6)  myGLCD.print(P("Return To Launch"), CENTER, 200);
+                 if((baseMode  & 81) == 81 && customMode == 2)  myGLCD.print(P("    Alt Hold    "), CENTER, 200);
+                 if((baseMode  & 89) == 89 && customMode == 3)  myGLCD.print(P("      Auto      "), CENTER, 200);
+                 if((baseMode  & 89) == 89 && customMode == 4)  myGLCD.print(P("     Guided      "), CENTER, 200);
 
                  if((baseMode & 193) == 193)
                  {
                   myGLCD.setFont(BigFont);
                   myGLCD.setColor(255,0,0);
                   myGLCD.setBackColor(0,0,128);
-                  myGLCD.print("    ARMED    ", CENTER, 175);
+                  myGLCD.print(P("    ARMED    "), CENTER, 175);
                  }
                
                  else
@@ -112,7 +112,7 @@ void MainMenuR()
                   myGLCD.setFont(BigFont);
                   myGLCD.setColor(0,255,0);
                   myGLCD.setBackColor(0,0,128);
-                  myGLCD.print("    DISARMED    ", CENTER, 175);                 
+                  myGLCD.print(P("    DISARMED    "), CENTER, 175);                 
                  }
                }
                myGLCD.setFont(SmallFont);
@@ -129,7 +129,7 @@ void Setup1()
                myGLCD.fillRect(0, 0, 319, 13);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print("Ground Station Setup", CENTER, 1);
+               myGLCD.print(P("Ground Station Setup"), CENTER, 1);
                myGLCD.setBackColor(0, 0, 128);
                myGLCD.setColor(255,255,0);  
 
@@ -140,28 +140,28 @@ void Setup1()
                myGLCD.fillRoundRect(5, 20, 75, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Debug", 20, 50);
+               myGLCD.print(P("Debug"), 20, 50);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(80, 20, 150, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Start", 97, 44);
-               myGLCD.print("Feeds", 97, 56);
+               myGLCD.print(P("Start"), 97, 44);
+               myGLCD.print(P("Feeds"), 97, 56);
                               
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(155, 20, 225, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Stop", 175, 44);
-               myGLCD.print("Feeds", 175, 56);
+               myGLCD.print(P("Stop"), 175, 44);
+               myGLCD.print(P("Feeds"), 175, 56);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(230, 20, 305, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-			   myGLCD.print("Tune", 255, 44);
-               myGLCD.print("Parm", 255, 56);
+			   myGLCD.print(P("Tune"), 255, 44);
+               myGLCD.print(P("Parm"), 255, 56);
                
                
                /////////////////////////////////////////
@@ -171,28 +171,28 @@ void Setup1()
                myGLCD.fillRoundRect(5, 95, 75, 165);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("SPT", 20, 125);
+               myGLCD.print(P("SPT"), 20, 125);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(80, 95, 150, 165);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("SD Card", 92, 125);
+               myGLCD.print(P("SD Card"), 92, 125);
                //myGLCD.print("Feeds", 97, 56);
                               
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(155, 95, 225, 165);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("GS Config", 155, 125);
+               myGLCD.print(P("GS Config"), 155, 125);
                //myGLCD.print("Feeds", 175, 56);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(230, 95, 305, 165);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Main", 250, 120);
-               myGLCD.print("Menu", 250, 132);
+               myGLCD.print(P("Main"), 250, 120);
+               myGLCD.print(P("Menu"), 250, 132);
                return;
 
 }
@@ -212,7 +212,7 @@ void Debug1()
                myGLCD.fillRect(0, 0, 319, 13);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print("Ground Station Debug", CENTER, 1);
+               myGLCD.print(P("Ground Station Debug"), CENTER, 1);
                myGLCD.setBackColor(0, 0, 128);
                myGLCD.setColor(255,255,0);  
                return;
@@ -220,119 +220,112 @@ void Debug1()
 
 void Debug1R()
 {
-               //float flat;
-               //float flon;
-               //unsigned long age;
-               //char dLon[15]; 
-               char cFloat[15];
-
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(0, 0, 0);
                
                gps.f_get_position(&flat, &flon, &age);
                
-               bline = "Drone Type: ";
-               bline += droneType;
+               strcpy(bline, P("Drone Type: "));
+               itoa(droneType, cFloat, 10);
+			   strcat(bline, cFloat);
                myGLCD.print(bline, 5, 12);
              
-               bline = "Autopilot: ";
-               bline += autoPilot;
+               strcpy(bline, P("Autopilot: "));
+               itoa(autoPilot, cFloat, 10);
+			   strcat(bline, cFloat);
                myGLCD.print(bline, 5, 24);
                
-               bline = "Rcd SysID: ";
-               bline += received_sysid;
+               strcpy(bline, P("Rcd SysID: "));
+			   itoa(received_sysid, cFloat, 10);
+			   strcat(bline, cFloat);
                myGLCD.print(bline, 5, 36);
              
-               bline = "Rcd CompID: ";
-               bline += received_compid;
+               strcpy(bline, P("Rcd CompID: "));
+               itoa(received_compid, cFloat, 10);
+			   strcat(bline, cFloat);
                myGLCD.print(bline, 5, 48);
                
-               dtostrf(pitch, 10, 6, cFloat);
-               bline = "Pitch: ";
-               bline += cFloat;
-               //bline += pitch;
+               strcpy(bline, P("Pitch: "));
+			   dtostrf(pitch, 10, 6, cFloat);
+               strcat(bline, cFloat);
                myGLCD.print(bline, 5, 60);
              
-               dtostrf(yaw, 10, 6, cFloat);
-               bline = "Yaw: ";
-               bline += cFloat;             
+               strcpy(bline, P("Yaw: "));
+			   dtostrf(yaw, 10, 6, cFloat);
+               strcat(bline, cFloat);             
                myGLCD.print(bline, 5, 72);
                
-               dtostrf(roll, 10, 6, cFloat);
-               bline = "Roll: ";
-               bline += cFloat; 
+               strcpy(bline, "Roll: ");
+			   dtostrf(roll, 10, 6, cFloat);
+               strcat(bline,  cFloat); 
                myGLCD.print(bline, 5, 84);
               
 //=============================================================
                
-               dtostrf(latitude, 10, 6, cFloat);
-               bline = "AP Lat: ";
-               bline += cFloat;
-               //bline += pitch;
+               strcpy(bline, P("AP Lat: "));
+			   dtostrf(latitude, 10, 6, cFloat);
+               strcat(bline, cFloat);
                myGLCD.print(bline, 5, 96);
              
-               dtostrf(longitude, 10, 6, cFloat);
-               bline = "AP Lon: ";
-               bline += cFloat;             
+               strcpy(bline, P("AP Lon: "));
+			   dtostrf(longitude, 10, 6, cFloat);
+               strcat(bline, cFloat);             
                myGLCD.print(bline, 5, 108);
                
+               strcpy(bline, P("Alt: "));
                dtostrf(altitude, 10, 6, cFloat);
-               bline = "Alt: ";
-               bline += cFloat; 
+               strcat(bline, cFloat); 
                myGLCD.print(bline, 5, 120);
                
-               //dtostrf(altitude, 10, 6, cFloat);
-               bline = "GPS Fix: ";
-               bline += gpsfix; 
-               bline += "D";
+               strcpy(bline, P("GPS Fix: "));
+               itoa(gpsfix, cFloat, 10); 
+			   strcat(bline, cFloat);
+               strcat(bline, P("D"));
                myGLCD.print(bline, 5, 132);
                
+               strcpy(bline, P("Dist To AP: "));
                dtostrf(calc_dist(latitude,longitude, flat, flon), 6, 4, cFloat);
-               bline = "Dist To AP: ";
-               bline += cFloat; 
+               strcat(bline, cFloat); 
                myGLCD.print(bline, 5, 144);
                
+               strcpy(bline, P("My Lat: "));
                dtostrf(flat, 10, 6, cFloat);
-               bline = "My Lat: ";
-               bline += cFloat;
-               //bline += pitch;
+               strcat(bline, cFloat);
                myGLCD.print(bline, 5, 156);
              
+               strcpy(bline, P("My Lon: "));
                dtostrf(flon, 10, 6, cFloat);
-               bline = "My Lon: ";
-               bline += cFloat;             
+               strcat(bline, cFloat);             
                myGLCD.print(bline, 5, 168);
                
-               dtostrf(battery/1000, 6, 4, cFloat);
-               bline = "Battery: ";
-               bline += cFloat;             
+               strcpy(bline, P("Battery: "));
+			   dtostrf(battery/1000, 6, 4, cFloat);
+               strcat(bline, cFloat);             
                myGLCD.print(bline, 5, 180);
                
-               dtostrf(current, 6, 4, cFloat);
-               bline = "Current: ";
-               bline += cFloat;             
+               strcpy(bline, P("Current: "));
+			   dtostrf(current, 6, 4, cFloat);
+               strcat(bline, cFloat);             
                myGLCD.print(bline, 5, 192);
                
-               dtostrf(ground_distance, 6, 4, cFloat);
-               bline = "Ground Dist: ";
-               bline += cFloat;             
+               strcpy(bline, P("Ground Dist: "));
+			   dtostrf(ground_distance, 6, 4, cFloat);
+               strcat(bline, cFloat);             
                myGLCD.print(bline, 5, 204);
                
-               //dtostrf(ground_distance, 6, 4, cFloat);
-               bline = "Base Mode: ";
-               bline += baseMode;
-               bline += "  ";              
+               strcpy(bline, P("Base Mode: "));
+			   itoa(baseMode, cFloat, 10);
+               strcat(bline, "  ");              
                myGLCD.print(bline, 158, 12);
                
-               //dtostrf(ground_distance, 6, 4, cFloat);
-               bline = "Custom Mode: ";
-               bline += customMode;
-               bline += "  ";             
+               strcpy(bline, P("Custom Mode: "));
+               itoa(customMode, cFloat, 10);
+               strcat(bline, "  ");             
                myGLCD.print(bline, 158, 24);
                
-               bline = "Pot: ";
-               bline += pot;
-               bline += "  ";             
+               strcpy(bline, P("Pot: "));
+               itoa(pot, cFloat, 10);
+               strcat(bline, "  ");             
                myGLCD.print(bline, 158, 36);
                return;
 }
@@ -344,9 +337,6 @@ void HUD()
                myGLCD.setFont(BigFont);
                myGLCD.setColor(0, 0, 128);
                myGLCD.fillRect(0, 0, 319, 239);
-               //myGLCD.fillRect(0, 0, 319, 239);
-               //myGLCD.setColor(255, 0, 0);
-               //myGLCD.fillRect(0, 0, 319, 13);
                return;
 }
 
@@ -359,7 +349,7 @@ void HUDR()
                int sx = 0;
                int ex = 319;
                float dYaw;
-               
+
                dpitch = (239/2) + ((pitch/90)*239);
                
                droll = roll*2;
@@ -375,18 +365,18 @@ void HUDR()
                  dYaw = yaw;
                }
                
+               strcpy(bline, P("  "));
                dtostrf(dYaw, 7, 2, cFloat);
-               bline = "  ";
-               bline += cFloat; 
-               bline += "  ";  
+               strcat(bline, cFloat); 
+               strcat(bline, P("  "));  
                myGLCD.setFont(BigFont);               
                myGLCD.print(bline, CENTER, 1);
-               
-               dYaw = rBearing();
+
+               strcpy(bline, P("  "));
+			   dYaw = rBearing();
                dtostrf(dYaw, 7, 2, cFloat);
-               bline = "  ";
-               bline += cFloat; 
-               bline += "  ";  
+               strcat(bline, cFloat); 
+               strcat(bline, P("  "));  
                myGLCD.setFont(BigFont);               
                myGLCD.print(bline, CENTER, 20);
                                           
@@ -434,19 +424,19 @@ void HUDR()
                  myGLCD.setColor(0,255,0);
                  myGLCD.setBackColor(0,0,128);
                
-                 if((baseMode & 81) == 81 && customMode == 0)  myGLCD.print("    Stabilize    ", CENTER, 200);
-                 if((baseMode & 89) == 89 && customMode == 5)  myGLCD.print("     Loiter     ", CENTER, 200);
-                 if((baseMode & 89) == 89 && customMode == 6)  myGLCD.print("Return To Launch", CENTER, 200);
-                 if((baseMode  & 81) == 81 && customMode == 2)  myGLCD.print("    Alt Hold    ", CENTER, 200);
-                 if((baseMode  & 89) == 89 && customMode == 3)  myGLCD.print("      Auto      ", CENTER, 200);
-                 if((baseMode  & 89) == 89 && customMode == 4)  myGLCD.print("     Guided      ", CENTER, 200);
+                 if((baseMode & 81) == 81 && customMode == 0)  myGLCD.print(P("    Stabilize    "), CENTER, 200);
+                 if((baseMode & 89) == 89 && customMode == 5)  myGLCD.print(P("     Loiter     "), CENTER, 200);
+                 if((baseMode & 89) == 89 && customMode == 6)  myGLCD.print(P("Return To Launch"), CENTER, 200);
+                 if((baseMode  & 81) == 81 && customMode == 2)  myGLCD.print(P("    Alt Hold    "), CENTER, 200);
+                 if((baseMode  & 89) == 89 && customMode == 3)  myGLCD.print(P("      Auto      "), CENTER, 200);
+                 if((baseMode  & 89) == 89 && customMode == 4)  myGLCD.print(P("     Guided      "), CENTER, 200);
 
                  if((baseMode & 193) == 193)
                  {
                   myGLCD.setFont(BigFont);
                   myGLCD.setColor(255,0,0);
                   myGLCD.setBackColor(0,0,128);
-                  myGLCD.print("    ARMED    ", CENTER, 175);
+                  myGLCD.print(P("    ARMED    "), CENTER, 175);
                  }
                
                  else
@@ -454,7 +444,7 @@ void HUDR()
                   myGLCD.setFont(BigFont);
                   myGLCD.setColor(0,255,0);
                   myGLCD.setBackColor(0,0,128);
-                  myGLCD.print("    DISARMED    ", CENTER, 175);                 
+                  myGLCD.print(P("    DISARMED    "), CENTER, 175);                 
                  }
                }
                return;
@@ -474,42 +464,44 @@ void FlightMapM()
                myGLCD.fillRoundRect(155, 95, 225, 165);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("-", 185, 120);
+               myGLCD.print(P("-"), 185, 120);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(155, 20, 225, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("+", 185, 46);
+               myGLCD.print(P("+"), 185, 46);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(230, 20, 305, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Ok", 255, 50);
+               myGLCD.print(P("Ok"), 255, 50);
                
-               dtostrf(mapZoom, 4, 2, cFloat);
-               bline = "Zoom:";
-               bline += cFloat; 
+
+
+               strcpy(bline, P("Zoom:"));
+			   dtostrf(mapZoom, 4, 2, cFloat);
+               strcat(bline, cFloat); 
                myGLCD.print(bline, 5, 90);
                
                myGLCD.setFont(BigFont);
                myGLCD.setColor(0,255,0);
                myGLCD.setBackColor(0,0,128);
                
-               if((baseMode & 81) == 81 && customMode == 0)  myGLCD.print("    Stabilize    ", CENTER, 200);
-               if((baseMode & 89) == 89 && customMode == 5)  myGLCD.print("     Loiter     ", CENTER, 200);
-               if((baseMode & 89) == 89 && customMode == 6)  myGLCD.print("Return To Launch", CENTER, 200);
-               if((baseMode  & 81) == 81 && customMode == 2)  myGLCD.print("    Alt Hold    ", CENTER, 200);
-               if((baseMode  & 89) == 89 && customMode == 3)  myGLCD.print("      Auto      ", CENTER, 200);
-               if((baseMode  & 89) == 89 && customMode == 4)  myGLCD.print("     Guided      ", CENTER, 200);
+               if((baseMode & 81) == 81 && customMode == 0)  myGLCD.print(P("    Stabilize    "), CENTER, 200);
+               if((baseMode & 89) == 89 && customMode == 5)  myGLCD.print(P("     Loiter     "), CENTER, 200);
+               if((baseMode & 89) == 89 && customMode == 6)  myGLCD.print(P("Return To Launch"), CENTER, 200);
+               if((baseMode  & 81) == 81 && customMode == 2)  myGLCD.print(P("    Alt Hold    "), CENTER, 200);
+               if((baseMode  & 89) == 89 && customMode == 3)  myGLCD.print(P("      Auto      "), CENTER, 200);
+               if((baseMode  & 89) == 89 && customMode == 4)  myGLCD.print(P("     Guided      "), CENTER, 200);
 
                if((baseMode & 193) == 193)
                {
                 myGLCD.setFont(BigFont);
                 myGLCD.setColor(255,0,0);
                 myGLCD.setBackColor(0,0,128);
-                myGLCD.print("    ARMED    ", CENTER, 175);
+                myGLCD.print(P("    ARMED    "), CENTER, 175);
                }
                
                else
@@ -517,7 +509,7 @@ void FlightMapM()
                 myGLCD.setFont(BigFont);
                 myGLCD.setColor(0,255,0);
                 myGLCD.setBackColor(0,0,128);
-                myGLCD.print("    DISARMED    ", CENTER, 175);                 
+                myGLCD.print(P("    DISARMED    "), CENTER, 175);                 
                }
                myGLCD.setFont(SmallFont);
                return;
@@ -528,9 +520,9 @@ void FlightMapMR()
                myGLCD.setFont(BigFont);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
+               strcpy(bline, P("Zoom:"));
                dtostrf(mapZoom, 4, 2, cFloat);
-               bline = "Zoom:";
-               bline += cFloat; 
+               strcat(bline, cFloat); 
                myGLCD.print(bline, 5, 90);
                return;
 
@@ -552,19 +544,19 @@ void FlightMap()
                  myGLCD.setColor(0,255,0);
                  myGLCD.setBackColor(0,0,128);
                
-                 if((baseMode & 81) == 81 && customMode == 0)  myGLCD.print("Stabilize", RIGHT, 5);
-                 if((baseMode & 89) == 89 && customMode == 5)  myGLCD.print("  Loiter  ", RIGHT, 5);
-                 if((baseMode & 89) == 89 && customMode == 6)  myGLCD.print("  R T L   ", RIGHT, 5);
-                 if((baseMode  & 81) == 81 && customMode == 2)  myGLCD.print(" Alt Hold ", RIGHT, 5);
-                 if((baseMode  & 89) == 89 && customMode == 3)  myGLCD.print("  Auto   ", RIGHT, 5);
-                 if((baseMode  & 89) == 89 && customMode == 4)  myGLCD.print(" Guided  ", RIGHT, 5);
+                 if((baseMode & 81) == 81 && customMode == 0)  myGLCD.print(P("Stabilize"), RIGHT, 5);
+                 if((baseMode & 89) == 89 && customMode == 5)  myGLCD.print(P("  Loiter  "), RIGHT, 5);
+                 if((baseMode & 89) == 89 && customMode == 6)  myGLCD.print(P("  R T L   "), RIGHT, 5);
+                 if((baseMode  & 81) == 81 && customMode == 2)  myGLCD.print(P(" Alt Hold "), RIGHT, 5);
+                 if((baseMode  & 89) == 89 && customMode == 3)  myGLCD.print(P("  Auto   "), RIGHT, 5);
+                 if((baseMode  & 89) == 89 && customMode == 4)  myGLCD.print(P(" Guided  "), RIGHT, 5);
 
                  if((baseMode & 193) == 193)
                  {
                   myGLCD.setFont(BigFont);
                   myGLCD.setColor(255,0,0);
                   myGLCD.setBackColor(0,0,128);
-                  myGLCD.print("  ARMED  ", CENTER, 5);
+                  myGLCD.print(P("  ARMED  "), CENTER, 5);
                  }
                
                  else
@@ -572,7 +564,7 @@ void FlightMap()
                   myGLCD.setFont(BigFont);
                   myGLCD.setColor(0,255,0);
                   myGLCD.setBackColor(0,0,128);
-                  myGLCD.print("DISARMED", CENTER, 5);                 
+                  myGLCD.print(P("DISARMED"), CENTER, 5);                 
                  }
                
                myGLCD.setFont(SmallFont);
@@ -585,15 +577,15 @@ void FlightMapR()
                int cy = 239/2;
                int mapNewX;
                int mapNewY;
-               
+              
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(0, 0, 128);
                
                dtostrf(mapZoom, 4, 1, cFloat);
-               bline = "Zoom: ";
-               bline += cFloat; 
+               strcpy(bline, P("Zoom: "));
+               strcat(bline, cFloat); 
                myGLCD.print(bline, LEFT, 5);
-               
+
                gps.f_get_position(&flat, &flon, &age);
                mapNewX = cx+((69.1*(flat-latitude))*(1000*mapZoom));
                mapNewY = cy+((69.1*(flon-longitude)*cos(flat/57.3))*(1000*mapZoom));
@@ -619,19 +611,19 @@ void FlightMapR()
                  myGLCD.setColor(0,255,0);
                  myGLCD.setBackColor(0,0,128);
                
-                 if((baseMode & 81) == 81 && customMode == 0)  myGLCD.print("Stabilize", RIGHT, 5);
-                 if((baseMode & 89) == 89 && customMode == 5)  myGLCD.print("  Loiter  ", RIGHT, 5);
-                 if((baseMode & 89) == 89 && customMode == 6)  myGLCD.print("  R T L   ", RIGHT, 5);
-                 if((baseMode  & 81) == 81 && customMode == 2)  myGLCD.print(" Alt Hold ", RIGHT, 5);
-                 if((baseMode  & 89) == 89 && customMode == 3)  myGLCD.print("  Auto   ", RIGHT, 5);
-                 if((baseMode  & 89) == 89 && customMode == 4)  myGLCD.print(" Guided  ", RIGHT, 5);
+                 if((baseMode & 81) == 81 && customMode == 0)  myGLCD.print(P("Stabilize"), RIGHT, 5);
+                 if((baseMode & 89) == 89 && customMode == 5)  myGLCD.print(P("  Loiter  "), RIGHT, 5);
+                 if((baseMode & 89) == 89 && customMode == 6)  myGLCD.print(P("  R T L   "), RIGHT, 5);
+                 if((baseMode  & 81) == 81 && customMode == 2)  myGLCD.print(P(" Alt Hold "), RIGHT, 5);
+                 if((baseMode  & 89) == 89 && customMode == 3)  myGLCD.print(P("  Auto   "), RIGHT, 5);
+                 if((baseMode  & 89) == 89 && customMode == 4)  myGLCD.print(P(" Guided  "), RIGHT, 5);
 
                  if((baseMode & 193) == 193)
                  {
                   myGLCD.setFont(BigFont);
                   myGLCD.setColor(255,0,0);
                   myGLCD.setBackColor(0,0,128);
-                  myGLCD.print("  ARMED  ", CENTER, 5);
+                  myGLCD.print(P("  ARMED  "), CENTER, 5);
                  }
                
                  else
@@ -639,7 +631,7 @@ void FlightMapR()
                   myGLCD.setFont(BigFont);
                   myGLCD.setColor(0,255,0);
                   myGLCD.setBackColor(0,0,128);
-                  myGLCD.print("DISARMED", CENTER, 5);                 
+                  myGLCD.print(P("DISARMED"), CENTER, 5);                 
                  }
                }
                myGLCD.setFont(SmallFont);               
@@ -889,7 +881,7 @@ void SetMode()
                myGLCD.fillRect(0, 0, 319, 13);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print("Set Mode", CENTER, 1);
+               myGLCD.print(P("Set Mode"), CENTER, 1);
                myGLCD.setBackColor(0, 0, 128);
                myGLCD.setColor(255,255,0);  
 
@@ -900,25 +892,25 @@ void SetMode()
                myGLCD.fillRoundRect(5, 20, 75, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Stab", 20, 50);
+               myGLCD.print(P("Stab"), 20, 50);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(80, 20, 150, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Loiter", 95, 50);
+               myGLCD.print(P("Loiter"), 95, 50);
                               
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(155, 20, 225, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Auto", 175, 50);
+               myGLCD.print(P("Auto"), 175, 50);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(230, 20, 305, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("RTL", 252, 50);
+               myGLCD.print(P("RTL"), 252, 50);
                
                
                /////////////////////////////////////////
@@ -928,26 +920,26 @@ void SetMode()
                myGLCD.fillRoundRect(5, 95, 75, 165);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Alt Hold", 10, 125);
+               myGLCD.print(P("Alt Hold"), 10, 125);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(80, 95, 150, 165);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Guided", 97, 125);
+               myGLCD.print(P("Guided"), 97, 125);
                               
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(155, 95, 225, 165);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Arm", 175, 125);
+               myGLCD.print(P("Arm"), 175, 125);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(230, 95, 305, 165);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Main", 250, 120);
-               myGLCD.print("Menu", 250, 132);
+               myGLCD.print(P("Main"), 250, 120);
+               myGLCD.print(P("Menu"), 250, 132);
                return;
 
 }
@@ -960,19 +952,19 @@ void SetModeR()
                  myGLCD.setColor(0,255,0);
                  myGLCD.setBackColor(0,0,128);
                
-                 if((baseMode & 81) == 81 && customMode == 0)  myGLCD.print("    Stabilize    ", CENTER, 200);
-                 if((baseMode & 89) == 89 && customMode == 5)  myGLCD.print("     Loiter     ", CENTER, 200);
-                 if((baseMode & 89) == 89 && customMode == 6)  myGLCD.print("Return To Launch", CENTER, 200);
-                 if((baseMode  & 81) == 81 && customMode == 2)  myGLCD.print("    Alt Hold    ", CENTER, 200);
-                 if((baseMode  & 89) == 89 && customMode == 3)  myGLCD.print("      Auto      ", CENTER, 200);
-                 if((baseMode  & 89) == 89 && customMode == 4)  myGLCD.print("     Guided      ", CENTER, 200);
+                 if((baseMode & 81) == 81 && customMode == 0)  myGLCD.print(P("    Stabilize    "), CENTER, 200);
+                 if((baseMode & 89) == 89 && customMode == 5)  myGLCD.print(P("     Loiter     "), CENTER, 200);
+                 if((baseMode & 89) == 89 && customMode == 6)  myGLCD.print(P("Return To Launch"), CENTER, 200);
+                 if((baseMode  & 81) == 81 && customMode == 2)  myGLCD.print(P("    Alt Hold    "), CENTER, 200);
+                 if((baseMode  & 89) == 89 && customMode == 3)  myGLCD.print(P("      Auto      "), CENTER, 200);
+                 if((baseMode  & 89) == 89 && customMode == 4)  myGLCD.print(P("     Guided      "), CENTER, 200);
 
                  if((baseMode & 193) == 193)
                  {
                   myGLCD.setFont(BigFont);
                   myGLCD.setColor(255,0,0);
                   myGLCD.setBackColor(0,0,128);
-                  myGLCD.print("    ARMED    ", CENTER, 175);
+                  myGLCD.print(P("    ARMED    "), CENTER, 175);
                  }
                
                  else
@@ -980,7 +972,7 @@ void SetModeR()
                   myGLCD.setFont(BigFont);
                   myGLCD.setColor(0,255,0);
                   myGLCD.setBackColor(0,0,128);
-                  myGLCD.print("    DISARMED    ", CENTER, 175);                 
+                  myGLCD.print(P("    DISARMED    "), CENTER, 175);                 
                  }
                }
                myGLCD.setFont(SmallFont);
@@ -993,7 +985,7 @@ void SetLimitM()
                myGLCD.setFont(BigFont);
                myGLCD.setColor(0, 0, 128);
                myGLCD.fillRect(0, 0, 319, 239);
-               
+
                mapLastX = 0;
                mapLastY = 0;
                 
@@ -1001,44 +993,44 @@ void SetLimitM()
                myGLCD.fillRoundRect(90, 40, 160, 110);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               //myGLCD.setFont(SmallFont);
-               myGLCD.print("-", 120, 66);
+               myGLCD.print(P("-"), 120, 66);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(15, 40, 85, 110);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("+", 45, 66);
-               //myGLCD.print("Feeds", 175, 56);
+               myGLCD.print(P("+"), 45, 66);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(230, 20, 305, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Ok", 255, 50);
+               myGLCD.print(P("Ok"), 255, 50);
                
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(0, 0, 128);
-               bline = "Soft Limit:";
-               bline += softLimitMeters; 
+               strcpy(bline, P("Soft Limit:"));
+               itoa(softLimitMeters, cFloat, 10);
+			   strcat(bline, cFloat); 
                myGLCD.print(bline, 15, 20);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(90, 140, 160, 210);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("-", 120, 166);
+               myGLCD.print(P("-"), 120, 166);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(15, 140, 85, 210);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("+", 45, 166);
+               myGLCD.print(P("+"), 45, 166);
                
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(0, 0, 128);
-               bline = "Hard Limit:";
-               bline += limitMeters; 
+               strcpy(bline, P("Hard Limit:"));
+               itoa(limitMeters, cFloat, 10); 
+			   strcat(bline, cFloat);
                myGLCD.print(bline, 15, 120);
                return;
 }
@@ -1048,16 +1040,20 @@ void SetLimitR()
                myGLCD.setFont(BigFont);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(0, 0, 128);
-               
-               bline = "Soft Limit:";
-               bline += softLimitMeters; 
-               if(softLimitMeters < 10) bline += " ";
+               //String bline;
+
+               strcpy(bline, P("Soft Limit:"));
+               itoa(softLimitMeters, cFloat, 10); 
+			   strcat(bline, cFloat);
+               if(softLimitMeters < 10) strcat(bline, " ");
                myGLCD.print(bline, 15, 20);
                
-               bline = "Hard Limit:";
-               bline += limitMeters; 
-               if(limitMeters < 10) bline += " ";
+               strcpy(bline, P("Hard Limit:"));
+			   itoa(limitMeters, cFloat, 10);
+               strcat(bline, cFloat); 
+               if(limitMeters < 10) strcat(bline, " ");
                myGLCD.print(bline, 15, 120);
+
               return;
 }
 
@@ -1076,19 +1072,19 @@ void ParmM()
       myGLCD.fillRect(0, 0, 319, 12);
       myGLCD.setBackColor(255, 0, 0);
       myGLCD.setColor(255, 255, 255);
-      myGLCD.print("Index   Parameter       Value", LEFT, 0);
+      myGLCD.print(P("Index   Parameter       Value"), LEFT, 0);
       
       myGLCD.setColor(0, 255, 0);
       myGLCD.fillRoundRect(285, 20, 319, 100);
       myGLCD.setColor(0, 0, 0);
       myGLCD.setBackColor(0, 255, 0);
-      myGLCD.print("UP", 295, 55);
+      myGLCD.print(P("UP"), 295, 55);
                
       myGLCD.setColor(0, 255, 0);
       myGLCD.fillRoundRect(285, 139, 319, 219);
       myGLCD.setColor(0, 0, 0);
       myGLCD.setBackColor(0, 255, 0);
-      myGLCD.print("DN", 295, 174);
+      myGLCD.print(P("DN"), 295, 174);
       
       cmdRequestParm();
       cmdRequestParm();
@@ -1117,25 +1113,27 @@ void ParmR()
       myGLCD.setFont(SmallFont);
       if((pIndex >= 250) && ((lsx != lsy) || (lex != ley)) )
       {
-        myGLCD.print("                     ", 25, 110);
+        myGLCD.print(P("                     "), 25, 110);
         for(int x = lsy; x < ley; x++)
         {
          value = EEPROM_readDouble(x*4);
          if(value > 65499.0) value = 65500.0;
-         dtostrf(value, 4, 1, cFloat);
-         bline = " ";
-         bline += x;
-         bline += "  ";
+
+		 strcpy(bline, P(" "));
+         itoa(x, cFloat, 10);
+		 strcat(bline, cFloat);
+         strcat(bline, "  ");
          myGLCD.print(bline, 0, (l+1)*12);
          
-         bline = " ";
-         bline += PName(x);
-         bline += "     ";
+         strcpy(bline, P(" "));
+         strcat(bline, PName(x));
+         strcat(bline, "     ");
          myGLCD.print(bline, 55, (l+1)*12);
          
-         bline = " ";
-         bline += cFloat;
-         bline += "   ";
+         strcpy(bline, P(" "));
+         dtostrf(value, 4, 1, cFloat);
+         strcat(bline, cFloat);
+         strcat(bline, P("   "));
          myGLCD.print(bline, 190, (l+1)*12);
          l++;
          lex = ley;
@@ -1147,9 +1145,9 @@ void ParmR()
         if(((lsx != lsy) || (lex != ley)))
         {
          myGLCD.setFont(SmallFont);
-         bline = "Getting: ";
-         bline += PName(pIndex);
-         bline += "       ";
+		 strcpy(bline, P("Getting: "));
+         strcat(bline, PName(pIndex));
+         strcat(bline, P("       "));
          myGLCD.print(bline, 25, 110);
         }
       }
@@ -1166,7 +1164,7 @@ void ParamMainP1()
                myGLCD.fillRect(0, 0, 319, 13);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print("Paremeter Main", CENTER, 1);
+               myGLCD.print(P("Paremeter Main"), CENTER, 1);
                myGLCD.setBackColor(0, 0, 128);
                myGLCD.setColor(255,255,0);  
 
@@ -1177,29 +1175,29 @@ void ParamMainP1()
                myGLCD.fillRoundRect(5, 20, 75, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Sensors", 15, 50);
+               myGLCD.print(P("Sensors"), 15, 50);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(80, 20, 150, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Modes", 96, 50);
+               myGLCD.print(P("Modes"), 96, 50);
                //myGLCD.print("Feeds", 97, 56);
                               
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(155, 20, 225, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Stab", 167, 44);
-			   myGLCD.print("Tune", 167, 56);
+               myGLCD.print(P("Stab"), 167, 44);
+			   myGLCD.print(P("Tune"), 167, 56);
                 
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(230, 20, 305, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Stab", 252, 38);
-			   myGLCD.print("Rate", 252, 50);
-               myGLCD.print("Tune", 252, 62);
+               myGLCD.print(P("Stab"), 252, 38);
+			   myGLCD.print(P("Rate"), 252, 50);
+               myGLCD.print(P("Tune"), 252, 62);
                
                
                /////////////////////////////////////////
@@ -1209,42 +1207,42 @@ void ParamMainP1()
                myGLCD.fillRoundRect(5, 95, 75, 165);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Loiter", 15, 119);
-               myGLCD.print("Tune", 20, 131);
+               myGLCD.print(P("Loiter"), 15, 119);
+               myGLCD.print(P("Tune"), 20, 131);
                               
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(80, 95, 150, 165);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Nav", 104, 119);
-               myGLCD.print("Tune", 100, 131);
+               myGLCD.print(P("Nav"), 104, 119);
+               myGLCD.print(P("Tune"), 100, 131);
                               
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(155, 95, 225, 165);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Alt", 175, 119);
-               myGLCD.print("Tune", 175, 131);
+               myGLCD.print(P("Alt"), 175, 119);
+               myGLCD.print(P("Tune"), 175, 131);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(230, 95, 305, 165);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Browse", 245, 120);
-               myGLCD.print("Params", 245, 132);
+               myGLCD.print(P("Browse"), 245, 120);
+               myGLCD.print(P("Params"), 245, 132);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(117, 170, 187, 233);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Main", 137, 185);
-               myGLCD.print("Menu", 137, 197);
+               myGLCD.print(P("Main"), 137, 185);
+               myGLCD.print(P("Menu"), 137, 197);
                
                myGLCD.setColor(0, 100, 0);
                myGLCD.fillRoundRect(5, 170, 112, 233);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 100, 0);
-               myGLCD.print("Down", 40, 198);
+               myGLCD.print(P("Down"), 40, 198);
                //myGLCD.print("Menu", 10, 177);
                return;
 }
@@ -1257,60 +1255,60 @@ void ParamMainP2()
                /////////////////////////////////////////
                //              Row 1
                /////////////////////////////////////////
-               myGLCD.print("       ", 15, 50);
-               myGLCD.print("Sensors", 15, 50);
+               myGLCD.print(P("       "), 15, 50);
+               myGLCD.print(P("Sensors"), 15, 50);
                
-               myGLCD.print("     ", 96, 50);
-               myGLCD.print("Modes", 96, 50);
+               myGLCD.print(P("     "), 96, 50);
+               myGLCD.print(P("Modes"), 96, 50);
                                   
-               myGLCD.print("        ", 162, 50);
-               myGLCD.print("Waypoint", 162, 50);
+               myGLCD.print(P("        "), 162, 50);
+               myGLCD.print(P("Waypoint"), 162, 50);
                
-               myGLCD.print("    ", 252, 44);
-               myGLCD.print("    ", 252, 56);
-               myGLCD.print("Stab", 252, 44);
-               myGLCD.print("Tune", 252, 56);
+               myGLCD.print(P("    "), 252, 44);
+               myGLCD.print(P("    "), 252, 56);
+               myGLCD.print(P("Stab"), 252, 44);
+               myGLCD.print(P("Tune"), 252, 56);
                
                
                /////////////////////////////////////////
                //              Row 2
                /////////////////////////////////////////
-               myGLCD.print("      ", 15, 119);
-               myGLCD.print("    ", 20, 131);
-               myGLCD.print("Loiter", 15, 119);
-               myGLCD.print("Tune", 20, 131);
+               myGLCD.print(P("      "), 15, 119);
+               myGLCD.print(P("    "), 20, 131);
+               myGLCD.print(P("Loiter"), 15, 119);
+               myGLCD.print(P("Tune"), 20, 131);
                               
-               myGLCD.print("   ", 104, 119);
-               myGLCD.print("    ", 100, 131);
-               myGLCD.print("Nav", 104, 119);
-               myGLCD.print("Tune", 100, 131);
+               myGLCD.print(P("   "), 104, 119);
+               myGLCD.print(P("    "), 100, 131);
+               myGLCD.print(P("Nav"), 104, 119);
+               myGLCD.print(P("Tune"), 100, 131);
                               
-               myGLCD.print("   ", 175, 125);
-               myGLCD.print("Arm", 175, 125);
+               myGLCD.print(P("   "), 175, 125);
+               myGLCD.print(P("Arm"), 175, 125);
                
-               myGLCD.print("    ", 250, 120);
-               myGLCD.print("    ", 250, 132);
-               myGLCD.print("Main", 250, 120);
-               myGLCD.print("Menu", 250, 132);
+               myGLCD.print(P("    "), 250, 120);
+               myGLCD.print(P("    "), 250, 132);
+               myGLCD.print(P("Main"), 250, 120);
+               myGLCD.print(P("Menu"), 250, 132);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(117, 170, 187, 233);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Main", 137, 185);
-               myGLCD.print("Menu", 137, 197);
+               myGLCD.print(P("Main"), 137, 185);
+               myGLCD.print(P("Menu"), 137, 197);
                
                myGLCD.setColor(0, 100, 0);
                myGLCD.fillRoundRect(5, 170, 112, 233);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 100, 0);
-               myGLCD.print("Down", 40, 198);
+               myGLCD.print(P("Down"), 40, 198);
                
                myGLCD.setColor(0, 100, 0);
                myGLCD.fillRoundRect(192, 170, 304, 233);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 100, 0);
-               myGLCD.print("Up", 240, 198);
+               myGLCD.print(P("Up"), 240, 198);
                return;
 }
 
@@ -1321,7 +1319,7 @@ return;
 
 void LoiterTune()
 {   
-	ThreeTune("Loiter", 128);
+	ThreeTune(P("Loiter"), 128);
     return;
 }
 
@@ -1333,7 +1331,7 @@ void LoiterTuneR()
 
 void NavTune()
 {     
-	ThreeTune("Navigation", 136);
+	ThreeTune(P("Navigation"), 136);
                return;
 }
 
@@ -1345,7 +1343,7 @@ void NavTuneR()
 
 void StabTune()
 {   
-	TwoTune("Stab Rate", 156);
+	TwoTune(P("Stab Rate"), 156);
 	return;
 }
 
@@ -1357,7 +1355,7 @@ void StabTuneR()
 
 void StabRTune()
 {
-	ThreeTune("Stab Rate", 116);
+	ThreeTune(P("Stab Rate"), 116);
 }
 
 void StabRTuneR()
@@ -1375,7 +1373,7 @@ void AltTune()
                myGLCD.fillRect(0, 0, 319, 13);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print("Tune Stabilisation", CENTER, 1);
+               myGLCD.print(P("Tune Stabilisation"), CENTER, 1);
                myGLCD.setFont(BigFont);
                myGLCD.setBackColor(0, 0, 128);
                
@@ -1383,15 +1381,15 @@ void AltTune()
                myGLCD.fillRect(0, 24, 319, 44);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print("Roll", LEFT, 24);
-               myGLCD.print ("Start", 110, 24);
-               myGLCD.print ("New", 210, 24);
+               myGLCD.print(P("Roll"), LEFT, 24);
+               myGLCD.print (P("Start"), 110, 24);
+               myGLCD.print (P("New"), 210, 24);
                
                myGLCD.setBackColor(0, 0, 128);
-               myGLCD.print("   P:", LEFT, 44);
-               myGLCD.print("   I:", LEFT, 64);
+               myGLCD.print(P("   P:"), LEFT, 44);
+               myGLCD.print(P("   I:"), LEFT, 64);
             // myGLCD.print("   D:", LEFT, 84);
-               myGLCD.print("IMax:", LEFT, 84);
+               myGLCD.print(P("IMax:"), LEFT, 84);
  
              //  myGLCD.setColor(255, 0, 0);
              //  myGLCD.fillRect(0, 124, 319, 144);
@@ -1410,28 +1408,28 @@ void AltTune()
                x = 165;
                value = EEPROM_readDouble(x*4);
                if(value > 65499.0) value = 65500.0;
+               strcpy(bline, P(" "));
                dtostrf(value, 4, 2, cFloat);
-               bline = " ";
-               bline += cFloat;
-               bline += "  ";
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
                myGLCD.print(bline, 85, 44);
                
                x++;
                value = EEPROM_readDouble(x*4);
                if(value > 65499.0) value = 65500.0;
+               strcpy(bline, P(" "));
                dtostrf(value, 4, 2, cFloat);
-               bline = " ";
-               bline += cFloat;
-               bline += "  ";
+			   strcat(bline, cFloat);
+               strcat(bline, P("  "));
                myGLCD.print(bline, 85, 64);
                
                x++;
                value = EEPROM_readDouble(x*4);
                if(value > 65499.0) value = 65500.0;
+               strcpy(bline, P(" "));
                dtostrf(value, 4, 2, cFloat);
-               bline = " ";
-               bline += cFloat;
-               bline += "  ";
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
                myGLCD.print(bline, 85, 84);
                
                // x++;
@@ -1487,19 +1485,19 @@ void AltTune()
                myGLCD.fillRoundRect(285, 20, 319, 100);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("UP", 295, 55);
+               myGLCD.print(P("UP"), 295, 55);
                
                myGLCD.setColor(255, 0, 0);
                myGLCD.fillRoundRect(285, 105, 319, 154);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print("SND", 292, 123); 
+               myGLCD.print(P("SND"), 292, 123); 
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(285, 159, 319, 239);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("DN", 295, 195);  
+               myGLCD.print(P("DN"), 295, 195);  
                
                tuneP = 0.0;
                tuneI = 0.0;
@@ -1512,7 +1510,6 @@ void AltTune()
 void AltTuneR()
 {              
   int addr = 116;
-  char cFloat[15];
   if(pSend)
   {
     int x = ley;
@@ -1649,22 +1646,22 @@ void AltTuneR()
             case 0:
              {
 			   tuneP = value;
+               strcpy(bline, P("tune P "));
                dtostrf(value, 4, 2, cFloat);
-               bline = "tune P ";
-               bline += cFloat;
-               bline += "  ";
-               Serial.println(bline);
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
+               if(beLog) eLog.println(bline);
                break;
              }
              
             case 1:
              {
 			   tuneI = value;
+               strcpy(bline, P("Tune I "));
                dtostrf(value, 4, 2, cFloat);
-               bline = "Tune I ";
-               bline += cFloat;
-               bline += "  ";
-               Serial.println(bline);
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
+               if(beLog) eLog.println(bline);
                break;
              }
              
@@ -1682,11 +1679,11 @@ void AltTuneR()
             case 2:
              {
                tuneIMax = value;
+               strcpy(bline, P("Tune I Max "));
                dtostrf(value, 4, 2, cFloat);
-               bline = "Tune I Max ";
-               bline += cFloat;
-               bline += "  ";
-               Serial.println(bline);
+               strcat(bline, cFloat);
+               strcat(bline, P("  "));
+               if(beLog) eLog.println(bline);
                break;
              }
            }
@@ -1694,8 +1691,8 @@ void AltTuneR()
            if(value > 65499.0) value = 65500.0;
            if(x != 3) dtostrf((value), 4, 2, cFloat);
            else dtostrf((value/100), 4, 2, cFloat);
-           bline = " ";
-           bline += cFloat;
+           strcpy(bline, P(" "));
+           strcat(bline, cFloat);
            myGLCD.setFont(BigFont);
            myGLCD.setBackColor(0, 0, 128);
            myGLCD.setColor(255, 255, 255);
@@ -1787,8 +1784,8 @@ void AltTuneR()
            if(value > 65499.0) value = 65500.0;
            if(x != 3) dtostrf((value), 4, 2, cFloat);
            else dtostrf((value/100), 4, 2, cFloat);
-           bline = " ";
-           bline += cFloat;
+		   strcpy(bline, P(" "));
+           strcat(bline, cFloat);
            myGLCD.setFont(BigFont);
            myGLCD.setBackColor(0, 0, 128);
            myGLCD.setColor(255, 255, 255);
@@ -1831,8 +1828,8 @@ void AltTuneR()
            if(value > 65499.0) value = 65500.0;
            if(x != 3) dtostrf((value), 4, 2, cFloat);
            else dtostrf((value/100), 4, 2, cFloat);
-           bline = " ";
-           bline += cFloat;
+           strcpy(bline, P(" "));
+           strcat(bline, cFloat);
            myGLCD.setFont(BigFont);
            myGLCD.setBackColor(0, 0, 128);
            myGLCD.setColor(255, 255, 255);
@@ -1853,8 +1850,8 @@ void SerialPassThru()
                myGLCD.fillRect(0, 0, 319, 13);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print("Serial Passthrough", CENTER, 1);
-			   myGLCD.print("Plug Ground Station into serial now", CENTER, 24);
+               myGLCD.print(P("Serial Passthrough"), CENTER, 1);
+			   myGLCD.print(P("Plug Ground Station into serial now"), CENTER, 24);
                myGLCD.setFont(BigFont);
                myGLCD.setBackColor(0, 0, 128);
                SetSPT();
@@ -1875,7 +1872,7 @@ void SDMaint()
                myGLCD.fillRect(0, 0, 319, 13);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print("SD Card Menu", CENTER, 1);
+               myGLCD.print(P("SD Card Menu"), CENTER, 1);
                myGLCD.setBackColor(0, 0, 128);
                myGLCD.setColor(255, 0, 0);
                myGLCD.fillRect(0, 226, 319, 239); 
@@ -1888,15 +1885,15 @@ void SDMaint()
                myGLCD.fillRoundRect(5, 20, 75, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Show", 25, 44);
-               myGLCD.print("Contents", 10, 56);
+               myGLCD.print(P("Show"), 25, 44);
+               myGLCD.print(P("Contents"), 10, 56);
                
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(80, 20, 150, 90);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Stop", 105, 44);
-               myGLCD.print("Logging", 93, 56);
+               myGLCD.print(P("Stop"), 105, 44);
+               myGLCD.print(P("Logging"), 93, 56);
                               
                myGLCD.setColor(0, 255, 0);
                myGLCD.fillRoundRect(155, 20, 225, 90);
@@ -1920,7 +1917,7 @@ void SDMaint()
                myGLCD.fillRoundRect(5, 95, 75, 165);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Format", 20, 125);
+               myGLCD.print(P("Format"), 20, 125);
                //myGLCD.print("Mode", 20, 127);               
                
                myGLCD.setColor(0, 255, 0);
@@ -1939,15 +1936,15 @@ void SDMaint()
                myGLCD.fillRoundRect(230, 95, 305, 165);
                myGLCD.setColor(0, 0, 0);
                myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print("Setup", 247, 119);
-               myGLCD.print("Menu", 250, 132);
-			   Serial.println("SDMaint End");
+               myGLCD.print(P("Setup"), 247, 119);
+               myGLCD.print(P("Menu"), 250, 132);
+			   if(beLog) eLog.println(P("SDMaint End"));
                return;
 }
 
 void SDMaintR()
 {
-			   if(beLog) eLog.println("SD Maint R");
+			   if(beLog) eLog.println(P("SD Maint R"));
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
                myGLCD.setFont(SmallFont);
@@ -1964,7 +1961,7 @@ void FormatSD()
                myGLCD.fillRect(0, 0, 319, 13);
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print("Formatting SD Card", CENTER, 1);
+               myGLCD.print(P("Formatting SD Card"), CENTER, 1);
                myGLCD.setBackColor(0, 0, 0);
                myGLCD.setColor(255,255,255);  
 			   SDReady = false;
@@ -1994,9 +1991,10 @@ void FormatSDR()
   
 		cardCapacityMB = (cardSizeBlocks + 2047)/2048;
 
-		bline = "Card Size: ";
-		bline += cardCapacityMB;
-		bline += " MB"; //, (MB = 1,048,576 bytes)";
+		strcpy(bline, "Card Size: ");
+		itoa(cardCapacityMB, cFloat, 10);
+		strcat(bline, cFloat);
+		strcat(bline, " MB"); //, (MB = 1,048,576 bytes)";
 		myGLCD.print(bline, LEFT, 24);		
 		myGLCD.print("Erasing Card", LEFT, 36);
 		eraseCard();
@@ -2004,7 +2002,6 @@ void FormatSDR()
 		formatCard();
 		myGLCD.print("Done...", LEFT, 60);
 		myGLCD.print("Touch screen to continue...", LEFT, 72);
-		bline = "";
 		delay(3000);
 		SDReady = true;
 	}
@@ -2030,44 +2027,44 @@ void StopLoggingSD()
 		myGLCD.fillRect(0, 0, 319, 13);
 		myGLCD.setColor(255, 255, 255);
 		myGLCD.setBackColor(255, 0, 0);
-		myGLCD.print("Stopping Logging", CENTER, 1);
+		myGLCD.print(P("Stopping Logging"), CENTER, 1);
 		myGLCD.setBackColor(0, 0, 0);
 		myGLCD.setColor(255,255,255); 
 		int i = 20;
 
 		if(beLog)
 		{
-			myGLCD.print("Stopping Error Log", LEFT, i);
-			eLog.println("Logging stopped at request of user");
+			myGLCD.print(P("Stopping Error Log"), LEFT, i);
+			eLog.println(P("Logging stopped at request of user"));
 			eLog.close();
 		}
 
 		if(btLog)
 		{
 			i += 12;
-			myGLCD.print("Stopping Telemetry Log", LEFT, i);
+			myGLCD.print(P("Stopping Telemetry Log"), LEFT, i);
 			tLog.close();
 		}
-
-		if(bfile)
+		
+		/*if(bfile)
 		{
 			i += 12;
 			myGLCD.print("Closing Open File", LEFT, i);
 			file.close();
 		}
-
+		*/
 		beLog = false;
 		btLog = false;
-		bfile = false;
+		//bfile = false;
 
 		i += 12;
-	    myGLCD.print("All Files Closed", LEFT, i);
+	    myGLCD.print(P("All Files Closed"), LEFT, i);
 
 		i += 12;
-		myGLCD.print("Card may be ejected when ready", LEFT, i);
+		myGLCD.print(P("Card may be ejected when ready"), LEFT, i);
 
 		i += 24;
-		myGLCD.print("Touch screen to continue", LEFT, i);
+		myGLCD.print(P("Touch screen to continue"), LEFT, i);
 }
 
 void StopLoggingSDR()
@@ -2079,16 +2076,89 @@ void GSConfig()
 {
 		myGLCD.clrScr();
 		myGLCD.setFont(SmallFont);
-		myGLCD.setColor(0, 0, 0);
+		myGLCD.setColor(0, 0, 128);
 		myGLCD.fillRect(0, 0, 319, 239);
 		myGLCD.setColor(255, 0, 0);
 		myGLCD.fillRect(0, 0, 319, 13);
 		myGLCD.setColor(255, 255, 255);
 		myGLCD.setBackColor(255, 0, 0);
-		myGLCD.print("GroundStation Config", CENTER, 1);
-		myGLCD.setBackColor(0, 0, 0);
+		myGLCD.print(P("GroundStation Config"), CENTER, 1);
+		myGLCD.setBackColor(0, 0, 128);
 		myGLCD.setColor(255,255,255); 
 		int i = 20;
+		int fr;
+		fr = EEPROM.read(0);
+		myGLCD.setFont(SmallFont);
+
+		myGLCD.print(P("       Factory Reset: "), LEFT, i);
+		if(fr & 1 == 1)
+		{
+			myGLCD.print(P("ON"), 220, i);
+		}
+		else
+		{
+			myGLCD.print(P("OFF"), 220, i);
+		}
+		i += 18;
+
+		myGLCD.print(P(" Serial Pass Through: "), LEFT, i);
+		if(fr & 2 == 2)
+		{
+			myGLCD.print(P("ON"), 220, i);
+		}
+		else
+		{
+			myGLCD.print(P("OFF"), 220, i);
+		}
+		i += 18;
+
+		myGLCD.print(P("           Error Log: "), LEFT, i);
+		if(fr & 4 == 4)
+		{
+			myGLCD.print(P("ON"), 220, i);
+		}
+		else
+		{
+			myGLCD.print(P("OFF"), 220, i);
+		}
+		i += 18;
+		
+		myGLCD.print(P("       Telemetry Log: "), LEFT, i);
+		if(fr & 8 == 8)
+		{
+			myGLCD.print(P("ON"), 220, i);
+		}
+		else
+		{
+			myGLCD.print(P("OFF"), 220, i);
+		}
+		i += 18;
+
+		myGLCD.print(P("Telemetry Log Format: "), LEFT, i);
+		if(fr & 16 == 16)
+		{
+			myGLCD.print(P("BIN"), 220, i);
+		}
+		else
+		{
+			myGLCD.print(P("CSV"), 220, i);
+		}
+		i += 18;
+
+		if(fr & 32 ==32)
+		{
+			//something something
+		}
+
+		if(fr & 64 == 64)
+		{
+			//something something
+		}
+
+		if(fr & 128 == 128)
+		{
+			//something something
+		}
 }
 
 void GSConfigR()

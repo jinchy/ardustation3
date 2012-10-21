@@ -1,13 +1,15 @@
 void vButton()
 {
-  String TouchCo;
-
-  TouchCo = "Touched X: "; 
-  TouchCo += tx;
-  TouchCo += " Y: ";
-  TouchCo += ty;
-  TouchCo += "      ";
-  //myGLCD.setFont(SmallFont);
+  char TouchCo[64];
+  char num[6];
+  char cty[6];
+  strcpy(TouchCo, "Touched X: "); 
+  itoa(tx, num, 10);
+  strcat(TouchCo, num);
+  strcat(TouchCo, " Y: ");
+  itoa(ty, num, 10);
+  strcat(TouchCo, num);
+  strcat(TouchCo, "      ");
   if(beLog) eLog.println(TouchCo);
 
 #ifdef DEBUG
@@ -93,7 +95,15 @@ switch(CurrentMenu)
           Touched = 5;
           return;
         }
-    if(tx > 1704 && tx < 2711 && ty > 2880 && ty < 3643 && CurrentMenu == 1 && Touched == 0) 
+   
+	if(tx > 1666 && tx < 2688 && ty > 2074 && ty < 2426 && CurrentMenu == 1 && Touched == 0) 
+        {
+          SetMenu(20, 0);
+          Touched = 5;
+          return;
+        }
+    
+	if(tx > 1704 && tx < 2711 && ty > 2880 && ty < 3643 && CurrentMenu == 1 && Touched == 0) 
         {
           SetMenu(0, 0);  //MainMenu
           Touched = 5;

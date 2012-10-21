@@ -44,7 +44,7 @@
 
 // disable the stock Arduino serial driver
 #ifdef HardwareSerial_h
-# error Must include FastSerial.h before the Arduino serial driver is defined.
+#error Must include FastSerial.h before the Arduino serial driver is defined.
 #endif
 #define HardwareSerial_h
 
@@ -217,7 +217,7 @@ private:
 	static void _freeBuffer(Buffer *buffer);
 
 	/// default receive buffer size
-	static const unsigned int	_default_rx_buffer_size = 64;
+	static const unsigned int	_default_rx_buffer_size = 256;
 
 	/// default transmit buffer size
 	static const unsigned int	_default_tx_buffer_size = 16;
@@ -226,7 +226,7 @@ private:
 	/// @note if we could bring the max size down to 256, the mask and head/tail
 	///       pointers in the buffer could become uint8_t.
 	///
-	static const unsigned int	_max_buffer_size = 256;
+	static const unsigned int	_max_buffer_size = 512;
 };
 
 // Used by the per-port interrupt vectors

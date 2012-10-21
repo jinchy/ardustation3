@@ -2053,14 +2053,14 @@ void UTFT::print(char *st, int x, int y, int deg)
 			rotateChar(*st++, x, y, i, deg);
 }
 
-void UTFT::print(String st, int x, int y, int deg)
+/*void UTFT::print(String st, int x, int y, int deg)
 {
 	char buf[st.length()+1];
 
 	st.toCharArray(buf, st.length()+1);
 	print(buf, x, y, deg);
 }
-
+*/
 void UTFT::printNumI(long num, int x, int y, int length, char filler)
 {
 	char buf[25];

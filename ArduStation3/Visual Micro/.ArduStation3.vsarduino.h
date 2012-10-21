@@ -97,7 +97,7 @@ void gcs_update();
 void gcs_handleMessage(mavlink_message_t* msg);
 void start_feeds();
 void send_message(mavlink_message_t* msg);
-String PName(int Index);
+char *PName(int Index);
 uint8_t writeCache(uint32_t lbn);
 int initSizes();
 void clearCache(uint8_t addSig);

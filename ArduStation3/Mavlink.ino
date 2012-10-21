@@ -5,7 +5,7 @@ void gcs_update()
     mavlink_status_t *status;
     
 #ifdef DEBUG_MAV
-    Serial.println("GCS Update");    
+    Serial.println(P("GCS Update"));    
 #endif	
     // process received bytes
     while(Serial1.available())
@@ -53,7 +53,7 @@ void gcs_update()
                   packetStartByte = c;
                   wrongMavlinkState = 1;
 #ifdef DEBUG_MAV
-                  Serial.print("WS1");    
+                  Serial.print(P("WS1"));    
 #endif	
                }
                break;
@@ -63,7 +63,7 @@ void gcs_update()
                {
                   wrongMavlinkState = 2;
 #ifdef DEBUG_MAV
-                  Serial.print("WS2");    
+                  Serial.print(P("WS2"));    
 #endif
                }
                
@@ -106,8 +106,8 @@ void gcs_update()
         {
 		 if(btLog) tLog.sync();
          gcs_handleMessage(&msg);
-		 Serial1.flush();
         }
+
         // If time value is 0 we were in idle, check if not in idle and receiving message bytes
         if (timeLastByte == 0)
         {
@@ -180,11 +180,13 @@ void gcs_handleMessage(mavlink_message_t* msg)
 
       
 #ifdef DEBUG
-    bline = "ACK Command: ";
-    bline += command;
-    bline += "   Result: ";
-    bline += result;
-    Serial.println(bline);    
+    strcpy(bline, P("ACK Command: "));
+    itoa(command, cFloat, 10);
+    strcat(bline, cFloat);
+	strcat(bline, P("   Result: "));
+	itoa(result, cFloat, 10);
+    strcat(bline, cFloat);
+    if(beLog) eLog.println(bline);
 #endif	
 
  
@@ -311,13 +313,16 @@ void gcs_handleMessage(mavlink_message_t* msg)
      EEPROM_writeDouble((pIndex*4), value);
      if(pIndex >0)
      {
-       dtostrf(EEPROM_readDouble((pIndex-1)*4), 4, 1, cFloat);
-       bline = "Index:  ";
-       bline += pIndex-1;
-       bline += "    Param: ";
-       bline += PName(pIndex-1);
-       bline += ",";
-       bline += cFloat;
+	   strcpy(bline, P("Index:  "));
+       itoa(pIndex-1, cFloat, 10);
+	   strcat(bline, cFloat);
+       strcat(bline, P("    Param: "));
+	   strcat(bline, PName(pIndex-1));
+	   strcat(bline, P("    "));
+	   strcat(bline, cFloat);
+	   strcat(bline, P(","));
+	   dtostrf(EEPROM_readDouble((pIndex-1)*4), 4, 1, cFloat);
+       strcat(bline, cFloat);
        if(beLog) eLog.println(bline);
      }
      /*

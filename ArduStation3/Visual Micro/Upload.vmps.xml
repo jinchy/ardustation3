@@ -31,6 +31,7 @@
         <VCCodeMacro Name="toRad" Value="(x*PI)/180.0" />
         <VCCodeMacro Name="toDeg" Value="(x*180.0)/PI" />
         <VCCodeMacro Name="GET_PARAMS_TIMEOUT" Value="250" />
+        <VCCodeMacro Name="PROGMEM" Value="__attribute__(( section(&quot;.progmem.data&quot;) ))" />
         <VCCodeMacro Name="PSTR" Value="(__extension__({static const char __c[] PROGMEM = (s); &amp;__c[0];}))" />
         <VCCodeMacro Name="MAV_DATA_STREAM_POSITION_ACTIVE" Value="1" />
         <VCCodeMacro Name="MAV_DATA_STREAM_RAW_SENSORS_ACTIVE" Value="1" />
@@ -42,6 +43,7 @@
         <VCCodeMacro Name="MAV_DATA_STREAM_EXTENDED_STATUS_RATE" Value="1" />
         <VCCodeMacro Name="MAV_DATA_STREAM_RAW_CONTROLLER_RATE" Value="1" />
         <VCCodeMacro Name="MAV_DATA_STREAM_EXTRA1_RATE" Value="1" />
+        <VCCodeMacro Name="P" Value="(strcpy_P(p_buffer, PSTR(str)), p_buffer)" />
         <VCCodeMacro Name="DEBUG" Value="" />
       </VCCodeMacros>
       <VCCodeVariables>
