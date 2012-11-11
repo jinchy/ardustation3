@@ -11,6 +11,7 @@ void vButton()
   strcat(TouchCo, num);
   strcat(TouchCo, "      ");
   if(beLog) eLog.println(TouchCo);
+  Serial.println(TouchCo);
 
 #ifdef DEBUG
 //  if(CurrentMenu != 3)  myGLCD.print(TouchCo, LEFT, 214);
@@ -240,6 +241,13 @@ switch(CurrentMenu)
           Touched = 5;
           return;
         }
+
+	 if(tx > 2973 && tx < 3802 && ty > 371 && ty < 1065 && CurrentMenu == 7 && Touched == 0) 
+        {
+          cmdSetOFLoiter();
+          Touched = 5;
+          return;
+        }
   }
   
   case 8:
@@ -344,8 +352,7 @@ switch(CurrentMenu)
      
      if(tx > 1666 && tx < 2688 && ty > 2074 && ty < 2426 && CurrentMenu == 9 && Touched == 0) 
         {
-          //TBA - Arm
-          //cmdSetArm();
+          SetMenu(21, 0);
           Touched = 5;
           return;
         }
@@ -739,15 +746,75 @@ case 19:
   }
 
 case 20:
-  {
-    //6 - GroundStation Config      
-     if(tx > 527 && tx < 3844 && ty > 453 && ty < 3843 && CurrentMenu == 20 && Touched == 0) 
-       { 
-          SetMenu(1, 0);  //Return to Main Menu from HUD
+    {
+      //12 Tune Loiter
+    if(tx > 555 && tx < 1651 && ty > 3502 && ty < 3755 && CurrentMenu == 20 && Touched == 0) 
+       {
+          if(ley != 0) ley--;
           Touched = 5;
+          SetMenu(20, 1);  //tParm Menu
           return;
        }
-  }
+  
+    if(tx > 2674 && tx < 3846 && ty > 3502 && ty < 3831 && CurrentMenu == 20 && Touched == 0) 
+       { 
+          ley++;
+          if(ley > 4) ley = 4;
+          Touched = 5;
+          SetMenu(20, 1);  //tParm Menu
+          return;
+       }
+    
+    if(tx > 1873 && tx < 2523 && ty > 3487 && ty < 3747 && CurrentMenu == 20 && Touched == 0) 
+       { 
+          pSend = true;
+		  Touched = 5;
+          SetMenu(20, 1);  //tParm Menu
+          return;
+       }
+       
+    if(tx > 428 && tx < 3801 && ty > 368 && ty < 3397 && CurrentMenu == 20 && Touched == 0) 
+       { 
+          //pSend = true;
+          SetMenu(1, 0);  //tParm Menu
+          return;
+       }
+    }
+case 21:
+    {
+      //13 Tune Stab
+    if(tx > 555 && tx < 1651 && ty > 3502 && ty < 3755 && CurrentMenu == 21 && Touched == 0) 
+       {
+          if(ley != 0) ley--;
+          Touched = 5;
+          SetMenu(21, 1);  //tParm Menu
+          return;
+       }
+  
+    if(tx > 2674 && tx < 3846 && ty > 3502 && ty < 3831 && CurrentMenu == 21 && Touched == 0) 
+       { 
+          ley++;
+          if(ley > 4) ley = 4;
+          Touched = 5;
+          SetMenu(21, 1);  //tParm Menu
+          return;
+       }
+    
+    if(tx > 1873 && tx < 2523 && ty > 3487 && ty < 3747 && CurrentMenu == 21 && Touched == 0) 
+       { 
+          pSend = true;
+          SetMenu(21, 1);  //tParm Menu
+          return;
+       }
+       
+    if(tx > 428 && tx < 3801 && ty > 368 && ty < 3397 && CurrentMenu == 21 && Touched == 0) 
+       { 
+          //pSend = true;
+          SetMenu(9, 0);  //tParm Menu
+          return;
+       }
+    }
+
   }
 }
 

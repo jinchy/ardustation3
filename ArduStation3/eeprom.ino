@@ -21,6 +21,7 @@ int GetLogID()
 	int id;
 	id = EEPROM.read(1);
 	id += 1;
+	if(id > 254) id = 0;
 	EEPROM.write(1, id);
 	return id;
 }
@@ -67,7 +68,6 @@ void FactReset()
 
 bool tLogging()
 {
-	/*
 	int fr;
 	fr = EEPROM.read(0);
 	if((fr & 4) == 4)
@@ -75,8 +75,6 @@ bool tLogging()
 		return true;
 	}
 	return false;
-	*/
-	return true;
 }
 
 void tLogging(bool on)
@@ -96,15 +94,13 @@ void tLogging(bool on)
 
 bool eLogging()
 {
-	/*int fr;
+	int fr;
 	fr = EEPROM.read(0);
 	if((fr & 4) == 4)
 	{
 		return true;
 	}
 	return false;
-	*/
-	return true;
 }
 
 void eLogging(bool on)

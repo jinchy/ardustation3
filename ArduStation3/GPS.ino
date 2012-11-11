@@ -9,4 +9,3 @@ static bool feedgps()
   Serial2.flush();
   return false;
 }
-

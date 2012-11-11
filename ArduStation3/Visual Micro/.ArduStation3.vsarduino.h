@@ -84,6 +84,7 @@ void TwoTune(char hdg[12], int addr);
 void TwoTuneR(int addr);
 void cmdSetStab();
 void cmdSetLoiter();
+void cmdSetOFLoiter();
 void cmdSetRTL();
 void cmdSetAltHold();
 void cmdSetAuto();
@@ -112,6 +113,11 @@ int makeFat32();
 int eraseCard();
 int formatCard();
 void SetMenu(int State, int Refresh);
+void date();
+void lts();
+void fts();
+void SetFromGPS();
+void dateTime(uint16_t* date, uint16_t* time);
 void EEPROM_writeDouble(int ee, double value);
 double EEPROM_readDouble(int ee);
 int GetLogID();
@@ -127,6 +133,7 @@ void eLogging(bool on);
 #include "C:\Users\jesse\Documents\arduino-1.0.1\hardware\arduino\cores\arduino\arduino.h"
 #include "C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3\ArduStation3.ino"
 #include "C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3\Buttons.ino"
+#include "C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3\CSVLog.ino"
 #include "C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3\Functions.ino"
 #include "C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3\GPS.ino"
 #include "C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3\GPS_Math.ino"
@@ -138,4 +145,5 @@ void eLogging(bool on);
 #include "C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3\SD.ino"
 #include "C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3\SetMenu.ino"
 #include "C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3\TouchCalibration.ino"
+#include "C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3\clock.ino"
 #include "C:\Users\jesse\Documents\Source\Ardustation3\ArduStation3\eeprom.ino"

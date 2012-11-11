@@ -3,11 +3,11 @@ void SetMenu(int State, int Refresh)
 {
   GoToMenu = State;
   if((CurrentMenu == GoToMenu) && Refresh == 0) return;   //We're on the menu that we want
-  if(beLog) eLog.print("SetMenu(");
+  if(beLog) eLog.print(P("SetMenu("));
   if(beLog) eLog.print(CurrentMenu);
-  if(beLog) eLog.print(", ");
+  if(beLog) eLog.print(P(", "));
   if(beLog) eLog.print(Refresh);
-  if(beLog) eLog.println(")");
+  if(beLog) eLog.println(P(")"));
                     
     switch(State)
                 {
@@ -301,6 +301,19 @@ void SetMenu(int State, int Refresh)
                                            {
                                             GSConfigR();
                                             CurrentMenu = 20;
+                                           }
+                           break;
+                   }
+		case 21: {
+					       if(Refresh == 0)
+                                           {
+                                            AltTune();
+                                            CurrentMenu = 21;
+                                           }
+                           if(Refresh == 1)
+                                           {
+                                            AltTuneR();
+                                            CurrentMenu = 21;
                                            }
                            break;
                    }

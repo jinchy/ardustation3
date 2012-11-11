@@ -18,6 +18,8 @@
 #include <EEPROM.h>
 #include <SdFat.h>
 #include <SdFatUtil.h>
+#include <Wire.h>                       // For some strange reasons, Wire.h must be included here
+#include <DS1307new.h>
 const uint8_t chipSelect = 53;
 const uint8_t spiSpeed = SPI_FULL_SPEED;
 
@@ -30,6 +32,10 @@ boolean beLog;
 
 SdFile tLog;
 boolean btLog;
+
+uint16_t startAddr = 0x0000;            // Start address to store in the NV-RAM
+uint16_t lastAddr;                      // new address for storing in NV-RAM
+uint16_t TimeIsSet = 0xaa55;            // Helper that time must not set again
 
 //SdFile file;
 //boolean bfile;
@@ -101,6 +107,7 @@ int pot;
 float value;
 boolean SDReady = false;
 boolean pSend = false;
+boolean TimeSet = false;
 float tuneP;
 float tuneI;
 float tuneD;
@@ -156,11 +163,20 @@ int RemainingBat=0;
 int waitingAck=0;
 int paramsRecv=0;
 int beat=0;
+int xacc;
+int	yacc;
+int zacc;
+int xgyro;
+int ygyro;
+int zgyro;
+int xmag;
+int ymag;
+int zmag;
 int droneType = 1;  // 0 = Not established, 1 = APM, 2 = ACM  - Normally read from Mavlink heartbeat, but ACM returns 0, not 2
 int autoPilot = 3;  // This should be 3 for ArdupilotMeg
 long timeLastByte = 0;
 long maxByteTime = 0;
-char bline[96];
+char bline[256];
 
 
 // Wrong Mavlink Version detector
@@ -181,6 +197,8 @@ FastSerialPort2(Serial2);
 void setup()
 {
 // Setup the LCD
+	pinMode(2, INPUT);                    // Test of the SQW pin, D2 = INPUT
+	digitalWrite(2, HIGH);                // Test of the SQW pin, D2 = Pullup on
     myGLCD.InitLCD();
     myGLCD.clrScr();
     myGLCD.setFont(SmallFont);
@@ -190,9 +208,7 @@ void setup()
     myGLCD.fillRect(0, 0, 319, 13);
     myGLCD.setColor(255, 255, 255);
     myGLCD.setBackColor(255, 0, 0);
-
-    //print_P(PSTR());
-	//strcpy(bline, P("Jesse's Aardustation"));
+	RTC.setRAM(0, (uint8_t *)&startAddr, sizeof(uint16_t));// Store startAddr in NV-RAM address 0x08 
 	myGLCD.print(P("Jesse's Aardustation"), CENTER, 1);
     myGLCD.setBackColor(0, 0, 128);
     myGLCD.setColor(255,255,0);   
@@ -202,6 +218,10 @@ void setup()
 	int logID;
 	logID = GetLogID();
 	char logName[12];
+
+	date();
+	myGLCD.print(bline, LEFT, i);
+	i += 12;
 
 	beLog = false;
 	btLog = false;
@@ -218,6 +238,7 @@ void setup()
 		{
 			i += 12;
 			myGLCD.print(P("SD Card Detected"), LEFT, i);
+			SdFile::dateTimeCallback(dateTime);
 
 			strcpy(bline, P("ELog"));
 			itoa(logID, cFloat, 10);
@@ -292,6 +313,8 @@ void setup()
 
 	//Serial.println("");
     //Serial.println("Debug Port 0 Started @115200bps");
+	Serial.begin(115200); //Debug USB Port
+	//if(beLog) eLog.print(lts());
 	if(beLog) eLog.println(P("Debug Port 0 Started @115200bps"));
 	i += 12;
     myGLCD.print(P("Debug Port 0 Started @115200bps"), LEFT, i);
@@ -327,13 +350,14 @@ void setup()
 	i += 12;
 	if(bSPT) myGLCD.print(P("SPT is True"), LEFT, i);
 	if(!bSPT) myGLCD.print(P("SPT is False"), LEFT, i);
-
-    delay(3000);
+	i += 12;
+	myGLCD.print("Setting clock from GPS", LEFT, i);
+	delay(3000);
     if(!bSPT) SetMenu(0, 0);
-	if(bSPT) Serial.begin(115200); //Debug USB Port
+	//if(bSPT) Serial.begin(115200); //Debug USB Port
 
     pinMode(13, OUTPUT);
-
+	SetFromGPS(); 
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -390,10 +414,12 @@ void loop()
    
     gcs_update();
     gps.f_get_position(&flat, &flon, &age); 
-    
+    if(!TimeSet) SetFromGPS();
+
 	if(beLog)
 	{
-		strcpy(bline, P("GPS Position update:\n lat: "));
+		lts();
+		strcat(bline, P("GPS Position update:\n lat: "));
 		dtostrf(flat, 4, 6, cFloat);
 		strcat(bline, cFloat);
 		strcat(bline, P(" Lon: "));
@@ -406,7 +432,8 @@ void loop()
 	}
 
 	if(beLog) eLog.sync();
-	
+	if(btLog) tLog.sync();
+
     if (limitMeters > 0)
        {
          cmdCheckLimit();  //check if distence limit is imposed

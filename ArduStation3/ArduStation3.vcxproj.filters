@@ -29,6 +29,8 @@
     <None Include="eeprom.ino" />
     <None Include="LCD_Supp.ino" />
     <None Include="SD.ino" />
+    <None Include="clock.ino" />
+    <None Include="CSVLog.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Visual Micro\.ArduStation3.vsarduino.h">

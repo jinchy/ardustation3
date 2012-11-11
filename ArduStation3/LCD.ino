@@ -94,6 +94,7 @@ void MainMenuR()
                
                  if((baseMode & 81) == 81 && customMode == 0)  myGLCD.print(P("    Stabilize    "), CENTER, 200);
                  if((baseMode & 89) == 89 && customMode == 5)  myGLCD.print(P("     Loiter     "), CENTER, 200);
+                 if((baseMode & 89) == 81 && customMode == 10)  myGLCD.print(P("   OF Loiter    "), CENTER, 200);
                  if((baseMode & 89) == 89 && customMode == 6)  myGLCD.print(P("Return To Launch"), CENTER, 200);
                  if((baseMode  & 81) == 81 && customMode == 2)  myGLCD.print(P("    Alt Hold    "), CENTER, 200);
                  if((baseMode  & 89) == 89 && customMode == 3)  myGLCD.print(P("      Auto      "), CENTER, 200);
@@ -315,18 +316,81 @@ void Debug1R()
                
                strcpy(bline, P("Base Mode: "));
 			   itoa(baseMode, cFloat, 10);
+			   strcat(bline, cFloat);
                strcat(bline, "  ");              
                myGLCD.print(bline, 158, 12);
                
                strcpy(bline, P("Custom Mode: "));
                itoa(customMode, cFloat, 10);
+			   strcat(bline, cFloat);
                strcat(bline, "  ");             
                myGLCD.print(bline, 158, 24);
                
                strcpy(bline, P("Pot: "));
                itoa(pot, cFloat, 10);
+			   strcat(bline, cFloat);
                strcat(bline, "  ");             
                myGLCD.print(bline, 158, 36);
+
+			   strcpy(bline, P("X acc: "));
+               itoa(xacc, cFloat, 10);
+			   strcat(bline, cFloat);
+               strcat(bline, "  ");             
+               myGLCD.print(bline, 158, 48);
+			   
+			   strcpy(bline, P("Y acc: "));
+               itoa(yacc, cFloat, 10);
+			   strcat(bline, cFloat);
+               strcat(bline, "  ");             
+               myGLCD.print(bline, 158, 60);
+			   			   
+			   strcpy(bline, P("Z acc: "));
+               itoa(zacc, cFloat, 10);
+			   strcat(bline, cFloat);
+               strcat(bline, "  ");             
+               myGLCD.print(bline, 158, 72);
+
+			   strcpy(bline, P("X gyr: "));
+               itoa(xgyro, cFloat, 10);
+			   strcat(bline, cFloat);
+               strcat(bline, "  ");             
+               myGLCD.print(bline, 158, 84);
+			   
+			   strcpy(bline, P("Y gyr: "));
+               itoa(ygyro, cFloat, 10);
+			   strcat(bline, cFloat);
+               strcat(bline, "  ");             
+               myGLCD.print(bline, 158, 96);
+			   
+			   strcpy(bline, P("Y gyr: "));
+               itoa(ygyro, cFloat, 10);
+			   strcat(bline, cFloat);
+               strcat(bline, "  ");             
+               myGLCD.print(bline, 158, 108);
+			   
+			   strcpy(bline, P("Z gyr: "));
+               itoa(zgyro, cFloat, 10);
+			   strcat(bline, cFloat);
+               strcat(bline, "  ");             
+               myGLCD.print(bline, 158, 108);
+			   
+			   strcpy(bline, P("X mag: "));
+               itoa(xmag, cFloat, 10);
+			   strcat(bline, cFloat);
+               strcat(bline, "  ");             
+               myGLCD.print(bline, 158, 120);
+			   
+			   strcpy(bline, P("Y mag: "));
+               itoa(ymag, cFloat, 10);
+			   strcat(bline, cFloat);
+               strcat(bline, "  ");             
+               myGLCD.print(bline, 158, 132);
+			   
+			   strcpy(bline, P("Z mag: "));
+               itoa(zmag, cFloat, 10);
+			   strcat(bline, cFloat);
+               strcat(bline, "  ");             
+               myGLCD.print(bline, 158, 144);
                return;
 }
 
@@ -356,7 +420,26 @@ void HUDR()
                
                myGLCD.setColor(255, 255, 255);
                myGLCD.setBackColor(0, 0, 128);
-               if(yaw<1)
+			   
+			   if(battery > 9) myGLCD.setColor(0, 255, 0);
+			   else myGLCD.setColor(255, 0, 0);
+               dtostrf(battery/1000, 5, 2, cFloat);
+               strcpy(bline, cFloat); 
+               strcat(bline, P(" "));  
+               myGLCD.setFont(BigFont);               
+               myGLCD.print(bline, LEFT, 1);
+			   
+               myGLCD.setColor(255, 255, 255);
+			   dtostrf(current/100, 5, 2, cFloat);
+               strcpy(bline, cFloat); 
+               //strcat(bline, P(" "));  
+               myGLCD.setFont(BigFont);               
+               myGLCD.print(bline, LEFT, 20);
+
+			   
+               myGLCD.setColor(255, 255, 255);
+
+			   if(yaw<1)
                {
                  dYaw = 360 + yaw;
                }
@@ -365,17 +448,17 @@ void HUDR()
                  dYaw = yaw;
                }
                
-               strcpy(bline, P("  "));
+               //strcpy(bline, P("  "));
                dtostrf(dYaw, 7, 2, cFloat);
-               strcat(bline, cFloat); 
+               strcpy(bline, cFloat); 
                strcat(bline, P("  "));  
                myGLCD.setFont(BigFont);               
                myGLCD.print(bline, CENTER, 1);
 
-               strcpy(bline, P("  "));
+               //strcpy(bline, P("  "));
 			   dYaw = rBearing();
                dtostrf(dYaw, 7, 2, cFloat);
-               strcat(bline, cFloat); 
+               strcpy(bline, cFloat); 
                strcat(bline, P("  "));  
                myGLCD.setFont(BigFont);               
                myGLCD.print(bline, CENTER, 20);
@@ -426,6 +509,7 @@ void HUDR()
                
                  if((baseMode & 81) == 81 && customMode == 0)  myGLCD.print(P("    Stabilize    "), CENTER, 200);
                  if((baseMode & 89) == 89 && customMode == 5)  myGLCD.print(P("     Loiter     "), CENTER, 200);
+                 if((baseMode & 89) == 81 && customMode == 10)  myGLCD.print(P("   OF Loiter    "), CENTER, 200);
                  if((baseMode & 89) == 89 && customMode == 6)  myGLCD.print(P("Return To Launch"), CENTER, 200);
                  if((baseMode  & 81) == 81 && customMode == 2)  myGLCD.print(P("    Alt Hold    "), CENTER, 200);
                  if((baseMode  & 89) == 89 && customMode == 3)  myGLCD.print(P("      Auto      "), CENTER, 200);
@@ -613,6 +697,7 @@ void FlightMapR()
                
                  if((baseMode & 81) == 81 && customMode == 0)  myGLCD.print(P("Stabilize"), RIGHT, 5);
                  if((baseMode & 89) == 89 && customMode == 5)  myGLCD.print(P("  Loiter  "), RIGHT, 5);
+                 if((baseMode & 89) == 81 && customMode == 10)  myGLCD.print(P(" OF Loiter "), RIGHT, 5);
                  if((baseMode & 89) == 89 && customMode == 6)  myGLCD.print(P("  R T L   "), RIGHT, 5);
                  if((baseMode  & 81) == 81 && customMode == 2)  myGLCD.print(P(" Alt Hold "), RIGHT, 5);
                  if((baseMode  & 89) == 89 && customMode == 3)  myGLCD.print(P("  Auto   "), RIGHT, 5);
@@ -644,226 +729,34 @@ void FollowMe()
   myGLCD.setFont(BigFont);
   myGLCD.setColor(0, 0, 128);
   myGLCD.fillRect(0, 0, 319, 239);
+
+  myGLCD.setFont(SmallFont);
+  myGLCD.setColor(255, 255, 255);
+  
   return;
-  
-  /* 
-  public void setGuidedModeWP(Locationwp gotohere)
-        {
-            if (gotohere.alt == 0 || gotohere.lat == 0 || gotohere.lng == 0)
-                return;
-
-            MainV2.giveComport = true;
-
-            try
-            {
-                gotohere.id =(byte)MAV_CMD.WAYPOINT;
-
-                MAV_MISSION_RESULT ans = MainV2.comPort.setWP(gotohere, 0, MAVLink.MAV_FRAME.GLOBAL_RELATIVE_ALT, (byte)2);
-
-                if (ans != MAV_MISSION_RESULT.MAV_MISSION_ACCEPTED)
-                    throw new Exception("Guided Mode Failed");
-            }
-            catch (Exception ex) { log.Error(ex); }
-
-            MainV2.giveComport = false;
-        } 
-  */
-  
-  
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //                          Guided mode from APM
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /* 
-            /// <summary>
-        /// Save wp to eeprom
-        /// </summary>
-        /// <param name="loc">location struct</param>
-        /// <param name="index">wp no</param>
-        /// <param name="frame">global or relative</param>
-        /// <param name="current">0 = no , 2 = guided mode</param>
-        public MAV_MISSION_RESULT setWP(Locationwp loc, ushort index, MAV_FRAME frame, byte current)
-        {
-            MainV2.giveComport = true;
-#if MAVLINK10
-            mavlink_mission_item_t req = new mavlink_mission_item_t();
-#else
-            mavlink_waypoint_t req = new mavlink_waypoint_t();
-#endif
-
-            req.target_system = sysid;
-            req.target_component = compid; // MAVLINK_MSG_ID_MISSION_ITEM
-
-            req.command = loc.id;
-            req.param1 = loc.p1;
-
-            req.current = current;
-
-            req.frame = (byte)frame;
-            req.y = (float)(loc.lng);
-            req.x = (float)(loc.lat);
-            req.z = (float)(loc.alt);
-
-            req.param1 = loc.p1;
-            req.param2 = loc.p2;
-            req.param3 = loc.p3;
-            req.param4 = loc.p4;
-            /*
-            if (MainV2.cs.firmware == MainV2.Firmwares.ArduPlane)
-            {
-                switch (loc.id)
-                {					// Switch to map APM command fields inot MAVLink command fields
-                    case (byte)MAV_CMD.LOITER_TURNS:
-                    case (byte)MAV_CMD.TAKEOFF:
-                        req.param1 = loc.p1;
-                        break;
-                    case (byte)MAV_CMD.DO_SET_HOME:
-                        req.param1 = loc.p1;
-                        break;
-
-                    case (byte)MAV_CMD.CONDITION_CHANGE_ALT:
-                        req.param1 = loc.lat;
-                        req.x = 0;
-                        req.y = 0;
-                        break;
-
-                    case (byte)MAV_CMD.LOITER_TIME:
-                        req.param1 = loc.p1 * 10;	// APM loiter time is in ten second increments
-                        break;
-
-                    case (byte)MAV_CMD.CONDITION_DELAY:
-                    case (byte)MAV_CMD.CONDITION_DISTANCE:
-                        req.param1 = loc.lat;
-                        break;
-
-                    case (byte)MAV_CMD.DO_JUMP:
-                        req.param2 = loc.lat;
-                        req.param1 = loc.p1;
-                        break;
-
-                    case (byte)MAV_CMD.DO_REPEAT_SERVO:
-                        req.param4 = loc.lng;
-                        goto case (byte)MAV_CMD.DO_CHANGE_SPEED;
-                    case (byte)MAV_CMD.DO_REPEAT_RELAY:
-                    case (byte)MAV_CMD.DO_CHANGE_SPEED:
-                        req.param3 = loc.lat;
-                        req.param2 = loc.alt;
-                        req.param1 = loc.p1;
-                        break;
-
-                    case (byte)MAV_CMD.DO_SET_PARAMETER:
-                    case (byte)MAV_CMD.DO_SET_RELAY:
-                    case (byte)MAV_CMD.DO_SET_SERVO:
-                        req.param2 = loc.alt;
-                        req.param1 = loc.p1;
-                        break;
-                }
-            }
-            */
-            /*
-            req.seq = index;
-
-            log.InfoFormat("setWP {6} frame {0} cmd {1} p1 {2} x {3} y {4} z {5}", req.frame, req.command, req.param1, req.x, req.y, req.z, index);
-
-            // request
-#if MAVLINK10
-            generatePacket(MAVLINK_MSG_ID_MISSION_ITEM, req);
-#else
-            generatePacket(MAVLINK_MSG_ID_WAYPOINT, req);
-#endif
-
-            DateTime start = DateTime.Now;
-            int retrys = 6;
-
-            while (true)
-            {
-                if (!(start.AddMilliseconds(200) > DateTime.Now))
-                {
-                    if (retrys > 0)
-                    {
-                        log.Info("setWP Retry " + retrys);
-#if MAVLINK10
-            generatePacket(MAVLINK_MSG_ID_MISSION_ITEM, req);
-#else
-                        generatePacket(MAVLINK_MSG_ID_WAYPOINT, req);
-#endif
-                        start = DateTime.Now;
-                        retrys--;
-                        continue;
-                    }
-                    MainV2.giveComport = false;
-                    throw new Exception("Timeout on read - setWP");
-                }
-                byte[] buffer = readPacket();
-                if (buffer.Length > 5)
-                {
-#if MAVLINK10
-                    if (buffer[5] == MAVLINK_MSG_ID_MISSION_ACK)
-                    {
-                        var ans = buffer.ByteArrayToStructure<mavlink_mission_ack_t>(6);
-                        log.Info("set wp " + index + " ACK 47 : " + buffer[5] + " ans " + Enum.Parse(typeof(MAV_MISSION_RESULT), ans.type.ToString()));
-                        return (MAV_MISSION_RESULT)ans.type;
-                    }
-                    else if (buffer[5] == MAVLINK_MSG_ID_MISSION_REQUEST)
-                    {
-                        var ans = buffer.ByteArrayToStructure<mavlink_mission_request_t>(6);
-                        if (ans.seq == (index + 1))
-                        {
-                            log.Info("set wp doing " + index + " req " + ans.seq + " REQ 40 : " + buffer[5]);
-                            MainV2.giveComport = false;
-
-                            return MAV_MISSION_RESULT.MAV_MISSION_ACCEPTED;
-                        }
-                        else
-                        {
-                            log.InfoFormat("set wp fail doing " + index + " req " + ans.seq + " ACK 47 or REQ 40 : " + buffer[5] + " seq {0} ts {1} tc {2}", req.seq, req.target_system, req.target_component);
-                            //break;
-                        }
-                    }
-                    else
-                    {
-                        //Console.WriteLine(DateTime.Now + " PC setwp " + buffer[5]);
-                    }
-#else
-                    if (buffer[5] == MAVLINK_MSG_ID_WAYPOINT_ACK)
-                    { //mavlink_waypoint_request_t
-                        log.Info("set wp " + index + " ACK 47 : " + buffer[5]);
-                        break;
-                    }
-                    else if (buffer[5] == MAVLINK_MSG_ID_WAYPOINT_REQUEST)
-                    {
-                        mavlink_waypoint_request_t ans = buffer.ByteArrayToStructure<mavlink_waypoint_request_t>(6);
-
-                        if (ans.seq == (index + 1))
-                        {
-                            log.Info("set wp doing " + index + " req " + ans.seq + " REQ 40 : " + buffer[5]);
-                            MainV2.giveComport = false;
-                            break;
-                        }
-                        else
-                        {
-                            log.InfoFormat("set wp fail doing " + index + " req " + ans.seq + " ACK 47 or REQ 40 : " + buffer[5] + " seq {0} ts {1} tc {2}", req.seq, req.target_system, req.target_component);
-                            //break;
-                        }
-                    }
-                    else
-                    {
-                        //Console.WriteLine(DateTime.Now + " PC setwp " + buffer[5]);
-                    }
-#endif
-                }
-            }
-
-           // return MAV_MISSION_RESULT.MAV_MISSION_INVALID;
-        }
-*/
   
 }    //End FollowMe
 
 void FollowMeR()
 {
+  int i = 12;
   
-  //mavlink_msg_request_data_stream_pack(127, 0, &msg, received_sysid, received_compid, MAV_DATA_STREAM_ALL, 5, MAV_DATA_STREAM_RAW_SENSORS_ACTIVE);
-  //
+  gps.f_get_position(&flat, &flon, &age); 
+  cmdSetComeHere(15);
+  strcpy(bline, P("Come To: "));
+  dtostrf(flat, 10, 6, cFloat);
+  strcat(bline, cFloat);
+   
+  strcat(bline, P(", "));
+  dtostrf(flon, 10, 6, cFloat);
+  strcat(bline, cFloat);
+
+  strcat(bline, P(", "));
+  dtostrf(15.0, 10, 6, cFloat);
+  strcat(bline, cFloat);
+
+  myGLCD.print(bline, LEFT, i);
+  
   delay(10);
   return;
   
@@ -940,6 +833,15 @@ void SetMode()
                myGLCD.setBackColor(0, 255, 0);
                myGLCD.print(P("Main"), 250, 120);
                myGLCD.print(P("Menu"), 250, 132);
+
+			   /////////////////////////////////////////
+               //              Dodgey Row 3
+               ////////////////////////////////////////
+               myGLCD.setColor(0, 255, 0);
+               myGLCD.fillRoundRect(5, 167, 75, 237);
+               myGLCD.setColor(0, 0, 0);
+               myGLCD.setBackColor(0, 255, 0);
+               myGLCD.print(P("OFLoiter"), 7, 195);
                return;
 
 }
@@ -952,19 +854,20 @@ void SetModeR()
                  myGLCD.setColor(0,255,0);
                  myGLCD.setBackColor(0,0,128);
                
-                 if((baseMode & 81) == 81 && customMode == 0)  myGLCD.print(P("    Stabilize    "), CENTER, 200);
-                 if((baseMode & 89) == 89 && customMode == 5)  myGLCD.print(P("     Loiter     "), CENTER, 200);
-                 if((baseMode & 89) == 89 && customMode == 6)  myGLCD.print(P("Return To Launch"), CENTER, 200);
-                 if((baseMode  & 81) == 81 && customMode == 2)  myGLCD.print(P("    Alt Hold    "), CENTER, 200);
-                 if((baseMode  & 89) == 89 && customMode == 3)  myGLCD.print(P("      Auto      "), CENTER, 200);
-                 if((baseMode  & 89) == 89 && customMode == 4)  myGLCD.print(P("     Guided      "), CENTER, 200);
+                 if((baseMode & 81) == 81 && customMode == 0)  myGLCD.print(P("Stabilize"), CENTER, 200);
+                 if((baseMode & 89) == 89 && customMode == 5)  myGLCD.print(P("  Loiter  "), CENTER, 200);
+                 if((baseMode & 89) == 81 && customMode == 10)  myGLCD.print(P("OF Loiter"), CENTER, 200);
+                 if((baseMode & 89) == 89 && customMode == 6)  myGLCD.print(P("    RTL   "), CENTER, 200);
+                 if((baseMode  & 81) == 81 && customMode == 2)  myGLCD.print(P(" Alt Hold "), CENTER, 200);
+                 if((baseMode  & 89) == 89 && customMode == 3)  myGLCD.print(P("   Auto   "), CENTER, 200);
+                 if((baseMode  & 89) == 89 && customMode == 4)  myGLCD.print(P("  Guided  "), CENTER, 200);
 
                  if((baseMode & 193) == 193)
                  {
                   myGLCD.setFont(BigFont);
                   myGLCD.setColor(255,0,0);
                   myGLCD.setBackColor(0,0,128);
-                  myGLCD.print(P("    ARMED    "), CENTER, 175);
+                  myGLCD.print(P("  ARMED  "), CENTER, 175);
                  }
                
                  else
@@ -972,7 +875,7 @@ void SetModeR()
                   myGLCD.setFont(BigFont);
                   myGLCD.setColor(0,255,0);
                   myGLCD.setBackColor(0,0,128);
-                  myGLCD.print(P("    DISARMED    "), CENTER, 175);                 
+                  myGLCD.print(P("DISARMED"), CENTER, 175);                 
                  }
                }
                myGLCD.setFont(SmallFont);
@@ -1365,478 +1268,12 @@ void StabRTuneR()
 
 void AltTune()
 {              
-               myGLCD.clrScr();
-               myGLCD.setFont(SmallFont);
-               myGLCD.setColor(0, 0, 128);
-               myGLCD.fillRect(0, 0, 319, 239);
-               myGLCD.setColor(255, 0, 0);
-               myGLCD.fillRect(0, 0, 319, 13);
-               myGLCD.setColor(255, 255, 255);
-               myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print(P("Tune Stabilisation"), CENTER, 1);
-               myGLCD.setFont(BigFont);
-               myGLCD.setBackColor(0, 0, 128);
-               
-               myGLCD.setColor(255, 0, 0);
-               myGLCD.fillRect(0, 24, 319, 44);
-               myGLCD.setColor(255, 255, 255);
-               myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print(P("Roll"), LEFT, 24);
-               myGLCD.print (P("Start"), 110, 24);
-               myGLCD.print (P("New"), 210, 24);
-               
-               myGLCD.setBackColor(0, 0, 128);
-               myGLCD.print(P("   P:"), LEFT, 44);
-               myGLCD.print(P("   I:"), LEFT, 64);
-            // myGLCD.print("   D:", LEFT, 84);
-               myGLCD.print(P("IMax:"), LEFT, 84);
- 
-             //  myGLCD.setColor(255, 0, 0);
-             //  myGLCD.fillRect(0, 124, 319, 144);
-             //  myGLCD.setColor(255, 255, 255);
-             //  myGLCD.setBackColor(255, 0, 0);
-             //  myGLCD.print("Pitch", LEFT, 124);
-               
-             //  myGLCD.setBackColor(0, 0, 128);
-             //  myGLCD.print("   P:", LEFT, 144);
-             //  myGLCD.print("   I:", LEFT, 164);
-             //  myGLCD.print("   D:", LEFT, 184);
-             //  myGLCD.print("IMax:", LEFT, 204);
-
-               int x;
-               
-               x = 165;
-               value = EEPROM_readDouble(x*4);
-               if(value > 65499.0) value = 65500.0;
-               strcpy(bline, P(" "));
-               dtostrf(value, 4, 2, cFloat);
-               strcat(bline, cFloat);
-               strcat(bline, P("  "));
-               myGLCD.print(bline, 85, 44);
-               
-               x++;
-               value = EEPROM_readDouble(x*4);
-               if(value > 65499.0) value = 65500.0;
-               strcpy(bline, P(" "));
-               dtostrf(value, 4, 2, cFloat);
-			   strcat(bline, cFloat);
-               strcat(bline, P("  "));
-               myGLCD.print(bline, 85, 64);
-               
-               x++;
-               value = EEPROM_readDouble(x*4);
-               if(value > 65499.0) value = 65500.0;
-               strcpy(bline, P(" "));
-               dtostrf(value, 4, 2, cFloat);
-               strcat(bline, cFloat);
-               strcat(bline, P("  "));
-               myGLCD.print(bline, 85, 84);
-               
-               // x++;
-              // value = EEPROM_readDouble(x*4);
-              // if(value > 65499.0) value = 65500.0;
-              // dtostrf((value/100), 4, 2, cFloat);
-              // bline = " ";
-              // bline += cFloat;
-              // bline += "  ";
-              // myGLCD.print(bline, 85, 104);
- 
-              // x++;
-              // value = EEPROM_readDouble(x*4);
-              // if(value > 65499.0) value = 65500.0;
-              // dtostrf(value, 4, 2, cFloat);
-              // bline = " ";
-              // bline += cFloat;
-              // bline += "  ";
-              // myGLCD.print(bline, 85, 144);
-               
-              // x++;
-              // value = EEPROM_readDouble(x*4);
-              // if(value > 65499.0) value = 65500.0;
-              // dtostrf(value, 4, 2, cFloat);
-              // bline = " ";
-              // bline += cFloat;
-              // bline += "  ";
-              // myGLCD.print(bline, 85, 164);
-               
-              // x++;
-              // value = EEPROM_readDouble(x*4);
-              // if(value > 65499.0) value = 65500.0;
-              // dtostrf(value, 4, 2, cFloat);
-              // bline = " ";
-              // bline += cFloat;
-              // bline += "  ";
-              // myGLCD.print(bline, 85, 184);
-               
-              // x++;
-              // value = EEPROM_readDouble(x*4);
-              // if(value > 65499.0) value = 65500.0;
-              // dtostrf((value/100), 4, 2, cFloat);
-              // bline = " ";
-              // bline += cFloat;
-              // bline += "  ";
-              // myGLCD.print(bline, 85, 204);
-               
-               myGLCD.setColor(0, 0, 128);
-               myGLCD.fillRoundRect(280, 20, 319, 239);
-               
-               myGLCD.setFont(SmallFont);
-               myGLCD.setColor(0, 255, 0);
-               myGLCD.fillRoundRect(285, 20, 319, 100);
-               myGLCD.setColor(0, 0, 0);
-               myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print(P("UP"), 295, 55);
-               
-               myGLCD.setColor(255, 0, 0);
-               myGLCD.fillRoundRect(285, 105, 319, 154);
-               myGLCD.setColor(255, 255, 255);
-               myGLCD.setBackColor(255, 0, 0);
-               myGLCD.print(P("SND"), 292, 123); 
-               
-               myGLCD.setColor(0, 255, 0);
-               myGLCD.fillRoundRect(285, 159, 319, 239);
-               myGLCD.setColor(0, 0, 0);
-               myGLCD.setBackColor(0, 255, 0);
-               myGLCD.print(P("DN"), 295, 195);  
-               
-               tuneP = 0.0;
-               tuneI = 0.0;
-               tuneD = 0.0;
-               tuneIMax = 0.0;
-               ley = 0;
-               return;
+ TwoTune(P("Altitude"), 116);
 }
 
 void AltTuneR()
 {              
-  int addr = 116;
-  if(pSend)
-  {
-    int x = ley;
-          switch(x)
-            {
-              case 0: 
-                {
-                  myGLCD.setColor(0, 255, 0);
-                  myGLCD.fillRect(179, (44 + (20 * x)), 184, (64 + (20 * x)));
-                  myGLCD.setColor(0, 0, 128);
-                  myGLCD.fillRect(179, (44 + (20 * (x+1))), 184, (64 + (20 * (x+1))));
-                  myGLCD.fillRect(179, (44 + (20 * (x+2))), 184, (64 + (20 * (x+2))));
-                  //myGLCD.fillRect(179, (44 + (20 * (x+3))), 184, (64 + (20 * (x+3))));
-                  break;
-                }
-                
-              case 1:
-                 {
-                  myGLCD.setColor(0, 255, 0);
-                  myGLCD.fillRect(179, (44 + (20 * x)), 184, (64 + (20 * x)));
-                  myGLCD.setColor(0, 0, 128);
-                  myGLCD.fillRect(179, (44 + (20 * (x-1))), 185, (64 + (20 * (x-1))));
-                  myGLCD.fillRect(179, (44 + (20 * (x+1))), 185, (64 + (20 * (x+1))));
-                  //myGLCD.fillRect(179, (44 + (20 * (x+2))), 185, (64 + (20 * (x+2))));
-                  break;
-                 }
-                 
-              case 2:
-                 {
-                   myGLCD.setColor(0, 255, 0);
-                   myGLCD.fillRect(179, (44 + (20 * x)), 184, (64 + (20 * x)));
-                   myGLCD.setColor(0, 0, 128);
-                   myGLCD.fillRect(179, (44 + (20 * (x-2))), 185, (64 + (20 * (x-2))));
-                   myGLCD.fillRect(179, (44 + (20 * (x-1))), 185, (64 + (20 * (x-1))));
-                   //myGLCD.fillRect(179, (44 + (20 * (x+1))), 185, (64 + (20 * (x+1))));
-                   break; 
-                 }
-                 
-              //case 3:
-              //   {
-              //     myGLCD.setColor(0, 255, 0);
-              //     myGLCD.fillRect(179, (44 + (20 * x)), 184, (64 + (20 * x)));
-              //     myGLCD.setColor(0, 0, 128);
-              //     myGLCD.fillRect(179, (44 + (20 * (x-3))), 185, (64 + (20 * (x-3))));
-              //     myGLCD.fillRect(179, (44 + (20 * (x-2))), 185, (64 + (20 * (x-2))));
-              //     myGLCD.fillRect(179, (44 + (20 * (x-1))), 185, (64 + (20 * (x-1))));
-              //    break;
-              //   }
-            }
-    if(pot > 512)
-        {
-           //int x = ley;
-           switch(x)
-            {
-              case 0: 
-                {
-                  value = (tuneP + (((pot-512)/100.0)/2));
-                  break;
-                }
-                
-              case 1:
-                 {
-                   value = (tuneI + (((pot-512)/100.0)/2));
-                   break;
-                 }
-                 
-              //case 2:
-              //   {
-              //     value = (tuneD + (((pot-512)/100.0)/2));
-              //     break;
-              //   }
-                 
-              case 2:
-                 {
-                   value = (tuneIMax + ((pot-512)/10.0));
-                   break;
-                 }
-            }
-        }
-        if(pot < 512)
-        {
-           //int x = ley;
-           switch(x)
-            {
-              case 0:
-               {
-                 value = (tuneP - (((512-pot)/100.0)/2));
-                 if(value <0) value = 0.0;
-                 break;
-               }
-               
-              case 1: 
-               {
-                 value = (tuneI - (((512-pot)/100.0)/2));
-                 if(value <0) value = 0.0;
-                 break;
-               }
-                
-              //case 2:
-              // {
-              //   value = (tuneD - (((512-pot)/100.0)/2));
-              //   if(value <0) value = 0.0;
-              //   break;
-              // }
-               
-              case 2:
-               {
-                 value = (tuneIMax - ((512-pot)/10.0));
-                 if(value <0) value = 0.0;
-                 break;
-               }
-            } 
-        }     
-    cmdSetParm((addr+x), value);
-    //cmdSetParm((addr+x+4), value);
-    
-    tuneP = 0.0;
-    tuneI = 0.0;
-    tuneD = 0.0;
-    tuneIMax = 0.0;
-    pSend = false;
-  }
-  
-  else
-  {
-    if((tuneP == 0.0) && (tuneI == 0.0) && (tuneD == 0.0) && (tuneIMax == 0.0))
-      {
-        for(int x; x < 2; x++)
-        {
-          value = EEPROM_readDouble((addr + x)*4);
-          
-          switch(x)
-           {
-            case 0:
-             {
-			   tuneP = value;
-               strcpy(bline, P("tune P "));
-               dtostrf(value, 4, 2, cFloat);
-               strcat(bline, cFloat);
-               strcat(bline, P("  "));
-               if(beLog) eLog.println(bline);
-               break;
-             }
-             
-            case 1:
-             {
-			   tuneI = value;
-               strcpy(bline, P("Tune I "));
-               dtostrf(value, 4, 2, cFloat);
-               strcat(bline, cFloat);
-               strcat(bline, P("  "));
-               if(beLog) eLog.println(bline);
-               break;
-             }
-             
-            //case 2:
-            // {
-            //   tuneD = value;
-            //   dtostrf(value, 4, 2, cFloat);
-            //   bline = "Tune D ";
-            //   bline += cFloat;
-            //   bline += "  ";
-            //   Serial.println(bline);
-            //   break;
-            // }
-             
-            case 2:
-             {
-               tuneIMax = value;
-               strcpy(bline, P("Tune I Max "));
-               dtostrf(value, 4, 2, cFloat);
-               strcat(bline, cFloat);
-               strcat(bline, P("  "));
-               if(beLog) eLog.println(bline);
-               break;
-             }
-           }
-               
-           if(value > 65499.0) value = 65500.0;
-           if(x != 3) dtostrf((value), 4, 2, cFloat);
-           else dtostrf((value/100), 4, 2, cFloat);
-           strcpy(bline, P(" "));
-           strcat(bline, cFloat);
-           myGLCD.setFont(BigFont);
-           myGLCD.setBackColor(0, 0, 128);
-           myGLCD.setColor(255, 255, 255);
-           myGLCD.print(bline, 185, (44 + (20 * x)));
-        }
-      }
-      
-    else
-      {
-          int x = ley;
-          switch(x)
-            {
-              case 0: 
-                {
-                  myGLCD.setColor(255, 0, 0);
-                  myGLCD.fillRect(179, (44 + (20 * x)), 184, (64 + (20 * x)));
-                  myGLCD.setColor(0, 0, 128);
-                  myGLCD.fillRect(179, (44 + (20 * (x+1))), 184, (64 + (20 * (x+1))));
-                  myGLCD.fillRect(179, (44 + (20 * (x+2))), 184, (64 + (20 * (x+2))));
-                  myGLCD.fillRect(179, (44 + (20 * (x+3))), 184, (64 + (20 * (x+3))));
-                  break;
-                }
-                
-              case 1:
-                 {
-                  myGLCD.setColor(255, 0, 0);
-                  myGLCD.fillRect(179, (44 + (20 * x)), 184, (64 + (20 * x)));
-                  myGLCD.setColor(0, 0, 128);
-                  myGLCD.fillRect(179, (44 + (20 * (x-1))), 185, (64 + (20 * (x-1))));
-                  myGLCD.fillRect(179, (44 + (20 * (x+1))), 185, (64 + (20 * (x+1))));
-                  myGLCD.fillRect(179, (44 + (20 * (x+2))), 185, (64 + (20 * (x+2))));
-                  break;
-                 }
-                 
-              case 2:
-                 {
-                   myGLCD.setColor(255, 0, 0);
-                   myGLCD.fillRect(179, (44 + (20 * x)), 184, (64 + (20 * x)));
-                   myGLCD.setColor(0, 0, 128);
-                   myGLCD.fillRect(179, (44 + (20 * (x-2))), 185, (64 + (20 * (x-2))));
-                   myGLCD.fillRect(179, (44 + (20 * (x-1))), 185, (64 + (20 * (x-1))));
-                   myGLCD.fillRect(179, (44 + (20 * (x+1))), 185, (64 + (20 * (x+1))));
-                   break; 
-                 }
-                 
-              case 3:
-                 {
-                   myGLCD.setColor(255, 0, 0);
-                   myGLCD.fillRect(179, (44 + (20 * x)), 184, (64 + (20 * x)));
-                   myGLCD.setColor(0, 0, 128);
-                   myGLCD.fillRect(179, (44 + (20 * (x-3))), 185, (64 + (20 * (x-3))));
-                   myGLCD.fillRect(179, (44 + (20 * (x-2))), 185, (64 + (20 * (x-2))));
-                   myGLCD.fillRect(179, (44 + (20 * (x-1))), 185, (64 + (20 * (x-1))));
-                  break;
-                 }
-            }
-       if(pot > 512)
-        {
-           //int x = ley;
-           switch(x)
-            {
-              case 0: 
-                {
-                  value = (tuneP + (((pot-512)/100.0)/2));
-                  break;
-                }
-                
-              case 1:
-                 {
-                   value = (tuneI + (((pot-512)/100.0)/2));
-                   break;
-                 }
-                 
-              case 2:
-                 {
-                   value = (tuneD + (((pot-512)/100.0)/2));
-                   break;
-                 }
-                 
-              case 3:
-                 {
-                   value = (tuneIMax + ((pot-512)/10.0));
-                   break;
-                 }
-            } 
-            
-            
-            
-           if(value > 65499.0) value = 65500.0;
-           if(x != 3) dtostrf((value), 4, 2, cFloat);
-           else dtostrf((value/100), 4, 2, cFloat);
-		   strcpy(bline, P(" "));
-           strcat(bline, cFloat);
-           myGLCD.setFont(BigFont);
-           myGLCD.setBackColor(0, 0, 128);
-           myGLCD.setColor(255, 255, 255);
-           myGLCD.print(bline, 185, (44 + (20 * x)));
-        }
-        if(pot < 512)
-        {
-           //int x = ley;
-           switch(x)
-            {
-              case 0:
-               {
-                 value = (tuneP - (((512-pot)/100.0)/2));
-                 if(value <0) value = 0.0;
-                 break;
-               }
-               
-              case 1: 
-               {
-                 value = (tuneI - (((512-pot)/100.0)/2));
-                 if(value <0) value = 0.0;
-                 break;
-               }
-                
-              case 2:
-               {
-                 value = (tuneD - (((512-pot)/100.0)/2));
-                 if(value <0) value = 0.0;
-                 break;
-               }
-               
-              case 3:
-               {
-                 value = (tuneIMax - ((512-pot)/10.0));
-                 if(value <0) value = 0.0;
-                 break;
-               }
-            } 
-            
-           if(value > 65499.0) value = 65500.0;
-           if(x != 3) dtostrf((value), 4, 2, cFloat);
-           else dtostrf((value/100), 4, 2, cFloat);
-           strcpy(bline, P(" "));
-           strcat(bline, cFloat);
-           myGLCD.setFont(BigFont);
-           myGLCD.setBackColor(0, 0, 128);
-           myGLCD.setColor(255, 255, 255);
-           myGLCD.print(bline, 185, (44 + (20 * x)));
-        }
-      }
-  }
+ TwoTuneR(116);
  return;
 }
 
@@ -2085,13 +1522,44 @@ void GSConfig()
 		myGLCD.print(P("GroundStation Config"), CENTER, 1);
 		myGLCD.setBackColor(0, 0, 128);
 		myGLCD.setColor(255,255,255); 
+		myGLCD.setColor(0, 0, 128);
+		myGLCD.fillRoundRect(280, 20, 319, 239);
+               
+		myGLCD.setFont(SmallFont);
+		myGLCD.setColor(0, 255, 0);
+		myGLCD.fillRoundRect(285, 20, 319, 100);
+		myGLCD.setColor(0, 0, 0);
+		myGLCD.setBackColor(0, 255, 0);
+		myGLCD.print(P("UP"), 295, 55);
+               
+		myGLCD.setColor(255, 0, 0);
+		myGLCD.fillRoundRect(285, 105, 319, 154);
+		myGLCD.setColor(255, 255, 255);
+		myGLCD.setBackColor(255, 0, 0);
+		myGLCD.print(P("OK"), 295, 123); 
+               
+		myGLCD.setColor(0, 255, 0);
+		myGLCD.fillRoundRect(285, 159, 319, 239);
+		myGLCD.setColor(0, 0, 0);
+		myGLCD.setBackColor(0, 255, 0);
+		myGLCD.print(P("DN"), 295, 195);  
+		myGLCD.setBackColor(0, 0, 128);
+		myGLCD.setColor(255,255,255); 
+		ley = 0;
 		int i = 20;
 		int fr;
 		fr = EEPROM.read(0);
+		
+		if(beLog) eLog.print("Settings Byte: ");
+		itoa(fr, cFloat, 10);
+		if(beLog) eLog.print(cFloat);
+		Serial.print("Settings Byte: ");
+		Serial.print(cFloat);
+		
 		myGLCD.setFont(SmallFont);
 
 		myGLCD.print(P("       Factory Reset: "), LEFT, i);
-		if(fr & 1 == 1)
+		if((fr & 1) == 1)
 		{
 			myGLCD.print(P("ON"), 220, i);
 		}
@@ -2102,7 +1570,7 @@ void GSConfig()
 		i += 18;
 
 		myGLCD.print(P(" Serial Pass Through: "), LEFT, i);
-		if(fr & 2 == 2)
+		if((fr & 2) == 2)
 		{
 			myGLCD.print(P("ON"), 220, i);
 		}
@@ -2113,7 +1581,7 @@ void GSConfig()
 		i += 18;
 
 		myGLCD.print(P("           Error Log: "), LEFT, i);
-		if(fr & 4 == 4)
+		if((fr & 4) == 4)
 		{
 			myGLCD.print(P("ON"), 220, i);
 		}
@@ -2124,7 +1592,7 @@ void GSConfig()
 		i += 18;
 		
 		myGLCD.print(P("       Telemetry Log: "), LEFT, i);
-		if(fr & 8 == 8)
+		if((fr & 8) == 8)
 		{
 			myGLCD.print(P("ON"), 220, i);
 		}
@@ -2135,7 +1603,7 @@ void GSConfig()
 		i += 18;
 
 		myGLCD.print(P("Telemetry Log Format: "), LEFT, i);
-		if(fr & 16 == 16)
+		if((fr & 16) == 16)
 		{
 			myGLCD.print(P("BIN"), 220, i);
 		}
@@ -2145,17 +1613,17 @@ void GSConfig()
 		}
 		i += 18;
 
-		if(fr & 32 ==32)
+		if((fr & 32) ==32)
 		{
 			//something something
 		}
 
-		if(fr & 64 == 64)
+		if((fr & 64) == 64)
 		{
 			//something something
 		}
 
-		if(fr & 128 == 128)
+		if((fr & 128) == 128)
 		{
 			//something something
 		}
@@ -2163,5 +1631,192 @@ void GSConfig()
 
 void GSConfigR()
 {
+	int x = ley;
+	int fr;
+	fr = EEPROM.read(0);
+	if(pSend)
+	{
+		myGLCD.setColor(255, 255, 255);
+		switch(x)
+            {
+              case 0: 
+                {
+					if((fr & 1) == 1)
+					{
+						EEPROM.write(0, (fr ^ 1));
+						myGLCD.print(P("OFF"), 220, (20+(x*18)));
+					}
+					else
+					{
+						EEPROM.write(0, (fr | 1));
+						myGLCD.print(P("ON "), 220, (20+(x*18)));
+					}
+					pSend = false;
+					break;
+                }
+                
+              case 1:
+                 {
+					if((fr & 2) == 2)
+					{
+						EEPROM.write(0, (fr ^ 2));
+						myGLCD.print(P("OFF"), 220, (20+(x*18)));
+					}
+					else
+					{
+						EEPROM.write(0, (fr | 2));
+						myGLCD.print(P("ON "), 220, (20+(x*18)));
+					}
+					pSend = false;
+					break;
+                 }
+                 
+              case 2:
+                 {
+					if((fr & 4) == 4)
+					{
+						EEPROM.write(0, (fr ^ 4));
+						myGLCD.print(P("OFF"), 220, (20+(x*18)));
+					}
+					else
+					{
+						EEPROM.write(0, (fr | 4));
+						myGLCD.print(P("ON "), 220, (20+(x*18)));
+					}
+					pSend = false;
+					break; 
+                 }
+                 
+              case 3:
+                 {
+					if((fr & 8) == 8)
+					{
+						EEPROM.write(0, (fr ^ 8));
+						myGLCD.print(P("OFF"), 220, (20+(x*18)));
+					}
+					else
+					{
+						EEPROM.write(0, (fr | 8));
+						myGLCD.print(P("ON "), 220, (20+(x*18)));
+					}
+					pSend = false;
+					break;
+                 }
 
+			  case 4:
+                 {
+					if((fr & 16) == 16)
+					{
+						EEPROM.write(0, (fr ^ 16));
+						myGLCD.print(P("CSV"), 220, (20+(x*18)));
+					}
+					else
+					{
+						EEPROM.write(0, (fr | 16));
+						myGLCD.print(P("BIN"), 220, (20+(x*18)));
+					}
+					pSend = false;
+	                break;
+                 }
+
+			 case 5:
+                 {
+					if((fr & 32) == 32)
+					{
+						EEPROM.write(0, (fr ^ 32));
+						myGLCD.print(P("CSV"), 220, (20+(x*18)));
+					}
+					else
+					{
+						EEPROM.write(0, (fr | 32));
+						myGLCD.print(P("BIN"), 220, (20+(x*18)));
+					}
+					pSend = false;
+                    break;
+                 }
+            }
+	}
+	else
+	{
+	      switch(x)
+            {
+              case 0: 
+                {
+                  myGLCD.setColor(255, 0, 0);
+                  myGLCD.fillRect(179, (20 + (18 * x)), 184, (32 + (18 * x)));
+                  myGLCD.setColor(0, 0, 128);
+                  myGLCD.fillRect(179, (20 + (18 * (x+1))), 184, (32 + (18 * (x+1))));
+                  myGLCD.fillRect(179, (20 + (18 * (x+2))), 184, (32 + (18 * (x+2))));
+                  myGLCD.fillRect(179, (20 + (18 * (x+3))), 184, (32 + (18 * (x+3))));
+                  myGLCD.fillRect(179, (20 + (18 * (x+4))), 184, (32 + (18 * (x+4))));
+                  myGLCD.fillRect(179, (20 + (18 * (x+5))), 184, (32 + (18 * (x+5))));
+                  break;
+                }
+                
+              case 1:
+                 {
+                  myGLCD.setColor(255, 0, 0);
+                  myGLCD.fillRect(179, (20 + (18 * x)), 184, (32 + (18 * x)));
+                  myGLCD.setColor(0, 0, 128);
+                  myGLCD.fillRect(179, (20 + (18 * (x-1))), 184, (32 + (18 * (x-1))));
+                  myGLCD.fillRect(179, (20 + (18 * (x+1))), 184, (32 + (18 * (x+1))));
+                  myGLCD.fillRect(179, (20 + (18 * (x+2))), 184, (32 + (18 * (x+2))));
+                  myGLCD.fillRect(179, (20 + (18 * (x+3))), 184, (32 + (18 * (x+3))));
+                  myGLCD.fillRect(179, (20 + (18 * (x+4))), 184, (32 + (18 * (x+4))));
+                  break;
+                 }
+                 
+              case 2:
+                 {
+                  myGLCD.setColor(255, 0, 0);
+                  myGLCD.fillRect(179, (20 + (18 * x)), 184, (32 + (18 * x)));
+                  myGLCD.setColor(0, 0, 128); 
+                  myGLCD.fillRect(179, (20 + (18 * (x-2))), 184, (32 + (18 * (x-2))));
+                  myGLCD.fillRect(179, (20 + (18 * (x-1))), 184, (32 + (18 * (x-1))));
+                  myGLCD.fillRect(179, (20 + (18 * (x+1))), 184, (32 + (18 * (x+1))));
+                  myGLCD.fillRect(179, (20 + (18 * (x+2))), 184, (32 + (18 * (x+2))));
+                  myGLCD.fillRect(179, (20 + (18 * (x+3))), 184, (32 + (18 * (x+3))));
+                  break; 
+                 }
+                 
+              case 3:
+                 {
+                  myGLCD.setColor(255, 0, 0);
+                  myGLCD.fillRect(179, (20 + (18 * x)), 184, (32 + (18 * x)));
+                  myGLCD.setColor(0, 0, 128);				   
+                  myGLCD.fillRect(179, (20 + (18 * (x-3))), 184, (32 + (18 * (x-3))));
+                  myGLCD.fillRect(179, (20 + (18 * (x-2))), 184, (32 + (18 * (x-2))));
+                  myGLCD.fillRect(179, (20 + (18 * (x-1))), 184, (32 + (18 * (x-1))));
+                  myGLCD.fillRect(179, (20 + (18 * (x+1))), 184, (32 + (18 * (x+1))));
+                  myGLCD.fillRect(179, (20 + (18 * (x+2))), 184, (32 + (18 * (x+2))));
+                  break;
+                 }
+
+			  case 4:
+                 {
+                  myGLCD.setColor(255, 0, 0);
+                  myGLCD.fillRect(179, (20 + (18 * x)), 184, (32 + (18 * x)));
+                  myGLCD.setColor(0, 0, 128);
+                  myGLCD.fillRect(179, (20 + (18 * (x-4))), 184, (32 + (18 * (x-4))));
+                  myGLCD.fillRect(179, (20 + (18 * (x-3))), 184, (32 + (18 * (x-3))));
+                  myGLCD.fillRect(179, (20 + (18 * (x-2))), 184, (32 + (18 * (x-2))));
+                  myGLCD.fillRect(179, (20 + (18 * (x-1))), 184, (32 + (18 * (x-1))));
+                  myGLCD.fillRect(179, (20 + (18 * (x+1))), 184, (32 + (18 * (x+1))));
+                  break;
+                 }
+
+			 case 5:
+                 {
+                  myGLCD.setColor(255, 0, 0);
+                  myGLCD.fillRect(179, (20 + (18 * x)), 184, (32 + (18 * x)));
+                  myGLCD.setColor(0, 0, 128);
+                  myGLCD.fillRect(179, (20 + (18 * (x-5))), 184, (32 + (18 * (x-5))));
+                  myGLCD.fillRect(179, (20 + (18 * (x-4))), 184, (32 + (18 * (x-4))));
+                  myGLCD.fillRect(179, (20 + (18 * (x-3))), 184, (32 + (18 * (x-3))));
+                  myGLCD.fillRect(179, (20 + (18 * (x-2))), 184, (32 + (18 * (x-2))));
+                  myGLCD.fillRect(179, (20 + (18 * (x-1))), 184, (32 + (18 * (x-1))));
+                  break;
+                 }
+            }
+	}
 }

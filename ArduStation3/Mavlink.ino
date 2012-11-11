@@ -104,7 +104,7 @@ void gcs_update()
         // Try to get a new message
         if(mavlink_parse_char(0, c, &msg, status)) 
         {
-		 if(btLog) tLog.sync();
+		// if(btLog) tLog.sync();
          gcs_handleMessage(&msg);
         }
 
@@ -208,6 +208,21 @@ void gcs_handleMessage(mavlink_message_t* msg)
       break;
     }
     
+   case MAVLINK_MSG_ID_SCALED_IMU:
+	{
+		mavlink_scaled_imu_t packet;
+		mavlink_msg_scaled_imu_decode(msg, &packet);
+		xacc = packet.xacc;
+		yacc = packet.yacc;
+		zacc = packet.zacc;
+		xgyro = packet.xgyro;
+		ygyro = packet.ygyro;
+		zgyro = packet.zgyro;
+		xmag = packet.xmag;
+		ymag = packet.ymag;
+		zmag = packet.zmag;
+	}
+
 #ifdef MAVLINK10
     case MAVLINK_MSG_ID_GPS_RAW_INT:
 #else // MAVLINK10
