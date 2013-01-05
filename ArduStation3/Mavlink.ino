@@ -340,21 +340,21 @@ void gcs_handleMessage(mavlink_message_t* msg)
        strcat(bline, cFloat);
        if(beLog) eLog.println(bline);
      }
-     /*
+     
      // Function used to build the parameter resolution list
-     test += 1; //intID
-     test += 16;
-     test += 4;
-     dtostrf(value, 4, 1, cFloat);
-     bline = "   case ";
-     bline += pIndex;
-     bline += ": return >";
-     bline += parameter;
-     bline += ">;";
-     //bline += ",";
+	 //test += 1; //intID
+  //   test += 16;
+  //   test += 4;
+  //   dtostrf(value, 4, 1, cFloat);
+  //   bline = "   case ";
+  //   bline += pIndex;
+  //   bline += ": return >";
+  //   bline += parameter;
+  //   bline += ">;";
+  //   //bline += ",";
      //bline += cFloat;
      Serial.println(bline);
-     */
+     
       break;
     }
   }
